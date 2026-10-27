@@ -362,6 +362,43 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
 .fm a.cur{font-style:italic;color:var(--rose)}
 .fm-foot{text-align:center;font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-lt)}
 
+
+/* AVISOS · carrusel 3D */
+.av{max-width:420px;margin:0 auto}
+.av-stage{position:relative;height:360px;perspective:1100px;touch-action:pan-y}
+.av-card{position:absolute;left:50%;top:10px;width:250px;height:330px;margin-left:-125px;padding:30px 22px 24px;border-radius:24px;cursor:pointer;
+  background:linear-gradient(160deg,#4a1028 0%,#2a0c18 55%,#1c0a12 100%);box-shadow:0 26px 50px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.08);
+  transition:transform .7s cubic-bezier(.22,1,.36,1),opacity .7s,filter .7s;display:flex;flex-direction:column;align-items:center;text-align:center;touch-action:manipulation;overflow:hidden}
+.av-card svg{width:46px;height:46px;color:var(--gold-lt);margin:10px 0 12px;filter:drop-shadow(0 0 8px rgba(227,192,143,.45))}
+.av-n{position:absolute;top:14px;left:18px;font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.2em;color:var(--gold-lt);opacity:.8}
+.av-card h3{font-family:var(--serif);font-weight:600;font-size:25px;line-height:1.2;color:var(--champ);margin-bottom:12px}
+.av-txt{font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.55;color:var(--champ);filter:blur(7px);opacity:.75;transition:filter .7s,opacity .7s}
+.av-card.open .av-txt{filter:none;opacity:1}
+.av-tap{margin-top:auto;font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#1c0710;padding:9px 16px;border-radius:30px;background:linear-gradient(135deg,#F7E7CE,#E3B7A0 40%,#B76E79 75%,#B87333);transition:opacity .4s;animation:hintP2 2.2s ease-in-out infinite}
+@keyframes hintP2{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.av-card.open .av-tap{opacity:0}
+.av-ctl{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:6px}
+.av-arr{width:46px;height:46px;border-radius:50%;border:1px solid var(--gold-lt);background:rgba(18,5,9,.5);color:var(--champ);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.av-arr svg{width:20px;height:20px}
+.av-dots{display:flex;gap:8px}
+.av-dots i{width:9px;height:9px;border-radius:50%;border:1px solid var(--gold-lt);transition:all .3s}
+.av-dots i.on{background:var(--gold-lt);transform:scale(1.3)}
+
+/* BRILLO SATINADO en todo lo dorado */
+@keyframes satin{0%{background-position:150% 0}55%,100%{background-position:-50% 0}}
+.lbl{background:linear-gradient(100deg,#C9A06A 0%,#E3C08F 30%,#FFF4DE 46%,#E3C08F 60%,#B87333 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent!important;animation:satin 6s ease-in-out infinite;text-shadow:none!important}
+#dresscode .lbl{background-image:linear-gradient(100deg,#7a1d40 0%,#99244f 30%,#D9A877 46%,#99244f 60%,#7a1d40 100%)}
+.gline{background:linear-gradient(90deg,transparent 0%,#B87333 25%,#FFF4DE 50%,#B87333 75%,transparent 100%)!important;background-size:250% 100%!important;animation:satin 4.5s ease-in-out infinite;height:1.5px}
+.satin-b{position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:3;
+  background:linear-gradient(110deg,rgba(227,192,143,.30) 0%,rgba(227,192,143,.30) 38%,#FFF4DE 50%,rgba(227,192,143,.30) 62%,rgba(227,192,143,.30) 100%);background-size:250% 100%;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:satin 7s ease-in-out infinite}
+.fam-card,.loc-card,.cd-box,.cd-rsvp,.wx2,.av-card,.it-ico,.btn{border-color:transparent!important}
+.cd-rsvp{border-style:solid!important}
+.loc-type,.fam-role,.it-ev,.hero-city,.av-n{background:linear-gradient(100deg,#C9A06A,#E3C08F 35%,#FFF4DE 48%,#E3C08F 62%,#B87333);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:satin 6.5s ease-in-out infinite}
+.hero-city{text-shadow:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.9))}
+.it-ico svg,.pin,.note svg,.fam-n svg{animation:icoGlow 4s ease-in-out infinite}
+@keyframes icoGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(255,236,200,0))}50%{filter:drop-shadow(0 0 7px rgba(255,236,200,.75))}}
+.vinyl-btn{box-shadow:0 6px 18px rgba(0,0,0,.5),0 0 0 1px rgba(227,192,143,.55),0 0 14px rgba(255,236,200,.25)}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.2s!important}}
 </style>
 </head>
@@ -835,21 +872,6 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
     <div class="dc-fig"><div class="sway"><img src="dama.png" alt="Dama en vestido formal"></div><span>Damas</span></div>
   </div>
   <div class="dc-tip fx" data-fx="up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 17h7l3-6 5 1c1.7.3 3 1.8 3 3.5V17h-3v3h-3v-3"/><path d="M3 17v3h4v-3"/></svg><p><b>Para ellas:</b> te sugerimos tacón cuadrado o zapato cómodo; el piso del viñedo es irregular (pasto y empedrado).</p></div>
-  <div class="dc-looks">
-    <button class="dc-look" type="button" data-look="caballeros" aria-label="Ver ideas de vestimenta para caballeros"><span class="dc-look-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l4 3 4-3 3 2.2c1.2.9 1.9 2.3 1.9 3.8V21H3V9c0-1.5.7-2.9 1.9-3.8L8 3z"/><path d="M12 6v15"/><path d="M9.4 4.2L12 9l2.6-4.8"/></svg></span><span class="dc-look-txt"><span class="dc-look-rol">Caballeros</span><span class="dc-look-cta">Ver ideas</span></span><span class="dc-look-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span></button>
-    <button class="dc-look" type="button" data-look="damas" aria-label="Ver ideas de vestimenta para damas"><span class="dc-look-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1.4 5.2L21 21H3l7.4-12.8L9 3z"/><path d="M10.6 8.2h2.8"/></svg></span><span class="dc-look-txt"><span class="dc-look-rol">Damas</span><span class="dc-look-cta">Ver ideas</span></span><span class="dc-look-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span></button>
-  </div>
-  <div class="dc-viewer" id="dcViewer" role="dialog" aria-modal="true" aria-label="Ideas de vestimenta" hidden>
-    <div class="dcv-box">
-      <button class="dc-viewer-close" id="dcViewerClose" type="button" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-      <p class="dcv-head" id="dcvHead"></p>
-      <div class="dcv-viewport"><div class="dcv-track" id="dcvTrack"></div></div>
-      <button class="dcv-nav dcv-prev" id="dcvPrev" type="button" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button>
-      <button class="dcv-nav dcv-next" id="dcvNext" type="button" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
-      <p class="dcv-cap" id="dcvCap"></p>
-      <div class="dcv-dots" id="dcvDots"></div>
-    </div>
-  </div>
   <div class="orbs"><div><p class="sw-ttl">Colores sugeridos</p><div class="orb" id="orbOk"><i></i></div><p class="orb-n" id="orbOkN">&nbsp;</p></div><div><p class="sw-ttl">Por favor evita</p><div class="orb x" id="orbNo"><i></i></div><p class="orb-n" id="orbNoN">&nbsp;</p></div></div>
 </section>
 
@@ -1344,10 +1366,15 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
   <span class="lbl">Para que todo salga perfecto</span>
   <h2 class="ttl">Avisos Importantes</h2>
   <div class="gline"></div>
-  <div class="note fx" data-fx="left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="9" cy="7" r="3"/><path d="M3 21v-1a6 6 0 0112 0v1"/><path d="M16 4l5 5M21 4l-5 5"/></svg><p><b>Celebración solo para adultos.</b> Con cariño, hemos planeado esta noche únicamente para adultos.</p></div>
-  <div class="note fx" data-fx="right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 17h14M6 17l1.5-6h9L18 17M8 11l1-4h6l1 4"/><circle cx="8" cy="18.5" r="1.5"/><circle cx="16" cy="18.5" r="1.5"/></svg><p><b>No hay Uber en la zona.</b> Indícanos en tu confirmación si requieren transporte del hotel al viñedo; la hacienda avisará a los taxis locales.</p></div>
-  <div class="note fx" data-fx="left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 8.5a15 15 0 0120 0M5 12a10 10 0 0114 0M8.5 15.5a5 5 0 017 0"/><circle cx="12" cy="19" r="1"/></svg><p><b>Señal móvil limitada</b> en el viñedo. Ponte de acuerdo con tu grupo antes de llegar.</p></div>
-  <div class="note fx" data-fx="right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg><p><b>Reserva tu hospedaje con tiempo:</b> no hay más hoteles a la redonda y puede haber otros eventos ese día.</p></div>
+  <div class="av" id="av">
+    <div class="av-stage" id="avStage">
+      <article class="av-card"><span class="av-n">01</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="7" r="3"/><path d="M3 21v-1a6 6 0 0112 0v1"/><path d="M16 4l5 5M21 4l-5 5"/></svg><h3>Solo adultos</h3><p class="av-txt">Con cariño, hemos planeado esta noche únicamente para adultos.</p><span class="av-tap">Toca para ver</span></article>
+      <article class="av-card"><span class="av-n">02</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 17h14M6 17l1.5-6h9L18 17M8 11l1-4h6l1 4"/><circle cx="8" cy="18.5" r="1.5"/><circle cx="16" cy="18.5" r="1.5"/></svg><h3>Sin Uber en la zona</h3><p class="av-txt">Indícanos en tu confirmación si requieren transporte del hotel al viñedo; la hacienda avisará a los taxis locales.</p><span class="av-tap">Toca para ver</span></article>
+      <article class="av-card"><span class="av-n">03</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 8.5a15 15 0 0120 0M5 12a10 10 0 0114 0M8.5 15.5a5 5 0 017 0"/><circle cx="12" cy="19" r="1"/></svg><h3>Señal limitada</h3><p class="av-txt">La señal móvil es difícil en el viñedo. Ponte de acuerdo con tu grupo antes de llegar y guarda esta invitación.</p><span class="av-tap">Toca para ver</span></article>
+      <article class="av-card"><span class="av-n">04</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg><h3>Reserva con tiempo</h3><p class="av-txt">No hay más hoteles a la redonda y puede haber otros eventos ese mismo día. Asegura tu hospedaje.</p><span class="av-tap">Toca para ver</span></article>
+    </div>
+    <div class="av-ctl"><button type="button" class="av-arr" id="avPrev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><div class="av-dots" id="avDots"></div><button type="button" class="av-arr" id="avNext" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
+  </div>
 </section>
 
 <!-- ===== regalos ===== -->
@@ -2103,7 +2130,7 @@ fab.addEventListener('click',function(){ if(mEl.paused) mEl.play().catch(functio
 
 function initAll(){
   splitTitles(); reveals(); initSectionFades(); hero(); hilo(); countdown(); setInterval(countdown,1000);
-  tilt(); itinerario(); eclipse(); stack(); swatches(); menu(); clima();
+  tilt(); itinerario(); eclipse(); stack(); swatches(); menu(); clima(); avisos(); satinBorders();
   setTimeout(function(){ ScrollTrigger.refresh(); },400);
 }
 
@@ -2193,6 +2220,28 @@ function clima(){
   ScrollTrigger.create({trigger:box,start:'top 80%',once:true,onEnter:function(){ box.querySelectorAll('.wx2-t').forEach(function(t){ var o={v:0}; gsap.to(o,{v:+t.dataset.to,duration:R?.01:1.8,ease:'power2.out',onUpdate:function(){t.textContent=Math.round(o.v)}}); }); }});
   window.addEventListener('resize',function(){ place(last); });
 }
+function avisos(){
+  var st=document.getElementById('avStage'),cards=[].slice.call(st.children),dots=document.getElementById('avDots'),i=0,n=cards.length;
+  cards.forEach(function(c,k){ var d=document.createElement('i'); dots.appendChild(d); });
+  function lay(){ cards.forEach(function(c,k){ var o=k-i; if(o>n/2)o-=n; if(o<-n/2)o+=n; var a=Math.abs(o);
+    c.style.transform='translateX('+(o*58)+'%) translateZ('+(-a*140)+'px) rotateY('+(-o*32)+'deg)';
+    c.style.opacity=a>1?0:(a?.55:1); c.style.zIndex=10-a; c.style.pointerEvents=a>1?'none':'auto'; c.style.filter=a?'brightness(.7)':'none'; });
+    [].forEach.call(dots.children,function(d,k){d.classList.toggle('on',k===i)}); }
+  function go(k){ i=(k+n)%n; lay(); }
+  cards.forEach(function(c,k){ c.addEventListener('click',function(){ if(k!==i){ go(k); return; } c.classList.toggle('open'); }); });
+  document.getElementById('avPrev').addEventListener('click',function(){go(i-1)});
+  document.getElementById('avNext').addEventListener('click',function(){go(i+1)});
+  var x0=null; st.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  st.addEventListener('touchend',function(e){ if(x0===null)return; var dx=e.changedTouches[0].clientX-x0; x0=null; if(Math.abs(dx)>40) go(i+(dx<0?1:-1)); },{passive:true});
+  lay();
+}
+function satinBorders(){
+  document.querySelectorAll('.fam-card,.loc-card,.cd-box,.cd-rsvp,.wx2,.av-card,.it-ico,.btn,.qr-frame,#rsvp .rv-card,#regalos [class*="card"],#hospedaje [class*="card"]').forEach(function(el,k){
+    if(el.querySelector(':scope > .satin-b')) return;
+    if(getComputedStyle(el).position==='static') el.style.position='relative';
+    var b=document.createElement('i'); b.className='satin-b'; b.style.animationDelay=(-(k%7)*.9)+'s'; el.appendChild(b);
+  });
+}
 function stack(){
   var s=document.getElementById('stack'),cards=[].slice.call(s.children);
   function lay(){ cards.forEach(function(c,i){ var k=cards.length-1-i; c.style.zIndex=i; c.style.transform='translate('+(k*6)+'px,'+(k*-4)+'px) rotate('+((k%2?1:-1)*k*3.2)+'deg)'; }); }
@@ -2231,30 +2280,6 @@ function menu(){
 if(qs.get('skip')==='1'){ opened=true; envFlash.style.opacity=1; flashed=true; reveal(); }
 })();
 
-/* DRESS CODE · carrusel de ideas (boda-fabiola-y-fernando) */
-(function(){
-  var viewer=document.getElementById('dcViewer'); if(!viewer) return;
-  document.body.appendChild(viewer);
-  var track=document.getElementById('dcvTrack'),head=document.getElementById('dcvHead'),cap=document.getElementById('dcvCap'),dots=document.getElementById('dcvDots'),close=document.getElementById('dcViewerClose');
-  var LOOKS={caballeros:{head:'Caballeros',items:[{src:'looks/cab-1.png',cap:'Chaleco y pantalón de vestir'},{src:'looks/cab-2.png',cap:'Traje en tono arena'},{src:'looks/cab-3.png',cap:'Traje oscuro'}]},
-    damas:{head:'Damas',items:[{src:'looks/dama-1.png',cap:'Vestido largo de gala'},{src:'looks/dama-2.png',cap:'Vestido marino'},{src:'looks/dama-3.png',cap:'Vestido en tono satinado'}]}};
-  var items=[],idx=0,last=null;
-  function render(){ track.style.transform='translateX('+(-idx*100)+'%)'; cap.textContent=items[idx].cap+'  ·  '+(idx+1)+' / '+items.length; [].forEach.call(dots.children,function(d,i){d.classList.toggle('on',i===idx)}); }
-  function go(i){ idx=(i+items.length)%items.length; render(); }
-  function open(key){ var L=LOOKS[key]; if(!L) return; items=L.items; idx=0; last=document.activeElement; head.textContent=L.head; track.innerHTML=''; dots.innerHTML='';
-    items.forEach(function(it,i){ var sl=document.createElement('figure'); sl.className='dcv-slide'; sl.innerHTML='<div class="dcv-frame"><div class="dcv-mat"><img alt=""></div></div>'; var im=sl.querySelector('img'); im.src=it.src; im.alt=L.head+' — '+it.cap; track.appendChild(sl);
-      var d=document.createElement('button'); d.type='button'; d.className='dcv-dot'; d.setAttribute('aria-label','Ver idea '+(i+1)); d.addEventListener('click',function(){go(i)}); dots.appendChild(d); });
-    render(); viewer.removeAttribute('hidden'); requestAnimationFrame(function(){viewer.classList.add('on')}); document.body.style.overflow='hidden'; close.focus(); }
-  function hide(){ viewer.classList.remove('on'); document.body.style.overflow=''; setTimeout(function(){viewer.setAttribute('hidden','')},300); if(last&&last.focus) last.focus(); }
-  document.querySelectorAll('.dc-look').forEach(function(b){ b.addEventListener('click',function(e){ e.preventDefault(); open(b.dataset.look); }); });
-  close.addEventListener('click',hide);
-  document.getElementById('dcvPrev').addEventListener('click',function(e){e.stopPropagation();go(idx-1)});
-  document.getElementById('dcvNext').addEventListener('click',function(e){e.stopPropagation();go(idx+1)});
-  viewer.addEventListener('click',function(e){ if(e.target===viewer) hide(); });
-  document.addEventListener('keydown',function(e){ if(!viewer.classList.contains('on')) return; if(e.key==='Escape') hide(); if(e.key==='ArrowLeft') go(idx-1); if(e.key==='ArrowRight') go(idx+1); });
-  var x0=null; track.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
-  track.addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0; x0=null; if(Math.abs(dx)>40) go(idx+(dx<0?1:-1)); },{passive:true});
-})();
 </script>
 <script>
 /* ELYSIUM AUDIO v2 — el primer gesto arranca la canción; respaldo = la misma canción */
