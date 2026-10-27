@@ -134,7 +134,7 @@ html.anim .fx:not(.in)[data-fx="clip"]{clip-path:inset(0 0 100% 0)}
 /* HERO */
 #hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:0 22px 110px!important;overflow:hidden}
 .hero-bg{position:absolute;inset:-6% 0 -6% 0;z-index:-3}
-.hero-drift{position:absolute;inset:0;background:url(fotos/hero.jpg) center 18%/cover;animation:heroDrift 26s ease-in-out infinite alternate}
+.hero-drift{position:absolute;inset:0;background:url(fotos/hero.jpg) 40% 12%/cover;animation:heroDrift 26s ease-in-out infinite alternate}
 @keyframes heroDrift{from{transform:translate(-1%,-1%) scale(1.02)}to{transform:translate(2%,1.5%) scale(1.10)}}
 .hero-shine{position:absolute;inset:0;z-index:-2;mix-blend-mode:soft-light;background:linear-gradient(115deg,transparent 30%,rgba(255,236,210,.55) 48%,transparent 66%);background-size:250% 100%;animation:shine 9s ease-in-out infinite}
 @keyframes shine{0%{background-position:120% 0}100%{background-position:-120% 0}}
@@ -366,7 +366,7 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
 
 /* AVISOS · carrusel 3D */
 .av{max-width:420px;margin:0 auto}
-.av-stage{position:relative;height:360px;perspective:1100px;touch-action:pan-y}
+.av-stage{position:relative;height:400px;perspective:1100px;touch-action:pan-y}
 .av-card{position:absolute;left:50%;top:10px;width:250px;height:330px;margin-left:-125px;padding:30px 22px 24px;border-radius:24px;cursor:pointer;
   background:linear-gradient(160deg,#4a1028 0%,#2a0c18 55%,#1c0a12 100%);box-shadow:0 26px 50px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.08);
   transition:transform .7s cubic-bezier(.22,1,.36,1),opacity .7s,filter .7s;display:flex;flex-direction:column;align-items:center;text-align:center;touch-action:manipulation;overflow:hidden}
@@ -568,6 +568,18 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
 .adq-s{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;color:var(--text-soft);margin-top:8px}
 .adq-m{position:absolute;font-family:'Playfair Display',serif;font-style:italic;font-weight:800;font-size:64px;line-height:1;background:linear-gradient(100deg,#C9A06A,#E3C08F 35%,#FFF4DE 48%,#E3C08F 62%,#B87333);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:satin 6s ease-in-out infinite;padding:.1em .15em}
 .adq-m{left:-6px;top:-18px}.adq-c{left:auto;right:-6px;top:auto;bottom:-46px}
+
+/* FOOTER con foto: borde superior difuminado + deriva lenta + destello */
+#footer{padding-top:0!important;padding-bottom:60px!important}
+.ft-photo{position:relative;height:min(118vw,560px);margin:0 -22px 18px;overflow:hidden;
+  -webkit-mask-image:linear-gradient(transparent 0,rgba(0,0,0,.35) 60px,#000 190px,#000 62%,transparent 100%);mask-image:linear-gradient(transparent 0,rgba(0,0,0,.35) 60px,#000 190px,#000 62%,transparent 100%)}
+.ft-img{position:absolute;inset:-6%;background:url(fotos/footer.jpg) 46% 60%/cover;animation:heroDrift 30s ease-in-out infinite alternate;filter:saturate(.85) contrast(1.05)}
+.ft-photo::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,transparent 40%,rgba(18,5,9,.55) 100%),linear-gradient(180deg,rgba(74,16,40,.25),transparent 40%,rgba(18,5,9,.5) 85%);mix-blend-mode:multiply}
+.ft-shine{position:absolute;inset:0;z-index:1;mix-blend-mode:soft-light;background:linear-gradient(115deg,transparent 30%,rgba(255,226,190,.55) 48%,transparent 66%);background-size:250% 100%;animation:shine 11s ease-in-out infinite}
+#footer .ft-mono{margin-top:-120px;position:relative;z-index:2}
+.av-card svg{flex-shrink:0}
+.av-card .av-txt{font-size:15.5px;line-height:1.5}
+.av-card{height:auto!important;min-height:330px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.2s!important}}
 </style>
 </head>
@@ -655,7 +667,7 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
 
 
 <section class="arco" id="arco1" data-top="#120509" data-bot="#120509" aria-label="Los Arcos de Querétaro">
-  <div class="arco-frame"><div class="arco-img" style="background-image:url(fotos/f16.jpg);background-position:center 40%"></div></div>
+  <div class="arco-frame"><div class="arco-img" style="background-image:url(fotos/f18.jpg);background-position:center 45%"></div></div>
   <div class="arco-txt"><span class="arco-k">Los Arcos · Querétaro</span><p class="arco-l">Donde nuestra historia<br>encontró su camino</p></div>
 </section>
 
@@ -1598,7 +1610,7 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
   <blockquote class="adq fx" data-fx="up"><span class="adq-m">“</span><p class="adq-t">Queremos que disfrutes de esta celebración sin preocupaciones</p><p class="adq-s">Por ello, nuestra boda será un evento solo para adultos.</p><span class="adq-m adq-c">”</span></blockquote>
   <div class="av" id="av">
     <div class="av-stage" id="avStage">
-      <article class="av-card"><span class="av-n">01</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="7" r="3"/><path d="M3 21v-1a6 6 0 0112 0v1"/><path d="M16 4l5 5M21 4l-5 5"/></svg><h3>Solo adultos</h3><p class="av-txt">Queremos que disfrutes de esta celebración sin preocupaciones. Por ello, nuestra boda será un evento solo para adultos.</p><span class="av-tap">Toca para ver</span></article>
+      <article class="av-card"><span class="av-n">01</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h5l-.4 4.2A2.6 2.6 0 017.5 9.6 2.6 2.6 0 015.4 7.2z"/><path d="M7.5 9.6V16M5.5 16h4"/><path d="M14 3h5l-.4 4.2a2.6 2.6 0 01-2.1 2.4 2.6 2.6 0 01-2.1-2.4z"/><path d="M16.5 9.6V16M14.5 16h4"/><path d="M12 19.5c-.9-.8-2.5-1.9-2.5-3a1.3 1.3 0 012.5-.6 1.3 1.3 0 012.5.6c0 1.1-1.6 2.2-2.5 3z" fill="currentColor"/></svg><h3>Una noche para ti</h3><p class="av-txt">Con todo nuestro cariño, queremos que esta noche te relajes y la disfrutes sin preocupaciones; por eso nuestra celebración será solo para adultos. ¡Gracias por entenderlo!</p><span class="av-tap">Toca para ver</span></article>
       <article class="av-card"><span class="av-n">02</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 17h14M6 17l1.5-6h9L18 17M8 11l1-4h6l1 4"/><circle cx="8" cy="18.5" r="1.5"/><circle cx="16" cy="18.5" r="1.5"/></svg><h3>Sin Uber en la zona</h3><p class="av-txt">Indícanos en tu confirmación si requieren transporte del hotel al viñedo; la hacienda avisará a los taxis locales.</p><span class="av-tap">Toca para ver</span></article>
       <article class="av-card"><span class="av-n">03</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 8.5a15 15 0 0120 0M5 12a10 10 0 0114 0M8.5 15.5a5 5 0 017 0"/><circle cx="12" cy="19" r="1"/></svg><h3>Señal limitada</h3><p class="av-txt">La señal móvil es difícil en el viñedo. Ponte de acuerdo con tu grupo antes de llegar y guarda esta invitación.</p><span class="av-tap">Toca para ver</span></article>
       <article class="av-card"><span class="av-n">04</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg><h3>Reserva con tiempo</h3><p class="av-txt">No hay más hoteles a la redonda y puede haber otros eventos ese mismo día. Asegura tu hospedaje.</p><span class="av-tap">Toca para ver</span></article>
@@ -2008,7 +2020,7 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv-btn{animation:none}}
 </style>
 
-<section id="rsvp" data-top="#F3E7D9" data-bot="#F3E7D9" data-nav="Confirmar">
+<section id="rsvp" data-top="#F3E7D9" data-bot="#120509" data-nav="Confirmar">
   <div class="rv-wrap">
     <span class="lbl">Sábado 29 de mayo de 2027</span>
     <h2 class="ttl">Confirma tu asistencia</h2>
@@ -2311,7 +2323,7 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
 
 
 <footer id="footer">
-  <div class="ink-bg flip"><i style="background-image:url(ink/ink-footer.webp)"></i></div>
+  <div class="ft-photo"><i class="ft-img"></i><i class="ft-shine"></i></div>
   <img class="ft-mono" src="monograma.png" alt="Ana &amp; Miguel">
   <p class="ft-dt">29 · 05 · 2027</p>
   <p class="p" style="margin-top:8px">Viñedos Puerta del Lobo · Querétaro</p>
