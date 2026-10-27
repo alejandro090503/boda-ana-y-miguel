@@ -226,6 +226,7 @@ html.anim .it:not(.in) .it-ico{transform:scale(0)}
 .ec-ring i{transform:translate(-50%,-50%) rotate(35deg);width:220%;opacity:.5}
 .ec-txt{position:absolute;left:0;right:0;bottom:12svh;padding:0 24px;text-align:center}
 .ec-line{font-family:'Playfair Display',serif;font-size:clamp(26px,7.4vw,36px);font-style:italic;font-weight:600;color:var(--champ);line-height:1.3;text-shadow:0 2px 16px #000;position:absolute;left:0;right:0;opacity:0}
+.ec-line span{display:block;white-space:nowrap}
 .ec-top{position:absolute;top:13svh;left:0;right:0}
 
 /* familia y mascotas */
@@ -442,6 +443,59 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
 .cbtn.hide{opacity:0!important;pointer-events:none!important;transform:translate(-50%,40px)!important}
 .vinyl-btn{bottom:max(16px,env(safe-area-inset-bottom))!important;right:14px}
 @media(min-width:1024px){.cbtn{bottom:24px}}
+
+/* ITINERARIO · CAMINO EN S (boda-jeffersson-y-vanessa / jorge-eva) en vino */
+.timeline{margin-top:30px;position:relative;padding:18px 0 6px;min-height:400px;text-align:left}
+.tl-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
+.tl-svg-bg{stroke:rgba(183,110,121,.35);stroke-width:1;fill:none;stroke-dasharray:2 5;stroke-linecap:round}
+.tl-svg-halo{stroke:#99244f;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;fill:none;opacity:.28}
+.tl-svg-beam{stroke:#c43a6a;stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round;fill:none;opacity:.5}
+.tl-svg-path{stroke:url(#tlGrad);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.tl-svg-core{stroke:rgba(255,226,234,.9);stroke-width:.85;stroke-linecap:round;stroke-linejoin:round;fill:none;opacity:.85}
+.tl-pearl{position:absolute;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:radial-gradient(circle at 38% 36%,#fff 0%,#ffe4ec 38%,rgba(196,58,106,.15) 100%);box-shadow:0 0 10px 4px rgba(255,230,238,.9),0 0 22px 8px rgba(196,58,106,.55),0 0 42px 14px rgba(153,36,79,.25);opacity:0;pointer-events:none;z-index:3}
+.tl-row{position:relative;z-index:1;min-height:132px;display:flex;align-items:center;margin-bottom:10px}
+.tl-row[data-side="left"]{padding-left:56px;padding-right:30%;justify-content:flex-start;text-align:left}
+.tl-row[data-side="right"]{padding-right:56px;padding-left:30%;justify-content:flex-end;text-align:right}
+.tl-row-inner{max-width:190px;display:flex;flex-direction:column;gap:2px;position:relative;padding:6px 4px}
+.tl-row-inner::before{content:'';position:absolute;inset:-8px -16px;background:radial-gradient(ellipse at center,rgba(18,5,9,.92) 0%,rgba(18,5,9,.6) 55%,rgba(18,5,9,0) 100%);z-index:-1;border-radius:16px;pointer-events:none}
+.tl-t{font-family:'Playfair Display',serif;font-style:italic;font-size:21px;font-weight:800;line-height:1.1;background:linear-gradient(100deg,#C9A06A,#E3C08F 35%,#FFF4DE 48%,#E3C08F 62%,#B87333);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:satin 6s ease-in-out infinite;padding:.1em .2em;margin:-.1em -.2em}
+.tl-ev{font-family:var(--serif);font-size:22px;color:var(--champ);font-weight:600;line-height:1.25;margin-top:5px}
+.tl-de{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;font-weight:600;color:var(--text-soft);line-height:1.45;margin-top:3px}
+.tl-row-inner>*{opacity:0;transform:translateY(8px);transition:opacity .55s cubic-bezier(.25,.46,.45,.94),transform .55s cubic-bezier(.25,.46,.45,.94)}
+.tl-row[data-side="left"] .tl-row-inner>*{transform:translateY(8px) translateX(-6px)}
+.tl-row[data-side="right"] .tl-row-inner>*{transform:translateY(8px) translateX(6px)}
+.tl-row.on .tl-row-inner>*{opacity:1;transform:none}
+.tl-row.on .tl-t{transition-delay:.08s}.tl-row.on .tl-ev{transition-delay:.2s}.tl-row.on .tl-de{transition-delay:.32s}
+.tl-dot{position:absolute;top:50%;width:16px;height:16px;margin-top:-8px;border-radius:50%;background:radial-gradient(circle,rgba(58,7,22,.9) 0%,rgba(58,7,22,.6) 60%,rgba(58,7,22,0) 100%);border:1px solid rgba(153,36,79,.55);transform:scale(.85);transition:transform .8s cubic-bezier(.34,1.56,.64,1),border-color .9s,box-shadow .9s;z-index:2}
+.tl-dot::before{content:'';position:absolute;inset:2px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#fff0f4 0%,#F7C9D4 24%,#c43a6a 55%,#3a0716 92%);opacity:0;transform:scale(.4);transition:opacity .65s,transform .8s cubic-bezier(.34,1.56,.64,1)}
+.tl-dot::after{content:'';position:absolute;top:18%;left:24%;width:34%;height:24%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.95),rgba(255,255,255,0) 70%);opacity:0;transition:opacity .8s .15s}
+.tl-row[data-side="left"] .tl-dot{left:20px}.tl-row[data-side="right"] .tl-dot{right:20px}
+.tl-row.on .tl-dot{transform:scale(1);border-color:rgba(247,201,212,.85);box-shadow:0 0 0 1px rgba(255,255,255,.18),0 0 6px rgba(255,230,238,.5),0 0 14px rgba(196,58,106,.6),0 0 28px rgba(153,36,79,.4)}
+.tl-row.on .tl-dot::before{opacity:1;transform:scale(1);animation:tlEmberBreath 3.4s ease-in-out infinite}
+.tl-row.on .tl-dot::after{opacity:.85}
+@keyframes tlEmberBreath{0%,100%{filter:brightness(1)}50%{filter:brightness(1.2)}}
+.tl-orn{position:absolute;top:50%;width:42px;height:42px;margin-top:-21px;border-radius:50%;border:1px dashed rgba(183,110,121,.25);opacity:0;animation:spin 28s linear infinite;transition:opacity 1.1s,border-color .9s;pointer-events:none;z-index:1}
+.tl-row[data-side="left"] .tl-orn{left:7px}.tl-row[data-side="right"] .tl-orn{right:7px}
+.tl-row.on .tl-orn{opacity:.9;border-color:rgba(247,201,212,.5)}
+.tl-pulse{position:absolute;top:50%;width:18px;height:18px;margin-top:-9px;border-radius:50%;border:1.5px solid #F7C9D4;opacity:0;pointer-events:none;z-index:1;box-shadow:0 0 12px rgba(196,58,106,.6)}
+.tl-row[data-side="left"] .tl-pulse{left:19px}.tl-row[data-side="right"] .tl-pulse{right:19px}
+.tl-row.on .tl-pulse{animation:tlEmberPulse 2.6s cubic-bezier(.2,.65,.4,1) 1}
+@keyframes tlEmberPulse{0%{transform:scale(.7);opacity:.95}60%{transform:scale(2.2);opacity:.35}100%{transform:scale(3.3);opacity:0}}
+
+/* HILO ROJO · listón de seda con moño */
+.liston{display:block;width:100%;max-width:400px;height:auto;margin:6px auto 4px;overflow:visible}
+.liston .lr{fill:none;stroke:url(#lsGrad);stroke-width:7;stroke-linecap:round;filter:drop-shadow(0 3px 5px rgba(0,0,0,.45))}
+.liston .lh{fill:none;stroke:rgba(255,205,215,.75);stroke-width:1.4;stroke-linecap:round}
+.liston .bow{transform-origin:200px 64px;transform:scale(0);transition:transform 1s cubic-bezier(.34,1.56,.64,1)}
+.liston.tied .bow{transform:scale(1)}
+.liston .bow path,.liston .bow ellipse{filter:drop-shadow(0 3px 4px rgba(0,0,0,.45))}
+
+/* bolas de color en 2 renglones */
+.orbs{display:flex!important;flex-direction:column;gap:14px;max-width:340px;margin:14px auto 0!important}
+.orbs>div{display:grid;grid-template-columns:1fr 64px 1fr;align-items:center;gap:14px;padding:10px 16px;border-radius:40px;background:#FFF8F0;border:1px solid rgba(153,36,79,.2)}
+.orbs .sw-ttl{margin:0!important;text-align:right;font-size:12px!important;line-height:1.3}
+.orb{width:56px!important;height:56px!important;animation:none!important}
+.orb-n{margin:0!important;text-align:left;font-size:16px!important}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.2s!important}}
 </style>
 </head>
@@ -500,7 +554,30 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
 <section id="bienvenida">
   <div class="ink-bg"><i style="background-image:url(ink/ink-top.webp)"></i></div>
   <p class="greet fx" data-fx="up" id="greet"><small>Con todo nuestro amor</small><span id="greetTxt">Queridos invitados</span></p>
-  <svg class="hilo" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M10 60 C 70 0, 110 120, 170 60 S 250 0, 290 60 S 360 120, 390 60"/></svg>
+  <svg class="liston" id="liston" viewBox="0 0 400 140" aria-hidden="true">
+    <defs>
+      <linearGradient id="lsGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#6e0a1e"/><stop offset="18%" stop-color="#b3122e"/><stop offset="30%" stop-color="#e8506a"/><stop offset="42%" stop-color="#9c0f28"/>
+        <stop offset="58%" stop-color="#c41e3a"/><stop offset="70%" stop-color="#f06e85"/><stop offset="84%" stop-color="#a3112b"/><stop offset="100%" stop-color="#6e0a1e"/>
+        <animateTransform attributeName="gradientTransform" type="translate" values="-.3 0;.3 0;-.3 0" dur="7s" repeatCount="indefinite"/>
+      </linearGradient>
+      <linearGradient id="lsBow" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f06e85"/><stop offset="45%" stop-color="#c41e3a"/><stop offset="100%" stop-color="#6e0a1e"/></linearGradient>
+    </defs>
+    <path class="lr" pathLength="1" d="M8 64 C 60 14, 110 118, 192 64"/>
+    <path class="lh lrh" pathLength="1" d="M8 61 C 60 11, 110 115, 192 61"/>
+    <path class="lr" pathLength="1" d="M392 64 C 340 14, 290 118, 208 64"/>
+    <path class="lh lrh" pathLength="1" d="M392 61 C 340 11, 290 115, 208 61"/>
+    <g class="bow">
+      <path d="M198 76 C 192 98, 184 114, 170 132 L 180 134 C 190 118, 198 100, 204 80 Z" fill="url(#lsBow)"/>
+      <path d="M202 76 C 210 98, 220 112, 234 128 L 224 132 C 212 118, 204 100, 198 80 Z" fill="url(#lsBow)"/>
+      <path d="M200 64 C 176 30, 140 36, 150 60 C 156 76, 182 80, 200 66 Z" fill="url(#lsBow)" stroke="#5a0818" stroke-width=".8"/>
+      <path d="M200 64 C 224 30, 260 36, 250 60 C 244 76, 218 80, 200 66 Z" fill="url(#lsBow)" stroke="#5a0818" stroke-width=".8"/>
+      <path d="M160 52 C 170 42, 186 46, 194 60" fill="none" stroke="rgba(255,210,220,.7)" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M240 52 C 230 42, 214 46, 206 60" fill="none" stroke="rgba(255,210,220,.7)" stroke-width="1.2" stroke-linecap="round"/>
+      <ellipse cx="200" cy="66" rx="8.5" ry="10" fill="url(#lsBow)" stroke="#5a0818" stroke-width=".8"/>
+      <ellipse cx="197.5" cy="62" rx="2.6" ry="3.4" fill="rgba(255,225,232,.75)"/>
+    </g>
+  </svg>
   <p class="p fx" data-fx="up" id="greetBody">Un hilo rojo invisible une a quienes están destinados a encontrarse. El nuestro nos trajo hasta aquí, y con la bendición de Dios y de nuestros padres queremos que <b id="greetYou">nos acompañes</b> el día en que el sol y la luna se encuentran para unir nuestras vidas.</p>
 </section>
 
@@ -575,13 +652,22 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
   <span class="lbl">El gran día</span>
   <h2 class="ttl">Itinerario</h2>
   <div class="gline"></div>
-  <div class="itin" id="itin">
-    <div class="itin-track"><i class="itin-line" id="itinLine"></i></div>
-    <div class="it fx" data-fx="left"><div class="it-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 3h8l-.5 6a3.5 3.5 0 01-7 0z"/><path d="M12 12.5V20M8.5 20h7"/><circle cx="17.5" cy="15" r="1.3"/><circle cx="19.3" cy="17" r="1.3"/><circle cx="16.8" cy="17.6" r="1.3"/></svg></div><div class="it-txt"><p class="it-time">4:00 PM</p><p class="it-ev">Ceremonia de vino</p></div></div>
-    <div class="it fx" data-fx="right"><div class="it-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2v5M9.5 4.5h5M5 21V11l7-4 7 4v10"/><path d="M10 21v-4a2 2 0 014 0v4"/></svg></div><div class="it-txt"><p class="it-time">4:30 PM</p><p class="it-ev">Ceremonia religiosa</p></div></div>
-    <div class="it fx" data-fx="left"><div class="it-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16l-8 9z"/><path d="M12 13v7M8 20h8M15 4l3-2"/></svg></div><div class="it-txt"><p class="it-time">5:00 PM</p><p class="it-ev">Cóctel de bienvenida</p></div></div>
-    <div class="it fx" data-fx="right"><div class="it-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="13" r="6"/><circle cx="12" cy="13" r="3"/><path d="M3 4v6M5 4v6M4 10v10M20 4c-1.5 1-2 3-2 6h2v10"/></svg></div><div class="it-txt"><p class="it-time">6:30 PM</p><p class="it-ev">Cena</p></div></div>
-    <div class="it fx" data-fx="left"><div class="it-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg></div><div class="it-txt"><p class="it-time">8:00 PM</p><p class="it-ev">¡A bailar!</p></div></div>
+  <div class="timeline" id="tlWrap">
+    <svg class="tl-svg" id="tlSvg" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="tlGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a0716"/><stop offset="14%" stop-color="#6e1535"/><stop offset="34%" stop-color="#99244f"/>
+          <stop offset="50%" stop-color="#F7C9D4"/><stop offset="66%" stop-color="#99244f"/><stop offset="86%" stop-color="#6e1535"/><stop offset="100%" stop-color="#3a0716"/>
+        </linearGradient>
+      </defs>
+      <path class="tl-svg-bg" id="tlPathBg"/><path class="tl-svg-halo" id="tlPathHalo"/><path class="tl-svg-beam" id="tlPathBeam"/><path class="tl-svg-path" id="tlPath"/><path class="tl-svg-core" id="tlPathCore"/>
+    </svg>
+    <div class="tl-pearl" id="tlPearl" aria-hidden="true"></div>
+    <div class="tl-row" data-side="left"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><p class="tl-t">4:00 PM</p><p class="tl-ev">Ceremonia de vino</p><p class="tl-de">Viñedos Puerta del Lobo</p></div></div>
+    <div class="tl-row" data-side="right"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><p class="tl-t">4:30 PM</p><p class="tl-ev">Ceremonia religiosa</p></div></div>
+    <div class="tl-row" data-side="left"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><p class="tl-t">5:00 PM</p><p class="tl-ev">Cóctel de bienvenida</p></div></div>
+    <div class="tl-row" data-side="right"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><p class="tl-t">6:30 PM</p><p class="tl-ev">Cena</p></div></div>
+    <div class="tl-row" data-side="left"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><p class="tl-t">8:00 PM</p><p class="tl-ev">¡A bailar!</p><p class="tl-de">Que comience la fiesta</p></div></div>
   </div>
 </section>
 
@@ -590,7 +676,7 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
   <div class="ec-sticky">
     <div class="ec-top"><span class="lbl">29 · 05 · 2027</span><p class="script mtx" style="font-size:clamp(46px,13vw,64px)">Reserva de un Eclipse</p></div>
     <div class="ec-stage"><i class="ec-glow"></i><i class="ec-corona" id="ecCorona"><i class="ec-rays"></i><i class="ec-rays r2"></i></i><i class="ec-sun"></i><i class="ec-chromo" id="ecChromo"></i><i class="ec-moon" id="ecMoon"></i><i class="ec-ring" id="ecRing"><i></i></i><i class="ec-beads" id="ecBeads"></i></div><div class="ec-dust" aria-hidden="true"></div>
-    <div class="ec-txt"><p class="ec-line">El sol y la luna</p><p class="ec-line">se buscan en el cielo…</p><p class="ec-line">y por un instante, son uno solo.</p></div>
+    <div class="ec-txt"><p class="ec-line"><span>El sol</span><span>y la luna…</span></p><p class="ec-line"><span>se buscan</span><span>en el cielo,</span></p><p class="ec-line"><span>y por un instante,</span><span>todo se alinea.</span></p></div>
   </div>
 </section>
 
@@ -2217,10 +2303,11 @@ function hero(){
   gsap.fromTo('#heroCnt > *',{y:30,opacity:0},{y:0,opacity:1,duration:1.1,stagger:.15,ease:'power3.out',delay:.3});
 }
 function hilo(){
-  document.querySelectorAll('.hilo path').forEach(function(p){
-    p.style.strokeDasharray=1; p.style.strokeDashoffset=R?0:1;
-    if(!R) gsap.to(p,{strokeDashoffset:0,ease:'none',scrollTrigger:{trigger:p.parentNode,start:'top 90%',end:'bottom 45%',scrub:true}});
-  });
+  var l=document.getElementById('liston'); if(!l) return;
+  var ps=l.querySelectorAll('.lr,.lrh');
+  ps.forEach(function(p){ p.style.strokeDasharray=1; p.style.strokeDashoffset=R?0:1; });
+  if(R){ l.classList.add('tied'); return; }
+  gsap.to(ps,{strokeDashoffset:0,ease:'none',scrollTrigger:{trigger:l,start:'top 92%',end:'center 55%',scrub:true,onUpdate:function(st){ l.classList.toggle('tied',st.progress>.92); }}});
 }
 
 var WED=new Date('2027-05-29T16:00:00-06:00'),RSVPD=new Date('2027-02-01T23:59:59-06:00'),prev={};
@@ -2238,9 +2325,28 @@ function tilt(){
   });
 }
 function itinerario(){
-  var l=document.getElementById('itinLine');
-  if(R){ l.style.transform='scaleY(1)'; return; }
-  gsap.to(l,{scaleY:1,ease:'none',scrollTrigger:{trigger:'#itin',start:'top 70%',end:'bottom 60%',scrub:true}});
+  var wrap=document.getElementById('tlWrap'),svg=document.getElementById('tlSvg'),path=document.getElementById('tlPath'),halo=document.getElementById('tlPathHalo'),beam=document.getElementById('tlPathBeam'),core=document.getElementById('tlPathCore'),bg=document.getElementById('tlPathBg'),pearl=document.getElementById('tlPearl');
+  var rows=[].slice.call(wrap.querySelectorAll('.tl-row')),data=null;
+  function build(){
+    var rect=wrap.getBoundingClientRect(),W=rect.width,H=wrap.offsetHeight; if(W<10||H<10) return;
+    svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('width',W); svg.setAttribute('height',H);
+    var pts=rows.map(function(r){ var b=r.getBoundingClientRect(); return {x:r.dataset.side==='left'?28:W-28,y:(b.top-rect.top)+b.height/2}; });
+    var d='M '+pts[0].x+' '+pts[0].y;
+    for(var i=1;i<pts.length;i++){ var p0=pts[i-1],p1=pts[i],m=(p0.y+p1.y)/2; d+=' C '+p0.x+' '+m+', '+p1.x+' '+m+', '+p1.x+' '+p1.y; }
+    [path,halo,beam,core,bg].forEach(function(p){p.setAttribute('d',d)});
+    var len=path.getTotalLength();
+    [path,halo,beam,core].forEach(function(p){ p.style.strokeDasharray=len; p.style.strokeDashoffset=R?0:len; });
+    data={len:len}; if(R) rows.forEach(function(r){r.classList.add('on')});
+  }
+  build(); requestAnimationFrame(function(){requestAnimationFrame(build)}); [150,500,1200].forEach(function(t){setTimeout(build,t)});
+  window.addEventListener('resize',function(){setTimeout(build,140)},{passive:true});
+  if(R) return;
+  ScrollTrigger.create({trigger:'#itinerario',start:'top 78%',end:'bottom 58%',scrub:.6,onUpdate:function(st){
+    if(!data) return; var p=st.progress,off=data.len*(1-p);
+    [path,halo,beam,core].forEach(function(el){el.style.strokeDashoffset=off});
+    if(p>.012&&p<.988){ var pt=path.getPointAtLength(data.len*p); pearl.style.left=pt.x+'px'; pearl.style.top=pt.y+'px'; pearl.style.opacity='1'; } else pearl.style.opacity='0';
+    var n=Math.ceil(p*rows.length); rows.forEach(function(r,i){r.classList.toggle('on',i<n)});
+  }});
 }
 function eclipse(){
   var moon=document.getElementById('ecMoon'),cor=document.getElementById('ecCorona'),ring=document.getElementById('ecRing'),lines=document.querySelectorAll('.ec-line');
