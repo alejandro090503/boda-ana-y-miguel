@@ -17,7 +17,7 @@
 .hs-copy:active{transform:scale(.97)}
 .hs-copy.is-pending{opacity:.72;border-style:dashed}
 .hs-copy.is-done{background:var(--metal);color:#2a0b16;border-color:transparent}
-.hs-copy-msg{display:block;min-height:22px;margin-top:10px;font-family:var(--sans);font-weight:700;font-size:14px;color:var(--gold-lt);opacity:0;transition:opacity .3s}
+.hs-copy-msg{display:block;min-height:20px;margin-top:8px;margin-bottom:-6px;font-family:var(--sans);font-weight:700;font-size:14px;color:var(--gold-lt);opacity:0;transition:opacity .3s}
 .hs-copy-msg.on{opacity:1}
 .hs-why{margin:20px auto 0;max-width:420px;font-family:var(--serif);font-weight:500;font-size:18px;line-height:1.6;color:var(--text-soft)}
 .hs-why strong{font-weight:700;color:var(--champ)}
@@ -61,7 +61,7 @@
 .hs-thumbs button{width:46px;height:46px;padding:2px;border-radius:50%;border:0;background:rgba(227,192,143,.18);cursor:pointer;opacity:.6;transition:opacity .25s,transform .25s,background .25s}
 .hs-thumbs button.on{background:var(--metal);opacity:1;transform:translateY(-2px)}
 .hs-thumbs img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;border:2px solid var(--bg)}
-.hs-type{display:block;margin-top:22px;font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-lt)}
+.hs-type{display:block;margin-top:22px;font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-lt)}
 .hs-name{margin:8px 0 0;font-family:var(--serif);font-weight:600;font-size:clamp(27px,7.4vw,33px);line-height:1.15;color:var(--champ)}
 .hs-addr{margin:10px auto 0;max-width:320px;font-family:var(--sans);font-weight:700;font-size:15px;line-height:1.5;color:var(--text-soft)}
 .hs-dist{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:16px 0 0}
@@ -81,7 +81,7 @@
 .hs-frame{padding:1px;border-radius:28px;background:var(--metal);box-shadow:0 22px 60px rgba(0,0,0,.5)}
 .hs-frame-in{position:relative;height:580px;border-radius:27px;overflow:hidden;background:#1b0b11;isolation:isolate}
 .hs-map{position:absolute;inset:0;z-index:0;background:#1b0b11}
-.hs-map .leaflet-tile-pane{filter:sepia(.85) hue-rotate(295deg) saturate(2.1) brightness(.92) contrast(1.06)}
+.hs-map .leaflet-tile-pane{filter:sepia(.9) hue-rotate(295deg) saturate(1.9) brightness(.66) contrast(1.18)}
 .hs-map .leaflet-control-attribution{background:rgba(18,5,9,.72)!important;color:rgba(247,231,206,.7)!important;font:400 9px/1.4 var(--sans)!important;border-radius:8px 0 0 0;padding:1px 6px!important}
 .hs-map .leaflet-control-attribution a{color:var(--gold-lt)!important}
 .hs-map .leaflet-bottom.leaflet-right{bottom:0;right:0}
@@ -122,12 +122,12 @@
 .hs-sh-num{flex:0 0 40px;height:40px;border-radius:50%;padding:2px;background:var(--metal)}
 .hs-sh-num span{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:var(--wine-deep);font-family:var(--sans);font-weight:700;font-size:17px;color:var(--champ)}
 .hs-sh-type{display:block;font-family:var(--sans);font-weight:700;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lt)}
-.hs-sh-name{display:block;margin-top:2px;font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.15;color:var(--champ)}
+.hs-sh-name{display:block;margin-top:2px;font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.15;color:var(--champ)}
 .hs-sh-addr{margin:12px 0 0;font-family:var(--sans);font-weight:700;font-size:14.5px;line-height:1.5;color:var(--text-soft)}
 .hs-sh-dist{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-family:var(--sans);font-weight:700;font-size:14.5px;color:var(--champ)}
 .hs-sh-dist svg{width:16px;height:16px;fill:none;stroke:var(--gold-lt);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .hs-sh-btns{display:flex;gap:8px;margin-top:16px}
-.hs-sh-btns .hs-btn{flex:1 1 0;padding:0 12px;min-height:44px;font-size:14.5px}
+.hs-sh-btns .hs-btn{flex:1 1 0;padding:0 10px;min-height:46px;font-size:14px;gap:6px;white-space:nowrap;letter-spacing:.02em}
 
 /* ── Aviso de transporte ── */
 .hs-note{display:flex;gap:14px;align-items:flex-start;margin:26px auto 0;padding:18px 18px;border-radius:20px;text-align:left;background:rgba(74,16,40,.35);border:1px solid rgba(183,110,121,.45)}

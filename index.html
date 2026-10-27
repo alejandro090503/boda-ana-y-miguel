@@ -545,7 +545,473 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
   <p style="font-family:var(--sans);font-size:14px;color:var(--text-soft);margin-top:10px">Promedio histórico de los últimos 10 años.</p>
 </section>
 
-<!--@@hospedaje@@-->
+<!-- ===== hospedaje ===== -->
+<style>
+/* ═══════════ HOSPEDAJE (parcial autocontenido · prefijo .hs-) ═══════════ */
+#hospedaje{background:transparent;text-align:center}
+#hospedaje .lbl{color:var(--gold-lt);font-family:var(--sans);font-weight:700}
+.hs-wrap{max-width:460px;margin:0 auto}
+
+/* ── Código de reservación ── */
+.hs-code{position:relative;margin:26px auto 0;padding:1px;border-radius:24px;background:var(--metal);box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 60px rgba(153,36,79,.18)}
+.hs-code-in{position:relative;border-radius:23px;padding:26px 20px 24px;background:radial-gradient(120% 90% at 50% 0%,rgba(153,36,79,.38),transparent 62%),linear-gradient(180deg,var(--bg2),var(--bg));overflow:hidden}
+.hs-code-in::before{content:"";position:absolute;inset:8px;border:1px solid rgba(227,192,143,.22);border-radius:17px;pointer-events:none}
+.hs-code-k{display:block;font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-lt)}
+.hs-code-val{display:block;margin:14px auto 4px;font-family:var(--sans);font-weight:700;font-size:clamp(25px,7.6vw,40px);letter-spacing:.09em;line-height:1.15;word-break:break-word;background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 10px rgba(0,0,0,.45))}
+.hs-code-sub{display:block;font-family:var(--serif);font-style:italic;font-weight:500;font-size:17px;color:var(--text-soft);margin-bottom:16px}
+.hs-copy{display:inline-flex;align-items:center;gap:9px;min-height:46px;padding:0 24px;border-radius:999px;border:1px solid var(--gold-lt);background:rgba(227,192,143,.08);color:var(--champ);font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.06em;cursor:pointer;transition:background .25s,transform .2s}
+.hs-copy svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hs-copy:hover{background:rgba(227,192,143,.18)}
+.hs-copy:active{transform:scale(.97)}
+.hs-copy.is-pending{opacity:.72;border-style:dashed}
+.hs-copy.is-done{background:var(--metal);color:#2a0b16;border-color:transparent}
+.hs-copy-msg{display:block;min-height:20px;margin-top:8px;margin-bottom:-6px;font-family:var(--sans);font-weight:700;font-size:14px;color:var(--gold-lt);opacity:0;transition:opacity .3s}
+.hs-copy-msg.on{opacity:1}
+.hs-why{margin:20px auto 0;max-width:420px;font-family:var(--serif);font-weight:500;font-size:18px;line-height:1.6;color:var(--text-soft)}
+.hs-why strong{font-weight:700;color:var(--champ)}
+
+/* ── Selector Lista / Mapa ── */
+.hs-toggle{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;margin:30px auto 0;padding:5px;border-radius:999px;background:rgba(28,10,18,.85);border:1px solid rgba(227,192,143,.32);box-shadow:inset 0 1px 0 rgba(247,231,206,.06),0 10px 28px rgba(0,0,0,.35)}
+.hs-ind{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:999px;background:var(--metal);box-shadow:0 4px 16px rgba(183,110,121,.4);transition:transform .45s cubic-bezier(.65,.05,.25,1)}
+.hs-toggle[data-view="map"] .hs-ind{transform:translateX(100%)}
+.hs-tab{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:118px;min-height:44px;padding:0 18px;border:0;background:none;border-radius:999px;cursor:pointer;font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.06em;color:var(--champ);transition:color .35s}
+.hs-tab svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hs-tab[aria-selected="true"]{color:#2a0b16}
+
+/* ── Tarjeta que gira ── */
+.hs-flip{perspective:1700px;margin-top:24px}
+.hs-card{position:relative;display:grid;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.65,.05,.25,1),height .7s cubic-bezier(.65,.05,.25,1)}
+.hs-face{grid-area:1/1;align-self:start;-webkit-backface-visibility:hidden;backface-visibility:hidden;min-width:0}
+.hs-back{transform:rotateY(180deg)}
+.hs-off{display:none!important}
+
+/* ── Lista: hotel ── */
+.hs-hotel{position:relative;padding:30px 18px 28px;border-radius:28px;background:linear-gradient(180deg,rgba(28,10,18,.92),rgba(18,5,9,.92));border:1px solid rgba(227,192,143,.24);box-shadow:0 22px 60px rgba(0,0,0,.45)}
+.hs-gal{position:relative;width:216px;margin:0 auto}
+.hs-orbit{animation:hs-levitate 6.5s ease-in-out infinite;will-change:transform}
+@keyframes hs-levitate{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-9px) rotate(.6deg)}}
+.hs-ring{padding:3px;border-radius:50%;background:var(--metal);box-shadow:0 20px 44px rgba(0,0,0,.55),0 0 46px rgba(183,110,121,.25)}
+.hs-vp{width:210px;height:210px;border-radius:50%;overflow:hidden;background:var(--bg2);border:3px solid var(--bg);touch-action:pan-y}
+.hs-track{display:flex;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.hs-track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;display:block;user-select:none;-webkit-user-drag:none}
+.hs-badge{position:absolute;top:6px;right:2px;z-index:2;width:44px;height:44px;border-radius:50%;padding:2px;background:var(--metal);box-shadow:0 6px 16px rgba(0,0,0,.5)}
+.hs-badge span{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6a1a3a,var(--wine-deep));font-family:var(--sans);font-weight:700;font-size:18px;color:var(--champ)}
+.hs-arrow{position:absolute;top:108px;transform:translateY(-50%);z-index:2;width:42px;height:42px;display:flex;align-items:center;justify-content:center;padding:0;border-radius:50%;border:1px solid rgba(227,192,143,.45);background:rgba(18,5,9,.78);color:var(--gold-lt);cursor:pointer;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:background .25s}
+.hs-arrow:hover{background:rgba(153,36,79,.55)}
+.hs-arrow svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.hs-arrow.prev{left:-52px}
+.hs-arrow.next{right:-52px}
+.hs-dots{display:flex;justify-content:center;gap:4px;margin-top:20px}
+.hs-dots button{width:24px;height:24px;padding:0;border:0;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.hs-dots button::before{content:"";width:7px;height:7px;border-radius:50%;background:rgba(227,192,143,.35);transition:transform .25s,background .25s}
+.hs-dots button.on::before{background:var(--gold-lt);transform:scale(1.4)}
+.hs-thumbs{display:flex;justify-content:center;gap:8px;margin:10px auto 0;flex-wrap:wrap}
+.hs-thumbs button{width:46px;height:46px;padding:2px;border-radius:50%;border:0;background:rgba(227,192,143,.18);cursor:pointer;opacity:.6;transition:opacity .25s,transform .25s,background .25s}
+.hs-thumbs button.on{background:var(--metal);opacity:1;transform:translateY(-2px)}
+.hs-thumbs img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;border:2px solid var(--bg)}
+.hs-type{display:block;margin-top:22px;font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-lt)}
+.hs-name{margin:8px 0 0;font-family:var(--serif);font-weight:600;font-size:clamp(27px,7.4vw,33px);line-height:1.15;color:var(--champ)}
+.hs-addr{margin:10px auto 0;max-width:320px;font-family:var(--sans);font-weight:700;font-size:15px;line-height:1.5;color:var(--text-soft)}
+.hs-dist{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.hs-chip{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 13px;border-radius:999px;background:rgba(153,36,79,.22);border:1px solid rgba(183,110,121,.45);font-family:var(--sans);font-weight:700;font-size:14px;color:var(--champ)}
+.hs-chip svg{width:15px;height:15px;fill:none;stroke:var(--gold-lt);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hs-dist-cap{display:block;width:100%;margin-top:2px;font-family:var(--serif);font-style:italic;font-weight:500;font-size:17px;color:var(--text-soft)}
+.hs-btns{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hs-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:999px;font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.04em;text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .25s,background .25s}
+.hs-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hs-btn--pri{background:var(--metal);color:#2a0b16;border:0;box-shadow:0 8px 22px rgba(183,110,121,.32)}
+.hs-btn--pri:hover{box-shadow:0 10px 28px rgba(183,110,121,.5)}
+.hs-btn--sec{background:transparent;color:var(--champ);border:1px solid var(--gold-lt)}
+.hs-btn--sec:hover{background:rgba(227,192,143,.12)}
+.hs-btn:active{transform:scale(.97)}
+
+/* ── Mapa ── */
+.hs-frame{padding:1px;border-radius:28px;background:var(--metal);box-shadow:0 22px 60px rgba(0,0,0,.5)}
+.hs-frame-in{position:relative;height:580px;border-radius:27px;overflow:hidden;background:#1b0b11;isolation:isolate}
+.hs-map{position:absolute;inset:0;z-index:0;background:#1b0b11}
+.hs-map .leaflet-tile-pane{filter:sepia(.9) hue-rotate(295deg) saturate(1.9) brightness(.66) contrast(1.18)}
+.hs-map .leaflet-control-attribution{background:rgba(18,5,9,.72)!important;color:rgba(247,231,206,.7)!important;font:400 9px/1.4 var(--sans)!important;border-radius:8px 0 0 0;padding:1px 6px!important}
+.hs-map .leaflet-control-attribution a{color:var(--gold-lt)!important}
+.hs-map .leaflet-bottom.leaflet-right{bottom:0;right:0}
+.hs-divicon{background:none!important;border:0!important}
+.hs-vig{position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:27px;box-shadow:inset 0 0 70px 18px rgba(18,5,9,.88);background:radial-gradient(ellipse at center,transparent 55%,rgba(18,5,9,.45) 100%)}
+.hs-loading{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.08em;color:var(--gold-lt);pointer-events:none;transition:opacity .4s}
+.hs-loading.gone{opacity:0}
+/* marcador hotel */
+.hs-mk-h{position:relative;width:46px;height:46px;cursor:pointer}
+.hs-mk-h .hs-pulse{position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold-lt);animation:hs-pulse 2.2s ease-out infinite}
+.hs-mk-h .hs-pulse.b{animation-delay:1.1s}
+@keyframes hs-pulse{0%{transform:scale(1);opacity:.85}100%{transform:scale(2.2);opacity:0}}
+.hs-mk-h .hs-mk-ring{position:absolute;inset:0;padding:2.5px;border-radius:50%;background:var(--metal);box-shadow:0 6px 18px rgba(0,0,0,.6)}
+.hs-mk-h .hs-mk-in{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7a1f45,var(--wine-deep));font-family:var(--sans);font-weight:700;font-size:19px;color:var(--champ)}
+/* marcador recepción */
+.hs-mk-r{position:relative;display:flex;align-items:center;justify-content:center;gap:6px;height:38px;padding:0 15px;border-radius:999px;background:var(--champ);color:#3a0d1f;font-family:var(--sans);font-weight:700;font-size:14px;white-space:nowrap;box-shadow:0 8px 22px rgba(0,0,0,.55);cursor:pointer}
+.hs-mk-r b{color:var(--wine);font-size:15px}
+.hs-mk-r::after{content:"";position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid var(--champ)}
+/* ruta */
+.hs-route{animation:hs-dash 1.1s linear infinite}
+@keyframes hs-dash{to{stroke-dashoffset:-22}}
+/* controles */
+.hs-ctrls{position:absolute;top:14px;right:14px;z-index:2;display:flex;flex-direction:column;gap:8px}
+.hs-ctrl{width:42px;height:42px;display:flex;align-items:center;justify-content:center;padding:0;border-radius:50%;border:1px solid rgba(227,192,143,.5);background:rgba(18,5,9,.82);color:var(--champ);cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .25s}
+.hs-ctrl:hover{background:rgba(153,36,79,.6)}
+.hs-ctrl svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.hs-hint{position:absolute;left:50%;bottom:24px;z-index:2;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;max-width:calc(100% - 32px);padding:11px 18px;border-radius:999px;background:rgba(18,5,9,.86);border:1px solid rgba(227,192,143,.42);font-family:var(--sans);font-weight:700;font-size:14px;color:var(--champ);white-space:nowrap;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:opacity .35s,transform .35s}
+.hs-hint i{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--metal);color:#2a0b16;font-style:normal;font-size:12px}
+.hs-hint.gone{opacity:0;transform:translate(-50%,12px)}
+.hs-2f{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(18,5,9,.62);font-family:var(--sans);font-weight:700;font-size:17px;line-height:1.4;color:var(--champ);pointer-events:none;opacity:0;transition:opacity .3s}
+.hs-2f.on{opacity:1}
+/* ficha flotante */
+.hs-sheet{position:absolute;left:12px;right:12px;bottom:12px;z-index:4;padding:20px 18px 18px;border-radius:22px;background:linear-gradient(180deg,rgba(36,12,22,.97),rgba(18,5,9,.98));border:1px solid rgba(227,192,143,.4);box-shadow:0 -10px 40px rgba(0,0,0,.6);text-align:left;transform:translateY(calc(100% + 20px));transition:transform .5s cubic-bezier(.2,.8,.2,1);visibility:hidden}
+.hs-sheet.open{transform:translateY(0);visibility:visible}
+.hs-sh-x{position:absolute;top:10px;right:10px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;padding:0;border-radius:50%;border:1px solid rgba(227,192,143,.35);background:transparent;color:var(--champ);cursor:pointer}
+.hs-sh-x svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.hs-sh-top{display:flex;align-items:center;gap:12px;padding-right:40px}
+.hs-sh-num{flex:0 0 40px;height:40px;border-radius:50%;padding:2px;background:var(--metal)}
+.hs-sh-num span{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:var(--wine-deep);font-family:var(--sans);font-weight:700;font-size:17px;color:var(--champ)}
+.hs-sh-type{display:block;font-family:var(--sans);font-weight:700;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lt)}
+.hs-sh-name{display:block;margin-top:2px;font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.15;color:var(--champ)}
+.hs-sh-addr{margin:12px 0 0;font-family:var(--sans);font-weight:700;font-size:14.5px;line-height:1.5;color:var(--text-soft)}
+.hs-sh-dist{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-family:var(--sans);font-weight:700;font-size:14.5px;color:var(--champ)}
+.hs-sh-dist svg{width:16px;height:16px;fill:none;stroke:var(--gold-lt);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hs-sh-btns{display:flex;gap:8px;margin-top:16px}
+.hs-sh-btns .hs-btn{flex:1 1 0;padding:0 10px;min-height:46px;font-size:14px;gap:6px;white-space:nowrap;letter-spacing:.02em}
+
+/* ── Aviso de transporte ── */
+.hs-note{display:flex;gap:14px;align-items:flex-start;margin:26px auto 0;padding:18px 18px;border-radius:20px;text-align:left;background:rgba(74,16,40,.35);border:1px solid rgba(183,110,121,.45)}
+.hs-note-ic{flex:0 0 42px;height:42px;border-radius:50%;padding:2px;background:var(--metal)}
+.hs-note-ic span{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:var(--bg2);color:var(--gold-lt)}
+.hs-note-ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.hs-note-t{display:block;font-family:var(--sans);font-weight:700;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-lt)}
+.hs-note p{margin:6px 0 0;font-family:var(--serif);font-weight:500;font-size:17.5px;line-height:1.55;color:var(--text-soft)}
+.hs-note p strong{font-weight:700;color:var(--champ)}
+
+@media (max-width:420px){
+  .hs-frame-in{height:min(70vh,580px)}
+  .hs-gal{width:186px}
+  .hs-vp{width:180px;height:180px}
+  .hs-arrow{top:93px;width:40px;height:40px}
+  .hs-arrow.prev{left:-48px}
+  .hs-arrow.next{right:-48px}
+  .hs-hotel{padding:26px 14px 24px}
+  .hs-tab{min-width:108px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hs-orbit,.hs-mk-h .hs-pulse,.hs-route{animation:none!important}
+  .hs-card,.hs-track,.hs-ind,.hs-sheet{transition:none!important}
+}
+</style>
+
+<section id="hospedaje" data-nav="Hospedaje" data-top="#120509" data-bot="#120509">
+  <span class="lbl">Hospédate cerca</span>
+  <h2 class="ttl">Hospedaje</h2>
+  <div class="gline"></div>
+
+  <div class="hs-wrap">
+
+    <!-- Código de reservación (petición del cliente: arriba y en grande) -->
+    <div class="hs-code">
+      <div class="hs-code-in">
+        <span class="hs-code-k">Código de reservación</span>
+        <!-- PENDIENTE: código de reservación — cuando el cliente lo mande, ponerlo en data-code="" (el texto se reemplaza solo y el botón copiar se activa) -->
+        <strong class="hs-code-val" id="hsCodeVal" data-code="">POR CONFIRMAR</strong>
+        <span class="hs-code-sub">Menciónalo al reservar con la hacienda</span>
+        <button type="button" class="hs-copy" id="hsCopy">
+          <svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 01-1-1V4a1 1 0 011-1h10a1 1 0 011 1v1"/></svg>
+          <span>Copiar código</span>
+        </button>
+        <span class="hs-copy-msg" id="hsCopyMsg" aria-live="polite"></span>
+      </div>
+    </div>
+    <p class="hs-why">Te pedimos <strong>reservar con tiempo</strong>: El Lobo es una comunidad pequeña, <strong>no hay más hoteles a la redonda</strong> y ese mismo día puede haber otros eventos. Así aseguras tu lugar y no te quedas sin hospedaje.</p>
+
+    <!-- Selector Lista / Mapa -->
+    <div class="hs-toggle" id="hsToggle" data-view="list" role="tablist" aria-label="Ver hospedaje">
+      <span class="hs-ind" aria-hidden="true"></span>
+      <button type="button" class="hs-tab" role="tab" aria-selected="true" data-view="list">
+        <svg viewBox="0 0 24 24"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg>Lista
+      </button>
+      <button type="button" class="hs-tab" role="tab" aria-selected="false" data-view="map">
+        <svg viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>Mapa
+      </button>
+    </div>
+
+    <div class="hs-flip">
+      <div class="hs-card" id="hsCard">
+
+        <!-- CARA A · LISTA -->
+        <div class="hs-face hs-front" id="hsFront">
+          <article class="hs-hotel">
+            <div class="hs-gal">
+              <button type="button" class="hs-arrow prev" aria-label="Foto anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button type="button" class="hs-arrow next" aria-label="Foto siguiente"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+              <div class="hs-orbit">
+                <div class="hs-ring">
+                  <div class="hs-vp" id="hsVp">
+                    <div class="hs-track" id="hsTrack">
+                      <img src="hotel/lobo-1.jpg" alt="Patio y capilla de la Ex-Hacienda El Lobo" width="560" height="560" decoding="async">
+                      <img src="hotel/lobo-2.jpg" alt="Habitación con tina en Ex-Hacienda El Lobo" width="560" height="560" decoding="async">
+                      <img src="hotel/lobo-3.jpg" alt="Restaurante de la Ex-Hacienda El Lobo" width="560" height="560" decoding="async">
+                      <img src="hotel/lobo-4.jpg" alt="Habitación king de la Ex-Hacienda El Lobo" width="560" height="560" decoding="async">
+                      <img src="hotel/lobo-5.jpg" alt="Habitación doble de la Ex-Hacienda El Lobo" width="560" height="560" decoding="async">
+                    </div>
+                  </div>
+                </div>
+                <div class="hs-badge" aria-hidden="true"><span>1</span></div>
+              </div>
+            </div>
+            <div class="hs-dots" id="hsDots"></div>
+            <div class="hs-thumbs" id="hsThumbs"></div>
+
+            <span class="hs-type">Hotel sede · el único en la zona</span>
+            <h3 class="hs-name">Ex-Hacienda El Lobo</h3>
+            <p class="hs-addr">Comunidad El Lobo, El Marqués, Querétaro</p>
+            <div class="hs-dist">
+              <span class="hs-chip"><svg viewBox="0 0 24 24"><path d="M5 17h14M7 17l1.5-5h7L17 17M6 17v2M18 17v2"/><circle cx="8" cy="14.5" r=".6"/><circle cx="16" cy="14.5" r=".6"/></svg>5 min</span>
+              <span class="hs-chip"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>3.6 km · 2.2 mi</span>
+              <span class="hs-dist-cap">a la recepción en Viñedos Puerta del Lobo</span>
+            </div>
+            <div class="hs-btns">
+              <a class="hs-btn hs-btn--pri" href="https://wa.me/message/UGZMXLY3KU3MD1" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a4 4 0 018 0v2"/></svg>Reservar
+              </a>
+              <a class="hs-btn hs-btn--sec" href="https://maps.app.goo.gl/gQ4mqsGjmdo2QLzp8" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>Cómo llegar
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <!-- CARA B · MAPA -->
+        <div class="hs-face hs-back hs-off" id="hsBack">
+          <div class="hs-frame">
+            <div class="hs-frame-in" id="hsFrame">
+              <div class="hs-map" id="hsMap" aria-label="Mapa del hotel y la recepción"></div>
+              <div class="hs-loading" id="hsLoading">Cargando mapa…</div>
+              <div class="hs-vig" aria-hidden="true"></div>
+              <div class="hs-ctrls">
+                <button type="button" class="hs-ctrl" data-z="in" aria-label="Acercar"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <button type="button" class="hs-ctrl" data-z="out" aria-label="Alejar"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                <button type="button" class="hs-ctrl" data-z="all" aria-label="Ver todo"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+              </div>
+              <div class="hs-hint" id="hsHint"><i>1</i>Toca un número para ver el hotel</div>
+              <div class="hs-2f" id="hs2f">Usa dos dedos para mover el mapa</div>
+              <div class="hs-sheet" id="hsSheet" aria-live="polite">
+                <button type="button" class="hs-sh-x" id="hsShX" aria-label="Cerrar"><svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+                <div class="hs-sh-top">
+                  <div class="hs-sh-num"><span id="hsShNum">1</span></div>
+                  <div><span class="hs-sh-type" id="hsShType"></span><span class="hs-sh-name" id="hsShName"></span></div>
+                </div>
+                <p class="hs-sh-addr" id="hsShAddr"></p>
+                <span class="hs-sh-dist" id="hsShDist"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg><span></span></span>
+                <div class="hs-sh-btns">
+                  <a class="hs-btn hs-btn--sec" id="hsShMap" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Ver ubicación</a>
+                  <a class="hs-btn hs-btn--pri" id="hsShBook" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a4 4 0 018 0v2"/></svg>Reservar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Aviso de transporte -->
+    <div class="hs-note">
+      <div class="hs-note-ic"><span><svg viewBox="0 0 24 24"><path d="M5 17h14v-5l-2-5H7l-2 5v5z"/><path d="M5 12h14"/><circle cx="8" cy="15" r=".8"/><circle cx="16" cy="15" r=".8"/><path d="M6 17v2M18 17v2"/></svg></span></div>
+      <div>
+        <span class="hs-note-t">Transporte</span>
+        <p><strong>En la zona no hay Uber.</strong> En tu confirmación podrás indicar si necesitas transporte del hotel al viñedo; la hacienda avisará a los taxis locales.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function(){
+  var root=document.getElementById('hospedaje');
+  if(!root||root.__hsInit)return; root.__hsInit=true;
+  var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var COARSE=window.matchMedia&&matchMedia('(pointer: coarse)').matches;
+  function $(id){return document.getElementById(id);}
+
+  var HOTEL={n:'1',type:'Hotel sede',name:'Ex-Hacienda El Lobo',lat:20.7290368,lng:-100.2002979,
+    addr:'Comunidad El Lobo, El Marqués, Querétaro',dist:'2.2 mi · 5 min a la recepción',
+    maps:'https://maps.app.goo.gl/gQ4mqsGjmdo2QLzp8',book:'https://wa.me/message/UGZMXLY3KU3MD1'};
+  var VENUE={n:'♥',type:'Recepción y ceremonia',name:'Viñedos Puerta del Lobo',lat:20.7001686,lng:-100.2010098,
+    addr:'Carr. Chichimequillas–La Griega, El Lobo, Qro.',dist:'3.6 km · 5 min desde el hotel',
+    maps:'https://maps.app.goo.gl/M7nsg7WgK4aCAsNA9',book:''};
+  /* Ruta real OSRM (driving) hotel → recepción: 3,637 m · 298 s. Calculada una vez (router.project-osrm.org, overview=full). */
+  var ROUTE=[[20.72931,-100.19925],[20.72901,-100.19915],[20.72889,-100.19911],[20.72875,-100.19908],[20.72864,-100.19907],[20.72853,-100.19907],[20.72846,-100.19907],[20.72838,-100.1991],[20.7283,-100.19914],[20.72822,-100.19922],[20.72814,-100.1993],[20.72807,-100.19943],[20.72801,-100.19959],[20.72793,-100.19988],[20.72786,-100.20022],[20.72783,-100.20062],[20.72751,-100.2006],[20.72728,-100.20059],[20.72689,-100.20058],[20.72659,-100.20054],[20.72625,-100.20052],[20.726,-100.2005],[20.72591,-100.2005],[20.72579,-100.2005],[20.72567,-100.20051],[20.72556,-100.20053],[20.72542,-100.20056],[20.72457,-100.20082],[20.72387,-100.20104],[20.72377,-100.20107],[20.7237,-100.20109],[20.72364,-100.2011],[20.72356,-100.2011],[20.72347,-100.20111],[20.72332,-100.20109],[20.72311,-100.20105],[20.72283,-100.20099],[20.72249,-100.20091],[20.7223,-100.20088],[20.72221,-100.20086],[20.72194,-100.20079],[20.72161,-100.20063],[20.7212,-100.20042],[20.72032,-100.19999],[20.71999,-100.1998],[20.71995,-100.19978],[20.71977,-100.19967],[20.71968,-100.19961],[20.71959,-100.19955],[20.71943,-100.19942],[20.71924,-100.19925],[20.71894,-100.199],[20.71876,-100.19884],[20.71865,-100.19875],[20.71856,-100.19868],[20.71848,-100.19863],[20.71839,-100.19859],[20.71829,-100.19857],[20.71812,-100.19854],[20.71785,-100.1985],[20.71754,-100.19846],[20.71725,-100.19841],[20.71697,-100.19837],[20.71663,-100.19831],[20.7163,-100.19825],[20.716,-100.19818],[20.71567,-100.1981],[20.71527,-100.19801],[20.71482,-100.19792],[20.71445,-100.19783],[20.71404,-100.19774],[20.71364,-100.19765],[20.7133,-100.19757],[20.71298,-100.1975],[20.71262,-100.19742],[20.71245,-100.19738],[20.71225,-100.19735],[20.71194,-100.19731],[20.71151,-100.19725],[20.71086,-100.19716],[20.71025,-100.19709],[20.70955,-100.19698],[20.70854,-100.19679],[20.70789,-100.19666],[20.70692,-100.19649],[20.70657,-100.19639],[20.70642,-100.19633],[20.70626,-100.19623],[20.70612,-100.19615],[20.70606,-100.19614],[20.706,-100.19615],[20.70581,-100.19632],[20.70549,-100.19663],[20.70494,-100.19724],[20.70481,-100.19738],[20.70392,-100.19827],[20.70381,-100.19838],[20.70338,-100.19885],[20.70325,-100.19896],[20.7028,-100.19946],[20.7023,-100.19995],[20.70204,-100.20023],[20.70188,-100.20038],[20.70169,-100.2005],[20.7013,-100.2008],[20.70116,-100.20089],[20.70105,-100.20096],[20.70101,-100.20097],[20.70095,-100.201],[20.70085,-100.20104],[20.70064,-100.2011],[20.70052,-100.20114],[20.70039,-100.2012],[20.7003,-100.20125]];
+
+  /* ── 1. Código de reservación ── */
+  (function(){
+    var val=$('hsCodeVal'),btn=$('hsCopy'),msg=$('hsCopyMsg');
+    if(!val||!btn)return;
+    var code=(val.getAttribute('data-code')||'').trim();
+    var t;
+    function say(s){msg.textContent=s;msg.classList.add('on');clearTimeout(t);t=setTimeout(function(){msg.classList.remove('on');},2600);}
+    if(code){val.textContent=code;}else{btn.classList.add('is-pending');btn.setAttribute('aria-disabled','true');}
+    function fallbackCopy(s){
+      var ta=document.createElement('textarea');ta.value=s;ta.setAttribute('readonly','');
+      ta.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(ta);ta.select();
+      var ok=false;try{ok=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);return ok;
+    }
+    btn.addEventListener('click',function(){
+      if(!code){say('El código se publicará muy pronto');return;}
+      function done(){btn.classList.add('is-done');btn.querySelector('span').textContent='¡Copiado!';say('Código copiado: '+code);
+        setTimeout(function(){btn.classList.remove('is-done');btn.querySelector('span').textContent='Copiar código';},2200);}
+      if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(code).then(done,function(){fallbackCopy(code)?done():say(code);});}
+      else{fallbackCopy(code)?done():say(code);}
+    });
+  })();
+
+  /* ── 2. Carrusel de fotos ── */
+  (function(){
+    var track=$('hsTrack'),vp=$('hsVp');if(!track)return;
+    var imgs=track.querySelectorAll('img'),n=imgs.length,idx=0;
+    var dotsBox=$('hsDots'),thBox=$('hsThumbs'),dots=[],ths=[];
+    for(var i=0;i<n;i++){(function(k){
+      var d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Foto '+(k+1));
+      d.addEventListener('click',function(){go(k);});dotsBox.appendChild(d);dots.push(d);
+      var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Ver foto '+(k+1));
+      var im=document.createElement('img');im.src=imgs[k].getAttribute('src');im.alt='';im.loading='lazy';b.appendChild(im);
+      b.addEventListener('click',function(){go(k);});thBox.appendChild(b);ths.push(b);
+    })(i);}
+    function go(i){idx=(i+n)%n;track.style.transform='translateX('+(-idx*100)+'%)';
+      for(var k=0;k<n;k++){dots[k].classList.toggle('on',k===idx);ths[k].classList.toggle('on',k===idx);}}
+    root.querySelector('.hs-arrow.prev').addEventListener('click',function(){go(idx-1);});
+    root.querySelector('.hs-arrow.next').addEventListener('click',function(){go(idx+1);});
+    var sx=0,sy=0;
+    vp.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+    vp.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+      if(Math.abs(dx)>36&&Math.abs(dx)>Math.abs(dy))go(dx<0?idx+1:idx-1);},{passive:true});
+    go(0);
+  })();
+
+  /* ── 3. Leaflet bajo demanda ── */
+  var LP=null;
+  function loadLeaflet(){
+    if(window.L&&window.L.map)return Promise.resolve(window.L);
+    if(LP)return LP;
+    LP=new Promise(function(res,rej){
+      var base='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/';
+      if(!document.querySelector('link[data-hs-leaflet]')){
+        var l=document.createElement('link');l.rel='stylesheet';l.href=base+'leaflet.min.css';l.setAttribute('data-hs-leaflet','');document.head.appendChild(l);}
+      var s=document.createElement('script');s.src=base+'leaflet.min.js';s.async=true;
+      s.onload=function(){res(window.L);};s.onerror=function(){LP=null;rej(new Error('leaflet'));};
+      document.head.appendChild(s);
+    });
+    return LP;
+  }
+
+  /* ── 4. Mapa ── */
+  var map=null,bounds=null;
+  var sheet=$('hsSheet'),hint=$('hsHint');
+  function fitAll(anim){
+    if(!map)return;
+    var o={paddingTopLeft:[46,92],paddingBottomRight:[64,118],maxZoom:16};
+    if(anim&&!RM)map.flyToBounds(bounds,Object.assign({duration:.9},o));else map.fitBounds(bounds,o);
+  }
+  function openSheet(p){
+    $('hsShNum').textContent=p.n;$('hsShType').textContent=p.type;$('hsShName').textContent=p.name;
+    $('hsShAddr').textContent=p.addr;$('hsShDist').querySelector('span').textContent=p.dist;
+    $('hsShMap').href=p.maps;var bk=$('hsShBook');
+    if(p.book){bk.href=p.book;bk.style.display='';}else{bk.style.display='none';}
+    sheet.classList.add('open');hint.classList.add('gone');
+    var z=15.5,sh=sheet.offsetHeight||200;
+    var pt=map.project([p.lat,p.lng],z).add([0,sh/2+10]);
+    var target=map.unproject(pt,z);
+    if(RM)map.setView(target,z);else map.flyTo(target,z,{duration:1});
+  }
+  function closeSheet(){sheet.classList.remove('open');hint.classList.remove('gone');}
+  $('hsShX').addEventListener('click',function(){closeSheet();fitAll(true);});
+
+  function buildMap(L){
+    if(map)return;
+    map=L.map('hsMap',{zoomControl:false,attributionControl:true,scrollWheelZoom:false,
+      dragging:!COARSE,tap:false,touchZoom:true,doubleClickZoom:true,zoomSnap:.25,minZoom:10,maxZoom:18});
+    var esri='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/';
+    L.tileLayer(esri+'World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',{maxNativeZoom:16,maxZoom:18,
+      attribution:'Tiles &copy; Esri — Esri, HERE, Garmin, &copy; OpenStreetMap'}).addTo(map);
+    L.tileLayer(esri+'World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}',{maxNativeZoom:16,maxZoom:18}).addTo(map);
+    map.attributionControl.setPrefix(false);
+
+    L.polyline(ROUTE,{color:'#E3C08F',weight:9,opacity:.16,lineCap:'round',lineJoin:'round',interactive:false}).addTo(map);
+    L.polyline(ROUTE,{color:'#E3C08F',weight:3.5,opacity:.95,dashArray:'2 9',lineCap:'round',lineJoin:'round',className:'hs-route',interactive:false}).addTo(map);
+
+    var hIcon=L.divIcon({className:'hs-divicon',iconSize:[46,46],iconAnchor:[23,23],
+      html:'<div class="hs-mk-h" role="button" aria-label="Hotel 1: Ex-Hacienda El Lobo"><span class="hs-pulse"></span><span class="hs-pulse b"></span><span class="hs-mk-ring"><span class="hs-mk-in">1</span></span></div>'});
+    var rIcon=L.divIcon({className:'hs-divicon',iconSize:[128,38],iconAnchor:[64,46],
+      html:'<div class="hs-mk-r" role="button" aria-label="Recepción: Viñedos Puerta del Lobo"><b>♥</b>Recepción</div>'});
+    L.marker([HOTEL.lat,HOTEL.lng],{icon:hIcon,keyboard:true,zIndexOffset:500}).addTo(map).on('click',function(){openSheet(HOTEL);});
+    L.marker([VENUE.lat,VENUE.lng],{icon:rIcon,keyboard:true}).addTo(map).on('click',function(){openSheet(VENUE);});
+
+    bounds=L.latLngBounds(ROUTE).extend([HOTEL.lat,HOTEL.lng]).extend([VENUE.lat,VENUE.lng]);
+    map.on('click',function(){if(sheet.classList.contains('open'))closeSheet();});
+    fitAll(false);
+
+    root.querySelectorAll('.hs-ctrl').forEach(function(b){b.addEventListener('click',function(){
+      var z=b.getAttribute('data-z');
+      if(z==='in')map.zoomIn(1);else if(z==='out')map.zoomOut(1);else{closeSheet();fitAll(true);}
+    });});
+
+    /* Móvil: 1 dedo = scroll de página; 2 dedos = mover/zoom del mapa */
+    if(COARSE){
+      var ov=$('hs2f'),tt;
+      $('hsMap').addEventListener('touchmove',function(e){
+        if(e.touches.length===1){ov.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){ov.classList.remove('on');},1300);}
+        else{ov.classList.remove('on');}
+      },{passive:true});
+      $('hsMap').addEventListener('touchend',function(){clearTimeout(tt);tt=setTimeout(function(){ov.classList.remove('on');},700);},{passive:true});
+    }
+    $('hsLoading').classList.add('gone');
+  }
+
+  /* ── 5. Selector + giro 3D ── */
+  var toggle=$('hsToggle'),card=$('hsCard'),front=$('hsFront'),back=$('hsBack');
+  var tabs=toggle.querySelectorAll('.hs-tab'),isMap=false,busy=false;
+  function setTabs(toMap){toggle.setAttribute('data-view',toMap?'map':'list');
+    tabs.forEach(function(t){t.setAttribute('aria-selected',String((t.getAttribute('data-view')==='map')===toMap));});}
+  function afterShow(){
+    if(isMap&&map){map.invalidateSize();if(!sheet.classList.contains('open'))fitAll(false);}
+  }
+  function flip(toMap){
+    if(busy||toMap===isMap)return;
+    busy=true;setTabs(toMap);
+    var from=isMap?back:front,to=toMap?back:front;
+    var h0=from.offsetHeight;
+    to.classList.remove('hs-off');
+    if(toMap){loadLeaflet().then(function(L){buildMap(L);if(!busy)afterShow();})
+      .catch(function(){$('hsLoading').textContent='No se pudo cargar el mapa';});}
+    var h1=to.offsetHeight;
+    function end(){
+      card.style.transition='none';
+      from.classList.add('hs-off');
+      card.style.transform='';back.style.transform=toMap?'none':'';card.style.height='';
+      void card.offsetWidth;card.style.transition='';
+      isMap=toMap;busy=false;afterShow();
+    }
+    if(RM){end();return;}
+    card.style.transition='none';
+    back.style.transform='rotateY(180deg)';
+    card.style.transform=isMap?'rotateY(180deg)':'rotateY(0deg)';
+    card.style.height=h0+'px';
+    void card.offsetWidth;
+    card.style.transition='';
+    card.style.transform=toMap?'rotateY(180deg)':'rotateY(0deg)';
+    card.style.height=h1+'px';
+    setTimeout(end,730);
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){flip(t.getAttribute('data-view')==='map');});});
+  /* precarga ligera al acercar el dedo/cursor al botón Mapa */
+  tabs[1].addEventListener('pointerenter',function(){loadLeaflet().catch(function(){});},{once:true});
+  tabs[1].addEventListener('touchstart',function(){loadLeaflet().catch(function(){});},{once:true,passive:true});
+  window.addEventListener('resize',function(){if(isMap&&map)map.invalidateSize();});
+})();
+</script>
+
 
 <!-- AVISOS -->
 <section id="avisos" data-top="#2a0c18" data-bot="#2a0c18" style="background:#2a0c18">
@@ -604,8 +1070,8 @@ function reveal(){
   document.getElementById('main-content').style.visibility='visible';
   document.getElementById('musicFab').classList.add('is-ready');
   document.getElementById('nav').classList.add('on');
-  initAll();
   gsap.to(envFlash,{opacity:0,duration:2,ease:'power1.out',onComplete:function(){envFlash.style.display='none'}});
+  try{ initAll(); }catch(e){ console.error(e); document.querySelectorAll('.fx,.ttl').forEach(function(x){x.classList.add('in')}); }
 }
 function flash(d){ if(flashed) return; flashed=true; gsap.to(envFlash,{opacity:1,duration:d,ease:'none',onComplete:reveal}); }
 envVideo.addEventListener('timeupdate',function(){ if(envVideo.duration&&envVideo.currentTime>=envVideo.duration*.8) flash(1.4); });
@@ -619,7 +1085,6 @@ function open(){
   setTimeout(function(){ flash(1); },9000);
 }
 envScreen.addEventListener('click',open);
-if(qs.get('skip')==='1'){ opened=true; envFlash.style.opacity=1; flashed=true; reveal(); }
 
 /* música */
 var mEl=document.getElementById('bgMusic'),fab=document.getElementById('musicFab');
@@ -747,6 +1212,7 @@ function menu(){
     else if(navigator.clipboard) navigator.clipboard.writeText(u).then(function(){toast('Enlace copiado')});
   });
 }
+if(qs.get('skip')==='1'){ opened=true; envFlash.style.opacity=1; flashed=true; reveal(); }
 })();
 
 /* DRESS CODE · carrusel de ideas (boda-fabiola-y-fernando) */
