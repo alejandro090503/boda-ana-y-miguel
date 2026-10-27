@@ -553,6 +553,8 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
 @keyframes flareStreak{0%,100%{transform:translate(-50%,-50%) scaleX(.85);opacity:.8}50%{transform:translate(-50%,-50%) scaleX(1.1);opacity:1}}
 .ec-orbit::after{width:120px!important;height:120px!important;background:radial-gradient(circle,rgba(255,214,175,.30),rgba(240,160,120,.10) 45%,transparent 70%)!important;filter:blur(4px)}
 .ec-flare b{background:radial-gradient(circle,#fff 0%,#fff4e6 55%,#ffdcbc 100%)!important;filter:blur(1.6px)!important;mix-blend-mode:normal!important}
+.dc-tip{align-items:center}
+.dc-tip-img{flex:0 0 62px;width:62px;height:auto;filter:drop-shadow(0 6px 8px rgba(74,16,40,.25));animation:sway 6.5s ease-in-out infinite;transform-origin:50% 100%}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.2s!important}}
 </style>
 </head>
@@ -1073,7 +1075,7 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
     <div class="dc-fig"><div class="sway"><img src="caballero.png" alt="Caballero en traje formal"></div><span>Caballeros</span></div>
     <div class="dc-fig"><div class="sway"><img src="dama.png" alt="Dama en vestido formal"></div><span>Damas</span></div>
   </div>
-  <div class="dc-tip fx" data-fx="up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 17h7l3-6 5 1c1.7.3 3 1.8 3 3.5V17h-3v3h-3v-3"/><path d="M3 17v3h4v-3"/></svg><p><b>Para ellas:</b> te sugerimos tacón cuadrado o zapato cómodo; el piso del viñedo es irregular (pasto y empedrado).</p></div>
+  <div class="dc-tip fx" data-fx="up"><img class="dc-tip-img" src="tacon.png" alt="Tacón cuadrado"><p><b>Para ellas:</b> te sugerimos tacón cuadrado o zapato cómodo; el piso del viñedo es irregular (pasto y empedrado).</p></div>
   <div class="orbs"><div><p class="sw-ttl">Colores sugeridos</p><div class="orb" id="orbOk"><i></i></div><p class="orb-n" id="orbOkN">&nbsp;</p></div><div><p class="sw-ttl">Por favor evita</p><div class="orb x" id="orbNo"><i></i></div><p class="orb-n" id="orbNoN">&nbsp;</p></div></div>
 </section>
 
