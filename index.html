@@ -134,11 +134,11 @@ html.anim .fx:not(.in)[data-fx="clip"]{clip-path:inset(0 0 100% 0)}
 /* HERO */
 #hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:0 22px 110px!important;overflow:hidden}
 .hero-bg{position:absolute;inset:-6% 0 -6% 0;z-index:-3}
-.hero-drift{position:absolute;inset:0;background:url(fotos/f02.jpg) center 30%/cover;animation:heroDrift 26s ease-in-out infinite alternate}
+.hero-drift{position:absolute;inset:0;background:url(fotos/hero.jpg) center 18%/cover;animation:heroDrift 26s ease-in-out infinite alternate}
 @keyframes heroDrift{from{transform:translate(-1%,-1%) scale(1.02)}to{transform:translate(2%,1.5%) scale(1.10)}}
 .hero-shine{position:absolute;inset:0;z-index:-2;mix-blend-mode:soft-light;background:linear-gradient(115deg,transparent 30%,rgba(255,236,210,.55) 48%,transparent 66%);background-size:250% 100%;animation:shine 9s ease-in-out infinite}
 @keyframes shine{0%{background-position:120% 0}100%{background-position:-120% 0}}
-.hero-veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,5,9,.35) 0%,rgba(18,5,9,.05) 30%,rgba(18,5,9,.35) 55%,rgba(18,5,9,.88) 80%,var(--bg) 100%)}
+.hero-veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,5,9,.30) 0%,rgba(18,5,9,0) 22%,rgba(18,5,9,.1) 45%,rgba(18,5,9,.75) 66%,rgba(18,5,9,.94) 82%,var(--bg) 100%)}
 .hero-cnt{position:relative;display:flex;flex-direction:column;align-items:center}
 .hero-eyebrow{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.4em;text-transform:uppercase;color:var(--champ);margin-bottom:6px;text-shadow:0 2px 10px #000}
 .hero-mono{width:min(78vw,330px);filter:drop-shadow(0 4px 24px rgba(0,0,0,.6))}
@@ -210,10 +210,20 @@ html.anim .it:not(.in) .it-ico{transform:scale(0)}
 #eclipse{padding:0!important;height:240vh}
 .ec-sticky{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
 .ec-stage{position:relative;width:min(70vw,300px);aspect-ratio:1}
-.ec-corona{position:absolute;inset:-35%;border-radius:50%;background:radial-gradient(circle,rgba(255,232,200,.0) 34%,rgba(255,214,170,.55) 38%,rgba(183,110,121,.35) 46%,rgba(153,36,79,.12) 58%,transparent 70%);opacity:.15;transform:scale(.8)}
-.ec-sun{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 45% 40%,#fff6e6,#F7E7CE 40%,#E3B7A0 70%,#B87333);box-shadow:0 0 60px 12px rgba(247,200,150,.45)}
-.ec-moon{position:absolute;inset:-1%;border-radius:50%;background:radial-gradient(circle at 40% 35%,#2a0e19,#0d0306 70%);box-shadow:inset -6px -6px 20px rgba(0,0,0,.6)}
-.ec-ring{position:absolute;width:14%;aspect-ratio:1;border-radius:50%;top:6%;right:12%;background:radial-gradient(circle,#fff,rgba(255,240,220,.7) 30%,transparent 70%);opacity:0}
+.ec-glow{position:absolute;inset:-60%;border-radius:50%;background:radial-gradient(circle,rgba(247,200,150,.18),rgba(153,36,79,.12) 40%,transparent 68%)}
+.ec-corona{position:absolute;inset:-45%;border-radius:50%;opacity:.12;transform:scale(.8);background:radial-gradient(circle,transparent 30%,rgba(255,244,228,.95) 31.5%,rgba(255,222,186,.6) 35%,rgba(227,183,160,.32) 42%,rgba(183,110,121,.16) 52%,transparent 68%)}
+.ec-rays{position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,236,210,.55) 0deg 1.2deg,transparent 1.2deg 7deg,rgba(255,220,190,.3) 7deg 8deg,transparent 8deg 14deg);-webkit-mask:radial-gradient(circle,transparent 30%,#000 32%,rgba(0,0,0,.4) 46%,transparent 66%);mask:radial-gradient(circle,transparent 30%,#000 32%,rgba(0,0,0,.4) 46%,transparent 66%);animation:spin 90s linear infinite;filter:blur(1.2px)}
+.ec-rays.r2{opacity:.6;animation-duration:140s;animation-direction:reverse}
+.ec-chromo{position:absolute;inset:-1.5%;border-radius:50%;opacity:0}
+.ec-beads{position:absolute;inset:-1%;border-radius:50%;opacity:0;background:radial-gradient(circle at 78% 18%,#fff 0 1.6%,transparent 3%),radial-gradient(circle at 86% 30%,#fff 0 1.1%,transparent 2.4%),radial-gradient(circle at 70% 10%,#fff 0 1%,transparent 2.2%);filter:drop-shadow(0 0 6px #fff)}
+.ec-dust{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(1px 1px at 20% 30%,#fff,transparent),radial-gradient(1.4px 1.4px at 80% 22%,#F7E7CE,transparent),radial-gradient(1px 1px at 65% 70%,#fff,transparent),radial-gradient(1.2px 1.2px at 12% 78%,#E3C08F,transparent),radial-gradient(1px 1px at 45% 12%,#fff,transparent),radial-gradient(1px 1px at 90% 60%,#fff,transparent),radial-gradient(1.3px 1.3px at 32% 52%,#F7E7CE,transparent);animation:tw 4s ease-in-out infinite alternate}
+.ec-sun{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 45% 40%,#fffaf0,#FBEBD3 35%,#F0C9A5 62%,#D9926A 85%,#B87333);box-shadow:0 0 40px 8px rgba(255,214,170,.55),0 0 120px 30px rgba(227,140,110,.28)}
+.ec-sun::after{content:'';position:absolute;inset:0;border-radius:50%;background:repeating-radial-gradient(circle at 40% 45%,rgba(255,255,255,.08) 0 2px,transparent 2px 6px);mix-blend-mode:soft-light;animation:spin 60s linear infinite}
+.ec-moon{position:absolute;inset:-1%;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.05) 0 6%,transparent 7%),radial-gradient(circle at 62% 58%,rgba(255,255,255,.04) 0 9%,transparent 10%),radial-gradient(circle at 48% 78%,rgba(255,255,255,.035) 0 5%,transparent 6%),radial-gradient(circle at 40% 35%,#2a0e19,#0b0205 72%);box-shadow:inset -10px -10px 30px rgba(0,0,0,.7),inset 4px 4px 14px rgba(183,110,121,.12)}
+.ec-ring{position:absolute;width:22%;aspect-ratio:1;top:2%;right:6%;opacity:0;background:radial-gradient(circle,#fff 0 14%,rgba(255,244,228,.85) 22%,rgba(255,220,190,.25) 45%,transparent 70%)}
+.ec-ring::before,.ec-ring::after,.ec-ring i{content:'';position:absolute;left:50%;top:50%;width:520%;height:2px;transform:translate(-50%,-50%);background:linear-gradient(90deg,transparent,rgba(255,240,225,.9),transparent)}
+.ec-ring::after{transform:translate(-50%,-50%) rotate(90deg);width:300%}
+.ec-ring i{transform:translate(-50%,-50%) rotate(35deg);width:220%;opacity:.5}
 .ec-txt{position:absolute;left:0;right:0;bottom:12svh;padding:0 24px;text-align:center}
 .ec-line{font-size:clamp(26px,7.4vw,36px);font-style:italic;font-weight:600;color:var(--champ);line-height:1.3;text-shadow:0 2px 16px #000;position:absolute;left:0;right:0;opacity:0}
 .ec-top{position:absolute;top:13svh;left:0;right:0}
@@ -269,6 +279,12 @@ html.anim .it:not(.in) .it-ico{transform:scale(0)}
 .dcv-nav{top:50%;transform:translateY(-50%)}
 .dcv-nav svg,.dc-viewer-close svg{width:20px;height:20px}
 .dcv-prev{left:6px}.dcv-next{right:6px}.dc-viewer-close{top:10px;right:10px}
+.orbs{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:420px;margin:10px auto 0}
+.orb{position:relative;width:110px;height:110px;margin:0 auto;border-radius:50%;transition:background-color 1.4s ease;border:2px solid rgba(58,15,31,.18);box-shadow:inset -12px -14px 24px rgba(0,0,0,.28),inset 10px 10px 20px rgba(255,255,255,.35),0 14px 30px rgba(74,16,40,.25);animation:levitate 6.5s ease-in-out infinite;overflow:hidden}
+.orb i{position:absolute;inset:0;border-radius:50%;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.6) 50%,transparent 70%);background-size:250% 100%;animation:shine 4.5s ease-in-out infinite}
+.orb.x::after{content:'';position:absolute;left:50%;top:-5%;width:3px;height:110%;background:#99244f;transform:rotate(45deg);box-shadow:0 0 0 1.5px #fff}
+.orb-n{font-family:var(--sans);font-weight:700;font-size:17px;color:#3a0f1f;margin-top:12px;transition:opacity .5s}
+#dresscode .sw-ttl{margin:24px 0 14px}
 .sw-ttl{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:#7a1d40;margin:24px 0 16px}
 .sw-grid{display:grid;grid-template-columns:repeat(6,48px);justify-content:center;gap:16px 10px}
 .sw-grid.five{grid-template-columns:repeat(5,52px)}
@@ -292,7 +308,23 @@ html.anim .it:not(.in) .it-ico{transform:scale(0)}
 .wx-c svg{width:46px;height:46px;margin:0 auto 6px;color:var(--gold-lt)}
 .wx-c b{display:block;font-family:var(--sans);font-size:34px;color:var(--champ)}
 .wx-c span{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-soft)}
-.sun-rot{animation:spin 30s linear infinite;transform-origin:center}
+.wx2{position:relative;max-width:420px;margin:0 auto;border-radius:28px;overflow:hidden;padding:150px 14px 20px;border:1px solid rgba(227,192,143,.35);box-shadow:0 24px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.12);isolation:isolate}
+.wx2-sky{position:absolute;inset:0;z-index:-3;background:linear-gradient(180deg,#E9A27A 0%,#B76E79 35%,#5a1a35 70%,#1c0a12 100%)}
+.wx2-sky::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#0b1030 0%,#2a0c30 45%,#120509 100%);opacity:var(--night,0)}
+.wx2-stars{position:absolute;inset:0;z-index:-2;opacity:var(--night,0);background-image:radial-gradient(1px 1px at 15% 20%,#fff,transparent),radial-gradient(1.3px 1.3px at 70% 12%,#fff,transparent),radial-gradient(1px 1px at 40% 35%,#fff,transparent),radial-gradient(1px 1px at 85% 40%,#fff,transparent),radial-gradient(1.2px 1.2px at 28% 8%,#fff,transparent),radial-gradient(1px 1px at 58% 28%,#fff,transparent)}
+.wx2-rain{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.14;background-image:linear-gradient(105deg,transparent 48%,rgba(247,231,206,.9) 49%,transparent 50%);background-size:22px 60px;animation:rain .9s linear infinite}
+@keyframes rain{to{background-position:-10px 60px}}
+.wx2-arc{position:absolute;left:5%;width:90%;top:14px}
+.wx2-orb{position:absolute;left:0;top:0;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:radial-gradient(circle at 40% 38%,#fffaf0,#FBDDB5 45%,#E9A27A);box-shadow:0 0 30px 10px rgba(255,214,170,.55);transition:background .6s,box-shadow .6s}
+.wx2-orb.moon{background:radial-gradient(circle at 72% 32%,rgba(0,0,0,0) 40%,#F7E7CE 42%);box-shadow:0 0 26px 6px rgba(247,231,206,.3)}
+.wx2-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative}
+.wx2-row>div{padding:16px 6px;border-radius:18px;background:rgba(18,5,9,.42);border:1px solid rgba(247,231,206,.22)}
+.wx2-k{display:block;font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--champ)}
+.wx2-t{display:block;font-family:var(--sans);font-weight:700;font-size:46px;line-height:1.1;color:#fff}
+.wx2-t::after{content:'°C';font-size:20px;vertical-align:top;margin-left:2px;color:var(--gold-lt)}
+.wx2-d{font-family:var(--serif);font-style:italic;font-weight:600;font-size:17px;color:var(--champ)}
+.wx2-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px}
+.wx2-chips span{font-family:var(--sans);font-weight:700;font-size:14px;color:var(--champ);padding:8px 14px;border-radius:30px;background:rgba(18,5,9,.5);border:1px solid rgba(247,231,206,.25)}
 
 /* álbum */
 .qr-frame{display:inline-block;padding:16px;border-radius:18px;background:#F7E7CE;box-shadow:0 18px 40px rgba(0,0,0,.5),0 0 0 1px var(--gold-lt);margin:6px auto 18px}
@@ -358,9 +390,7 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
 <nav class="nav" id="nav" aria-label="Secciones">
   <button class="nav-mono script" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Inicio">A&amp;M</button>
   <div class="nav-links" id="navLinks"><i class="nav-pill" id="navPill"></i></div>
-  <i class="nav-sep"></i>
-  <button class="nav-share" id="navShare" type="button" aria-label="Compartir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></button>
-  <button class="nav-menu" id="navMenu" type="button" aria-expanded="false">☰ Menú</button>
+    <button class="nav-menu" id="navMenu" type="button" aria-expanded="false">☰ Menú</button>
 </nav>
 <div class="fm" id="fm" aria-hidden="true">
   <div class="fm-head"><img src="monograma.png" alt="A&amp;M"><button class="fm-x" id="fmX" type="button" aria-label="Cerrar menú">✕</button></div>
@@ -477,7 +507,7 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
 <section id="eclipse" data-top="#120509" data-bot="#120509" aria-label="Reserva de un eclipse">
   <div class="ec-sticky">
     <div class="ec-top"><span class="lbl">29 · 05 · 2027</span><p class="script mtx" style="font-size:clamp(46px,13vw,64px)">Reserva de un Eclipse</p></div>
-    <div class="ec-stage"><i class="ec-corona" id="ecCorona"></i><i class="ec-sun"></i><i class="ec-moon" id="ecMoon"></i><i class="ec-ring" id="ecRing"></i></div>
+    <div class="ec-stage"><i class="ec-glow"></i><i class="ec-corona" id="ecCorona"><i class="ec-rays"></i><i class="ec-rays r2"></i></i><i class="ec-sun"></i><i class="ec-chromo" id="ecChromo"></i><i class="ec-moon" id="ecMoon"></i><i class="ec-ring" id="ecRing"><i></i></i><i class="ec-beads" id="ecBeads"></i></div><div class="ec-dust" aria-hidden="true"></div>
     <div class="ec-txt"><p class="ec-line">El sol y la luna</p><p class="ec-line">se buscan en el cielo…</p><p class="ec-line">y por un instante, son uno solo.</p></div>
   </div>
 </section>
@@ -820,24 +850,25 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
       <div class="dcv-dots" id="dcvDots"></div>
     </div>
   </div>
-  <p class="sw-ttl">Colores sugeridos</p>
-  <div class="sw-grid" id="swOk"></div>
-  <p class="sw-ttl">Por favor evita</p>
-  <div class="sw-grid five" id="swNo"></div>
+  <div class="orbs"><div><p class="sw-ttl">Colores sugeridos</p><div class="orb" id="orbOk"><i></i></div><p class="orb-n" id="orbOkN">&nbsp;</p></div><div><p class="sw-ttl">Por favor evita</p><div class="orb x" id="orbNo"><i></i></div><p class="orb-n" id="orbNoN">&nbsp;</p></div></div>
 </section>
 
 <!-- CLIMA -->
 <section id="clima">
-  <div class="ink-bg"><i style="background-image:url(ink/ink-top.webp)"></i></div>
   <span class="lbl">Finales de mayo en El Lobo</span>
   <h2 class="ttl">El Clima</h2>
   <div class="gline"></div>
-  <div class="wx">
-    <div class="wx-c lev fx" data-fx="zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><g class="sun-rot"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></g></svg><b>29°C</b><span>Tarde</span></div>
-    <div class="wx-c lev d2 fx" data-fx="zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/></svg><b>15°C</b><span>Noche</span></div>
+  <div class="wx2" id="wx2">
+    <i class="wx2-sky"></i><i class="wx2-stars"></i><i class="wx2-rain"></i>
+    <svg class="wx2-arc" viewBox="0 0 300 160" aria-hidden="true"><path id="wxPath" d="M20 150 A130 130 0 0 1 280 150" fill="none" stroke="rgba(247,231,206,.45)" stroke-width="1.2" stroke-dasharray="3 6"/></svg>
+    <i class="wx2-orb" id="wxOrb"></i>
+    <div class="wx2-row">
+      <div><span class="wx2-k">Tarde · 4 PM</span><b class="wx2-t" data-to="29">29</b><span class="wx2-d">Cálido y soleado</span></div>
+      <div><span class="wx2-k">Noche · 10 PM</span><b class="wx2-t" data-to="15">15</b><span class="wx2-d">Fresco en el viñedo</span></div>
+    </div>
+    <div class="wx2-chips"><span>Llueve 1 de cada 4 días</span><span>Trae chal o saco ligero</span></div>
   </div>
-  <p class="p fx" data-fx="up">La tarde suele ser cálida y soleada, y en la noche refresca en el viñedo. Es inicio de la temporada de lluvias (llueve aproximadamente uno de cada cuatro días): <b>trae un chal o saco ligero</b> para la noche.</p>
-  <p style="font-family:var(--sans);font-size:14px;color:var(--text-soft);margin-top:10px">Promedio histórico de los últimos 10 años.</p>
+  <p style="font-family:var(--sans);font-size:14px;color:var(--text-soft);margin-top:14px">Promedio histórico de los últimos 10 años.</p>
 </section>
 
 <!-- ===== hospedaje ===== -->
@@ -2072,7 +2103,7 @@ fab.addEventListener('click',function(){ if(mEl.paused) mEl.play().catch(functio
 
 function initAll(){
   splitTitles(); reveals(); initSectionFades(); hero(); hilo(); countdown(); setInterval(countdown,1000);
-  tilt(); itinerario(); eclipse(); stack(); swatches(); menu();
+  tilt(); itinerario(); eclipse(); stack(); swatches(); menu(); clima();
   setTimeout(function(){ ScrollTrigger.refresh(); },400);
 }
 
@@ -2145,11 +2176,22 @@ function eclipse(){
   var tl=gsap.timeline({scrollTrigger:{trigger:'#eclipse',start:'top top',end:'bottom bottom',scrub:.6}});
   tl.fromTo(moon,{xPercent:-120,yPercent:18},{xPercent:0,yPercent:0,ease:'none',duration:6},0)
     .to(cor,{opacity:1,scale:1.15,duration:1.6},4.6)
-    .to(ring,{opacity:1,duration:.5},5.4).to(ring,{opacity:0,duration:.6},6.2)
+    .to('#ecBeads',{opacity:1,duration:.4},4.9).to('#ecBeads',{opacity:0,duration:.4},5.6)
+    .to('#ecChromo',{opacity:1,boxShadow:'0 0 0 2px rgba(255,90,110,.75),0 0 16px 4px rgba(220,40,80,.55)',duration:.6},5.7)
+    .fromTo(ring,{opacity:0,scale:.4,rotate:-20},{opacity:1,scale:1,rotate:0,duration:.5},5.4).to(ring,{opacity:0,scale:.6,duration:.6},6.2)
     .fromTo(lines[0],{opacity:0,y:20},{opacity:1,y:0,duration:1},0.3).to(lines[0],{opacity:0,y:-20,duration:.8},2)
     .fromTo(lines[1],{opacity:0,y:20},{opacity:1,y:0,duration:1},2.6).to(lines[1],{opacity:0,y:-20,duration:.8},4.2)
     .fromTo(lines[2],{opacity:0,y:20},{opacity:1,y:0,duration:1},5)
     .to({}, {duration:1.5});
+}
+function clima(){
+  var box=document.getElementById('wx2'),orb=document.getElementById('wxOrb'),path=document.getElementById('wxPath'),svg=box.querySelector('.wx2-arc'),L=path.getTotalLength(),last=0;
+  function place(p){ last=p; var pt=path.getPointAtLength(L*(.06+p*.88)),r=svg.getBoundingClientRect(),br=box.getBoundingClientRect(),k=r.width/300;
+    orb.style.transform='translate('+(r.left-br.left+pt.x*k)+'px,'+(r.top-br.top+pt.y*k)+'px)'; box.style.setProperty('--night',Math.max(0,(p-.45)/.55).toFixed(3)); orb.classList.toggle('moon',p>.62); }
+  place(R?.3:0);
+  if(!R) ScrollTrigger.create({trigger:box,start:'top 85%',end:'bottom 30%',scrub:.5,onUpdate:function(st){place(st.progress)}});
+  ScrollTrigger.create({trigger:box,start:'top 80%',once:true,onEnter:function(){ box.querySelectorAll('.wx2-t').forEach(function(t){ var o={v:0}; gsap.to(o,{v:+t.dataset.to,duration:R?.01:1.8,ease:'power2.out',onUpdate:function(){t.textContent=Math.round(o.v)}}); }); }});
+  window.addEventListener('resize',function(){ place(last); });
 }
 function stack(){
   var s=document.getElementById('stack'),cards=[].slice.call(s.children);
@@ -2164,8 +2206,10 @@ function stack(){
 function swatches(){
   var ok=[['#ff6250','Coral'],['#864ffe','Violeta'],['#0061fe','Azul rey'],['#01c7fc','Turquesa'],['#feb43f','Mostaza'],['#11053b','Azul noche'],['#263e0f','Verde bosque'],['#669d34','Verde olivo'],['#450d59','Morado'],['#ad3e00','Terracota'],['#474747','Gris Oxford'],['#999999','Gris perla'],['#D4C5B2','Arena'],['#fff76b','Amarillo'],['#e292fe','Lila'],['#b1dd8b','Verde menta'],['#d357fe','Orquídea'],['#583300','Café']];
   var no=[['#000000','Negro'],['#FFFFFF','Blanco'],['#791a3d','Vino'],['#ee719e','Rosa'],['#ffecd4','Crema']];
-  function fill(id,arr,x){ document.getElementById(id).innerHTML=arr.map(function(c,i){ return '<div class="sw'+(x?' x':'')+'" style="animation-delay:'+(-(i%6)*.25)+'s"><div class="sw-dot" style="background:'+c[0]+'"></div><small>'+c[1]+'</small></div>'; }).join(''); }
-  fill('swOk',ok,false); fill('swNo',no,true);
+  function run(id,arr,off){ var o=document.getElementById(id),n=document.getElementById(id+'N'),i=0;
+    function set(){ o.style.backgroundColor=arr[i][0]; n.style.opacity=0; setTimeout(function(){ n.textContent=arr[i][1]; n.style.opacity=1; },350); }
+    set(); setTimeout(function(){ setInterval(function(){ i=(i+1)%arr.length; set(); },2200); },off); }
+  run('orbOk',ok,0); run('orbNo',no,1100);
 }
 function menu(){
   var secs=[].slice.call(document.querySelectorAll('.wrap > section[data-nav]')),links=document.getElementById('navLinks'),pill=document.getElementById('navPill'),list=document.getElementById('fmList'),fm=document.getElementById('fm'),btn=document.getElementById('navMenu');
@@ -2183,11 +2227,6 @@ function menu(){
   function toggle(o){ fm.classList.toggle('open',o); fm.setAttribute('aria-hidden',!o); btn.setAttribute('aria-expanded',o); }
   btn.addEventListener('click',function(){toggle(true)}); document.getElementById('fmX').addEventListener('click',function(){toggle(false)});
   list.addEventListener('click',function(e){ var a=e.target.closest('a'); if(!a) return; e.preventDefault(); toggle(false); var t=document.querySelector(a.getAttribute('href')); setTimeout(function(){ t.scrollIntoView({behavior:'smooth'}); },350); });
-  document.getElementById('navShare').addEventListener('click',function(){
-    var u=location.origin+location.pathname;
-    if(navigator.share) navigator.share({title:'Boda Ana & Miguel',url:u}).catch(function(){});
-    else if(navigator.clipboard) navigator.clipboard.writeText(u).then(function(){toast('Enlace copiado')});
-  });
 }
 if(qs.get('skip')==='1'){ opened=true; envFlash.style.opacity=1; flashed=true; reveal(); }
 })();
