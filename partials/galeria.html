@@ -1,0 +1,294 @@
+<style>
+/* ══════════ GALERÍA — carrusel 3D + mosaico editorial (.gl-) ══════════ */
+#galeria{position:relative;padding:76px 0 90px;background:transparent;text-align:center;overflow-x:clip}
+#galeria .gl-head{padding:0 24px}
+.gl-sub{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(15px,4.2vw,18px);color:var(--champ);opacity:.78;max-width:30ch;margin:0 auto;line-height:1.5}
+
+/* escena 3D */
+.gl-scene{position:relative;width:100%;height:350px;margin:22px auto 0;perspective:1000px;perspective-origin:50% 38%;overflow:hidden;touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.gl-scene.is-drag{cursor:grabbing}
+.gl-scene::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,var(--bg) 0%,transparent 14%,transparent 86%,var(--bg) 100%)}
+.gl-ring{position:absolute;left:50%;top:30px;width:0;height:0;transform-style:preserve-3d;will-change:transform}
+.gl-card{position:absolute;left:-62px;top:0;width:124px;height:300px;transform-style:flat;backface-visibility:visible}
+.gl-ph{position:relative;width:124px;height:176px;border-radius:10px;overflow:hidden;background:var(--bg2);box-shadow:0 14px 34px rgba(0,0,0,.45)}
+.gl-ph::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:var(--metal);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:2;pointer-events:none;opacity:.85}
+.gl-ph img,.gl-ref img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-user-drag:none}
+.gl-ref{position:relative;width:124px;height:84px;margin-top:6px;border-radius:10px 10px 0 0;overflow:hidden;transform:scaleY(-1);opacity:.55;pointer-events:none}
+.gl-ref img{height:176px;object-position:bottom}
+.gl-ref::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(18,5,9,.25) 0%,var(--bg) 92%)}
+.gl-hint{font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:.18em;color:var(--gold-lt);opacity:.75;margin-top:4px}
+.gl-hint span{display:inline-block;margin:0 8px;opacity:.7}
+
+/* lightbox */
+.gl-lb{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(10,3,6,.94);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s;touch-action:none}
+.gl-lb.is-open{opacity:1;visibility:visible;transition:opacity .35s ease}
+.gl-lb-fig{position:relative;margin:0;max-width:92vw;max-height:80vh;display:flex;align-items:center;justify-content:center}
+.gl-lb-img{max-width:92vw;max-height:80vh;width:auto;height:auto;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.6);transition:opacity .25s ease,transform .25s ease;-webkit-user-drag:none;user-select:none}
+.gl-lb-img.is-swap{opacity:0;transform:scale(.97)}
+.gl-lb-btn{position:absolute;display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;border:1px solid rgba(227,192,143,.45);background:rgba(28,10,18,.7);color:var(--champ);cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}
+.gl-lb-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6}
+.gl-lb-close{top:max(16px,env(safe-area-inset-top));right:16px}
+.gl-lb-prev{left:10px;top:50%;margin-top:-23px}
+.gl-lb-next{right:10px;top:50%;margin-top:-23px}
+.gl-lb-count{position:absolute;bottom:max(22px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;font-family:var(--serif);font-style:italic;font-size:15px;letter-spacing:.2em;color:var(--gold-lt)}
+
+/* mosaico editorial */
+.gl-fx{position:relative;max-width:520px;margin:58px auto 0;padding:0 18px}
+.gl-fx-ttl{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(20px,5.6vw,26px);color:var(--champ);margin-bottom:26px}
+.gl-fx-ttl em{font-style:normal;background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gl-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto;gap:12px;align-items:start}
+.gl-tile{position:relative;overflow:hidden;border-radius:8px;background:var(--bg2);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.gl-tile::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(227,192,143,.28);pointer-events:none}
+.gl-tile img{position:absolute;left:0;top:-10%;width:100%;height:120%;object-fit:cover;display:block}
+.gl-t1{grid-column:1 / 3;aspect-ratio:3/2}
+.gl-t2{aspect-ratio:3/4;margin-top:22px}
+.gl-t3{aspect-ratio:3/4}
+.gl-t4{grid-column:1 / 3;aspect-ratio:16/9}
+.gl-quote{grid-column:1 / 3;font-family:var(--serif);font-style:italic;font-size:clamp(16px,4.6vw,19px);line-height:1.5;color:var(--champ);opacity:.85;padding:10px 12px 4px}
+.gl-quote::before,.gl-quote::after{content:"";display:block;width:40px;height:1px;margin:10px auto;background:linear-gradient(90deg,transparent,var(--rose),transparent)}
+
+@media (min-width:700px){
+  .gl-scene{height:440px}
+  .gl-ring{top:54px}
+}
+@media (prefers-reduced-motion:reduce){
+  .gl-lb,.gl-lb-img{transition:opacity .2s ease}
+}
+</style>
+
+<section id="galeria" data-top="#120509" data-bot="#120509" aria-label="Galería de fotos">
+  <div class="gl-head">
+    <span class="lbl">Nuestra historia</span>
+    <h2 class="ttl">Galería</h2>
+    <div class="gline"></div>
+    <p class="gl-sub">Pequeños instantes que nos trajeron hasta aquí.</p>
+  </div>
+
+  <div class="gl-scene" id="gl-scene" role="region" aria-label="Carrusel de fotos, desliza para girar y toca para ampliar">
+    <div class="gl-ring" id="gl-ring"></div>
+  </div>
+  <p class="gl-hint"><span>‹</span>Desliza · toca para ampliar<span>›</span></p>
+
+  <div class="gl-fx">
+    <p class="gl-fx-ttl">Un amor <em>a la luz</em> de cada día</p>
+    <div class="gl-grid">
+      <figure class="gl-tile gl-t1" data-gl-i="2" data-speed="-6"><img src="fotos/f03.jpg" alt="Ana y Miguel" decoding="async"></figure>
+      <figure class="gl-tile gl-t2" data-gl-i="8" data-speed="9" data-lift="1"><img src="fotos/f09.jpg" alt="Ana y Miguel" decoding="async"></figure>
+      <figure class="gl-tile gl-t3" data-gl-i="14" data-speed="-9" data-lift="-1"><img src="fotos/f23.jpg" alt="Ana y Miguel" decoding="async"></figure>
+      <p class="gl-quote">“Y de pronto, todos los caminos llevaban a ti.”</p>
+      <figure class="gl-tile gl-t4" data-gl-i="20" data-speed="7"><img src="fotos/f29.jpg" alt="Ana y Miguel" decoding="async"></figure>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+  var sec=document.getElementById('galeria');
+  if(!sec||sec.getAttribute('data-gl-init'))return;
+  sec.setAttribute('data-gl-init','1');
+
+  var hasG=typeof window.gsap!=='undefined';
+  var hasST=hasG&&typeof window.ScrollTrigger!=='undefined';
+  if(hasST){try{gsap.registerPlugin(ScrollTrigger);}catch(e){}}
+  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* todas las fotos (lightbox) */
+  var ALL=[];
+  for(var a=1;a<=13;a++)ALL.push('fotos/f'+(a<10?'0':'')+a+'.jpg');
+  for(var b=22;b<=32;b++)ALL.push('fotos/f'+b+'.jpg');
+  /* anillo: 14 variadas (verticales + horizontales, color y B/N) */
+  var RING=['f01','f06','f02','f22','f04','f25','f07','f26','f08','f28','f10','f31','f12','f32'];
+
+  /* ── construir anillo ── */
+  var scene=document.getElementById('gl-scene'),ring=document.getElementById('gl-ring');
+  var n=RING.length,step=360/n,CW=124,GAP=16;
+  var radius=Math.round((CW+GAP)/(2*Math.tan(Math.PI/n)));
+  var frag=document.createDocumentFragment();
+  RING.forEach(function(id,i){
+    var src='fotos/'+id+'.jpg';
+    var c=document.createElement('div');
+    c.className='gl-card';
+    c.setAttribute('data-gl-i',String(ALL.indexOf(src)));
+    c.style.transform='rotateY('+(step*i)+'deg) translateZ('+radius+'px)';
+    c.innerHTML='<div class="gl-ph"><img src="'+src+'" alt="Ana y Miguel" decoding="async" draggable="false"></div>'+
+                '<div class="gl-ref" aria-hidden="true"><img src="'+src+'" alt="" decoding="async" draggable="false"></div>';
+    frag.appendChild(c);
+  });
+  ring.appendChild(frag);
+
+  var rot=0,vel=0,drag=false,sx=0,sy=0,lx=0,lt=0,moved=0,axis=null,pid=null,downT=0,downTarget=null;
+  var AUTO=RM?0:7;            /* grados por segundo */
+  var autoK=1,visible=true,running=false;
+
+  function apply(){
+    if(hasG)gsap.set(ring,{rotateY:rot,z:-radius,force3D:true});
+    else ring.style.transform='translateZ('+(-radius)+'px) rotateY('+rot+'deg)';
+  }
+  apply();
+
+  function tick(t,dt){
+    var s=Math.min(dt,64)/1000;
+    if(!drag){
+      if(Math.abs(vel)>0.5){rot+=vel*s;vel*=Math.pow(0.05,s);autoK=0;}  /* inercia */
+      else{vel=0;if(autoK<1)autoK=Math.min(1,autoK+s*0.6);                 /* retoma el giro */
+        if(!AUTO){var tg=Math.round(rot/step)*step;rot+=(tg-rot)*Math.min(1,s*6);}}  /* sin autogiro: asienta en una foto */
+      rot+=AUTO*autoK*s;
+    }
+    apply();
+  }
+  function start(){if(running||!hasG)return;running=true;gsap.ticker.add(tick);}
+  function stop(){if(!running)return;running=false;gsap.ticker.remove(tick);}
+
+  /* pausa fuera de pantalla */
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      visible=es[0].isIntersecting;
+      if(visible&&!lbOpen)start();else stop();
+    },{rootMargin:'80px 0px'}).observe(scene);
+  }else start();
+  document.addEventListener('visibilitychange',function(){if(document.hidden)stop();else if(visible&&!lbOpen)start();});
+
+  /* arrastre con inercia (pointer events; pan-y deja pasar el scroll vertical) */
+  scene.addEventListener('pointerdown',function(e){
+    if(e.pointerType==='mouse'&&e.button!==0)return;
+    pid=e.pointerId;drag=true;axis=e.pointerType==='mouse'?'x':null;moved=0;
+    sx=lx=e.clientX;sy=e.clientY;lt=performance.now();downT=lt;vel=0;
+    downTarget=e.target.closest?e.target.closest('.gl-card'):null;
+    start();
+  });
+  scene.addEventListener('pointermove',function(e){
+    if(!drag||e.pointerId!==pid)return;
+    var dx=e.clientX-sx,dy=e.clientY-sy;
+    if(!axis){
+      if(Math.abs(dx)<6&&Math.abs(dy)<6)return;
+      axis=Math.abs(dx)>Math.abs(dy)?'x':'y';
+      if(axis==='y'){drag=false;return;}
+      try{scene.setPointerCapture(pid);}catch(_){}
+      scene.classList.add('is-drag');
+    }
+    var now=performance.now(),ddx=e.clientX-lx,ddt=Math.max(1,now-lt);
+    rot+=ddx*0.32;moved+=Math.abs(ddx);
+    vel=vel*0.6+(ddx*0.32/ddt*1000)*0.4;
+    lx=e.clientX;lt=now;autoK=0;
+  });
+  function up(e){
+    if(e.pointerId!==pid)return;
+    var wasDrag=drag;drag=false;scene.classList.remove('is-drag');
+    if(performance.now()-lt>90)vel=0;
+    vel=Math.max(-900,Math.min(900,vel));
+    if(wasDrag&&e.type==='pointerup'&&moved<6&&performance.now()-downT<500){
+      if(!downTarget){var fi=((Math.round(-rot/step)%n)+n)%n;downTarget=ring.children[fi];}  /* tap en hueco = foto de frente */
+      if(downTarget)openLB(+downTarget.getAttribute('data-gl-i'));
+    }
+    pid=null;downTarget=null;
+  }
+  scene.addEventListener('pointerup',up);
+  scene.addEventListener('pointercancel',up);
+  scene.addEventListener('dragstart',function(e){e.preventDefault();});
+
+  /* ── lightbox ── */
+  var lb=document.createElement('div');
+  lb.className='gl-lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label','Foto ampliada');lb.setAttribute('aria-hidden','true');
+  lb.innerHTML='<figure class="gl-lb-fig"><img class="gl-lb-img" alt="Ana y Miguel" draggable="false"></figure>'+
+    '<button type="button" class="gl-lb-btn gl-lb-close" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>'+
+    '<button type="button" class="gl-lb-btn gl-lb-prev" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>'+
+    '<button type="button" class="gl-lb-btn gl-lb-next" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>'+
+    '<div class="gl-lb-count"></div>';
+  document.body.appendChild(lb);
+  var lbImg=lb.querySelector('.gl-lb-img'),lbCount=lb.querySelector('.gl-lb-count');
+  var lbOpen=false,cur=0,prevOverflow='',lastFocus=null;
+
+  function show(i,anim){
+    cur=(i+ALL.length)%ALL.length;
+    lbCount.textContent=(cur+1)+' / '+ALL.length;
+    if(!anim){lbImg.src=ALL[cur];return;}
+    lbImg.classList.add('is-swap');
+    setTimeout(function(){lbImg.src=ALL[cur];lbImg.classList.remove('is-swap');},180);
+    var nx=new Image();nx.src=ALL[(cur+1)%ALL.length];
+  }
+  function openLB(i){
+    if(isNaN(i))return;
+    lastFocus=document.activeElement;
+    show(i,false);lbOpen=true;stop();
+    prevOverflow=document.documentElement.style.overflow;
+    document.documentElement.style.overflow='hidden';
+    lb.classList.add('is-open');lb.setAttribute('aria-hidden','false');
+    lb.querySelector('.gl-lb-close').focus({preventScroll:true});
+  }
+  function closeLB(){
+    if(!lbOpen)return;lbOpen=false;
+    lb.classList.remove('is-open');lb.setAttribute('aria-hidden','true');
+    document.documentElement.style.overflow=prevOverflow;
+    if(lastFocus&&lastFocus.focus)try{lastFocus.focus({preventScroll:true});}catch(_){}
+    if(visible)start();
+  }
+  lb.querySelector('.gl-lb-close').addEventListener('click',closeLB);
+  lb.querySelector('.gl-lb-prev').addEventListener('click',function(e){e.stopPropagation();show(cur-1,true);});
+  lb.querySelector('.gl-lb-next').addEventListener('click',function(e){e.stopPropagation();show(cur+1,true);});
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLB();});
+  document.addEventListener('keydown',function(e){
+    if(!lbOpen)return;
+    if(e.key==='Escape')closeLB();
+    else if(e.key==='ArrowRight')show(cur+1,true);
+    else if(e.key==='ArrowLeft')show(cur-1,true);
+  });
+  /* swipe */
+  var tx=0,ty=0,tOn=false;
+  lb.addEventListener('pointerdown',function(e){if(e.target.closest('.gl-lb-btn'))return;tOn=true;tx=e.clientX;ty=e.clientY;});
+  lb.addEventListener('pointerup',function(e){
+    if(!tOn)return;tOn=false;
+    var dx=e.clientX-tx,dy=e.clientY-ty;
+    if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))show(cur+(dx<0?1:-1),true);
+    else if(dy>90&&Math.abs(dy)>Math.abs(dx))closeLB();
+  });
+  lb.addEventListener('pointercancel',function(){tOn=false;});
+
+  /* mosaico → también abre el lightbox */
+  var tiles=[].slice.call(sec.querySelectorAll('.gl-tile'));
+  tiles.forEach(function(t){
+    t.style.cursor='zoom-in';
+    t.addEventListener('click',function(){openLB(+t.getAttribute('data-gl-i'));});
+  });
+
+  /* ── efectos en fotos: reveal clip-path + parallax scrub ── */
+  if(!hasST)return;               /* sin GSAP: todo queda visible en reposo */
+  var CLIPS=['inset(0% 0% 100% 0%)','circle(0% at 50% 50%)','inset(0% 100% 0% 0%)','inset(100% 0% 0% 0%)'];
+  var END=['inset(0% 0% 0% 0%)','circle(75% at 50% 50%)','inset(0% 0% 0% 0%)','inset(0% 0% 0% 0%)'];
+
+  tiles.forEach(function(t,i){
+    var img=t.querySelector('img'),done=false;
+    function reveal(){
+      if(done)return;done=true;
+      if(RM){gsap.fromTo(t,{opacity:0},{opacity:1,duration:.8,ease:'power1.out',clearProps:'opacity'});return;}
+      gsap.fromTo(t,{clipPath:CLIPS[i],webkitClipPath:CLIPS[i]},{clipPath:END[i],webkitClipPath:END[i],duration:1.3,ease:'power3.inOut',
+        onComplete:function(){t.style.clipPath='';t.style.webkitClipPath='';}});
+      gsap.fromTo(img,{scale:1.18},{scale:1,duration:1.6,ease:'power2.out'});
+    }
+    t._glReveal=reveal;
+    var r=t.getBoundingClientRect();
+    if(r.top<window.innerHeight*0.9&&r.bottom>0){done=true;}   /* ya visible: no se oculta */
+    else{
+      if(!RM)gsap.set(t,{clipPath:CLIPS[i],webkitClipPath:CLIPS[i]});  /* la red de seguridad lo revela siempre */
+      ScrollTrigger.create({trigger:t,start:'top 92%',once:true,onEnter:reveal});
+    }
+    if(RM)return;
+    var sp=+t.getAttribute('data-speed')||0;
+    gsap.fromTo(img,{yPercent:-sp},{yPercent:sp,ease:'none',
+      scrollTrigger:{trigger:t,start:'top bottom',end:'bottom top',scrub:true}});
+    var lift=+t.getAttribute('data-lift')||0;
+    if(lift)gsap.fromTo(t,{y:28*lift},{y:-28*lift,ease:'none',
+      scrollTrigger:{trigger:sec.querySelector('.gl-grid'),start:'top bottom',end:'bottom top',scrub:true}});
+  });
+
+  /* red de seguridad: si un trigger no dispara, revelar al estar en vista */
+  function safety(){
+    tiles.forEach(function(t){
+      var r=t.getBoundingClientRect();
+      if(r.top<window.innerHeight&&r.bottom>0)t._glReveal();
+    });
+  }
+  window.addEventListener('scroll',function(){requestAnimationFrame(safety);},{passive:true});
+  window.addEventListener('load',function(){setTimeout(function(){ScrollTrigger.refresh();safety();},300);});
+})();
+</script>

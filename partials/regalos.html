@@ -1,0 +1,303 @@
+<!-- ================= MESA DE REGALOS (parcial autocontenido) ================= -->
+<style>
+#regalos{position:relative;overflow:hidden;background:transparent;padding:96px 16px 104px;text-align:center;isolation:isolate}
+#regalos .lbl{color:var(--gold-lt)}
+#regalos .ttl{color:var(--champ)}
+.rg-rain{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.rg-drop{position:absolute;top:0;left:0;opacity:0;will-change:transform,opacity}
+.rg-stage{position:relative;z-index:1;max-width:440px;margin:0 auto}
+
+/* ---- Sobre principal ---- */
+.rg-env{display:flex;flex-direction:column;align-items:center;margin:30px auto 0;padding:0;border:0;background:none;cursor:pointer;color:inherit;font:inherit;outline:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;will-change:transform}
+.rg-env:focus-visible .rg-body{outline:2px solid var(--gold-lt);outline-offset:8px;border-radius:10px}
+.rg-body{perspective:700px;position:relative;width:min(262px,74vw);aspect-ratio:260/200;filter:drop-shadow(0 14px 28px rgba(0,0,0,.45))}
+.rg-body svg.rg-svg{width:100%;height:100%;display:block}
+.rg-flap{position:absolute;top:23%;left:6.9%;width:86.2%;height:43%;transform-origin:top center;transform-style:preserve-3d;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .65s cubic-bezier(.4,0,.2,1);pointer-events:none;z-index:2}
+.rg-env.open .rg-flap{transform:rotateX(-175deg)}
+.rg-seal{position:absolute;top:52%;left:50%;width:24%;aspect-ratio:1;transform:translate(-50%,-50%);z-index:3;transition:opacity .35s ease,transform .5s cubic-bezier(.4,0,.2,1);pointer-events:none}
+.rg-env.open .rg-seal{opacity:0;transform:translate(-50%,-50%) scale(.7)}
+.rg-body.rg-breath{animation:rgBreath 3.6s ease-in-out infinite}
+@keyframes rgBreath{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+
+.rg-open{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:22px;padding:0 8px}
+.rg-open[hidden]{display:none}
+.rg-mail{width:44px;height:44px;color:var(--gold-lt)}
+.rg-script{font-family:var(--script);font-size:clamp(32px,9vw,40px);line-height:1.25;font-weight:400;
+  background:var(--metal);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--champ);
+  padding:.22em .45em;margin:-.22em -.45em;-webkit-box-decoration-break:clone;box-decoration-break:clone;display:inline-block}
+.rg-desc{font-family:var(--serif);font-size:19px;font-weight:500;font-style:italic;line-height:1.6;color:var(--text-soft);max-width:310px;margin:4px auto 0}
+
+.rg-hint{margin:20px auto 0;padding:12px 22px;min-height:48px;border:1px solid rgba(227,192,143,.45);border-radius:999px;background:rgba(28,10,18,.55);
+  font-family:var(--sans);font-weight:700;font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-lt);cursor:pointer;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.rg-hint:focus-visible{outline:2px solid var(--gold-lt);outline-offset:3px}
+.rg-hint.rg-pulse{animation:rgPulse 2.4s ease-in-out infinite}
+@keyframes rgPulse{0%,100%{opacity:.82}50%{opacity:1}}
+
+/* ---- Tarjetas ---- */
+.rg-cards{display:flex;flex-direction:column;gap:26px;margin-top:56px}
+.rg-card{position:relative;overflow:hidden;border-radius:20px;padding:34px 22px 30px;
+  background:linear-gradient(160deg,rgba(28,10,18,.92),rgba(18,5,9,.94));
+  border:1px solid rgba(227,192,143,.38);box-shadow:0 18px 40px rgba(0,0,0,.35),inset 0 0 0 4px rgba(18,5,9,.6),inset 0 0 0 5px rgba(227,192,143,.14)}
+.rg-card::after{content:'';position:absolute;top:-10%;bottom:-10%;left:0;width:60%;pointer-events:none;
+  background:linear-gradient(100deg,transparent 0%,rgba(247,231,206,.05) 30%,rgba(247,231,206,.24) 50%,rgba(247,231,206,.05) 70%,transparent 100%);
+  transform:translateX(-140%) skewX(-16deg);opacity:0}
+.rg-card.rg-shine::after{animation:rgSheen 1.6s cubic-bezier(.45,.05,.3,1) forwards}
+@keyframes rgSheen{0%{transform:translateX(-140%) skewX(-16deg);opacity:1}100%{transform:translateX(260%) skewX(-16deg);opacity:1}}
+.rg-ico{width:40px;height:40px;color:var(--gold-lt);margin:0 auto 10px;display:block}
+.rg-brand{font-family:var(--sans);font-weight:700;font-size:28px;letter-spacing:.06em;color:var(--champ);line-height:1}
+.rg-brand-sub{font-family:var(--serif);font-style:italic;font-weight:500;font-size:18px;color:var(--text-soft);margin-top:6px}
+.rg-h3{font-family:var(--serif);font-weight:600;font-size:26px;color:var(--champ);line-height:1.2}
+.rg-sep{width:44px;height:1px;margin:16px auto;background:linear-gradient(90deg,transparent,var(--gold-lt),transparent)}
+.rg-k{font-family:var(--serif);font-style:italic;font-weight:500;font-size:17px;color:var(--text-soft);margin-top:12px}
+.rg-v{font-family:var(--sans);font-weight:700;font-size:20px;color:var(--champ);letter-spacing:.06em;margin-top:2px;font-variant-numeric:tabular-nums;word-break:break-word}
+.rg-v.rg-big{font-size:clamp(20px,6.2vw,24px);letter-spacing:.08em}
+#rgClabe{font-size:clamp(18px,5.2vw,23px);letter-spacing:.04em;white-space:nowrap}
+.rg-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;margin-top:22px;padding:13px 28px;border:0;border-radius:999px;
+  background:var(--metal);color:#2a0c18;font-family:var(--sans);font-weight:700;font-size:16px;letter-spacing:.05em;text-decoration:none;cursor:pointer;
+  box-shadow:0 8px 22px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.45);-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:transform .2s ease}
+.rg-btn:active{transform:scale(.97)}
+.rg-btn:focus-visible{outline:2px solid var(--champ);outline-offset:3px}
+.rg-btn svg{width:18px;height:18px}
+
+.rg-qr{position:relative;width:196px;margin:26px auto 0;padding:12px;border-radius:14px;background:var(--champ);
+  box-shadow:0 0 0 1px rgba(227,192,143,.7),0 0 0 6px rgba(18,5,9,.9),0 0 0 7px rgba(227,192,143,.45),0 14px 30px rgba(0,0,0,.4)}
+.rg-qr img{display:block;width:100%;height:auto;aspect-ratio:1;border-radius:4px}
+.rg-qr i{position:absolute;width:16px;height:16px;border:2px solid var(--wine)}
+.rg-qr i:nth-child(1){top:4px;left:4px;border-right:0;border-bottom:0}
+.rg-qr i:nth-child(2){top:4px;right:4px;border-left:0;border-bottom:0}
+.rg-qr i:nth-child(3){bottom:4px;left:4px;border-right:0;border-top:0}
+.rg-qr i:nth-child(4){bottom:4px;right:4px;border-left:0;border-top:0}
+.rg-qr-cap{font-family:var(--serif);font-style:italic;font-weight:500;font-size:17px;color:var(--text-soft);margin-top:16px}
+
+@media (prefers-reduced-motion:reduce){
+  .rg-body.rg-breath,.rg-hint.rg-pulse{animation:none!important}
+  .rg-flap,.rg-seal{transition:none!important}
+  .rg-card::after{display:none}
+  .rg-rain{display:none}
+}
+</style>
+
+<section id="regalos" data-top="#120509" data-bot="#120509">
+  <div class="rg-rain" id="rgRain" aria-hidden="true"></div>
+  <div class="rg-stage">
+    <span class="lbl">Con cariño</span>
+    <h2 class="ttl">Mesa de Regalos</h2>
+    <div class="gline"></div>
+
+    <!-- A) Lluvia de sobres -->
+    <button class="rg-env" id="rgEnv" type="button" aria-label="Sobre: toca para abrir" aria-expanded="false" aria-controls="rgOpen">
+      <div class="rg-body" id="rgBody">
+        <svg class="rg-svg" viewBox="0 0 260 200" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="rgPaper" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stop-color="#f3dfc0"/><stop offset="100%" stop-color="#fbf0dd"/>
+            </linearGradient>
+          </defs>
+          <rect x="18" y="52" width="224" height="132" rx="8" fill="url(#rgPaper)" stroke="#C99A5B" stroke-width="1.6"/>
+          <rect x="24" y="58" width="212" height="120" rx="5" fill="none" stroke="rgba(153,101,21,.35)" stroke-width=".8"/>
+          <path d="M18 184 L130 110 L242 184" stroke="rgba(153,101,21,.45)" stroke-width="1.1" fill="none"/>
+        </svg>
+        <div class="rg-flap" aria-hidden="true">
+          <svg viewBox="0 0 224 86" preserveAspectRatio="none" style="width:100%;height:100%;display:block">
+            <defs>
+              <linearGradient id="rgFlapG" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#fbf0dd"/><stop offset="100%" stop-color="#ecd3ad"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 0 L112 86 L224 0 Z" fill="url(#rgFlapG)" stroke="#C99A5B" stroke-width="1.7" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <svg class="rg-seal" viewBox="0 0 60 60" aria-hidden="true">
+          <circle cx="30" cy="30" r="28" fill="#99244f"/>
+          <circle cx="30" cy="30" r="28" fill="none" stroke="#4a1028" stroke-width="2.2" opacity=".7"/>
+          <circle cx="30" cy="30" r="21.5" fill="none" stroke="#E3C08F" stroke-width="1.1" opacity=".9"/>
+          <text x="30" y="36" text-anchor="middle" font-family="'Great Vibes', cursive" font-size="16" textLength="30" lengthAdjust="spacingAndGlyphs" fill="#F7E7CE">A&amp;M</text>
+        </svg>
+      </div>
+      <div class="rg-open" id="rgOpen" hidden aria-live="polite">
+        <svg class="rg-mail" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <rect x="8" y="22" width="36" height="24" rx="5"/><path d="M8 30 Q26 38 44 30"/>
+          <rect x="18" y="8" width="16" height="16" rx="2"/><path d="M18 8 Q26 3 34 8"/>
+        </svg>
+        <span class="rg-script">Tu presencia es nuestro regalo</span>
+        <span class="rg-desc">Si deseas hacernos un obsequio, el día de la boda habrá un buzón para tu sobre.</span>
+      </div>
+    </button>
+    <button class="rg-hint rg-pulse" id="rgHint" type="button" aria-controls="rgOpen">Toca para abrir</button>
+
+    <div class="rg-cards">
+      <!-- B) Mesa Liverpool -->
+      <article class="rg-card" id="rgLiverpool">
+        <svg class="rg-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <rect x="7" y="19" width="34" height="23" rx="2"/><rect x="4" y="13" width="40" height="7" rx="1.5"/>
+          <path d="M24 13v29M24 13c-3-6-11-7-11-2s8 2 11 2c3 0 11 3 11-2s-8-4-11 2"/>
+        </svg>
+        <div class="rg-brand">Liverpool</div>
+        <div class="rg-brand-sub">Mesa de regalos</div>
+        <div class="rg-sep"></div>
+        <div class="rg-k">Número de evento</div>
+        <div class="rg-v rg-big">52015829</div>
+        <a class="rg-btn" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/52015829" target="_blank" rel="noopener">
+          Ver mesa de regalos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
+        <div class="rg-qr">
+          <i></i><i></i><i></i><i></i>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&amp;margin=8&amp;color=4a1028&amp;bgcolor=F7E7CE&amp;data=https%3A%2F%2Fmesaderegalos.liverpool.com.mx%2Fmilistaderegalos%2F52015829"
+               width="300" height="300" alt="Código QR de la mesa de regalos Liverpool, evento 52015829" loading="eager" decoding="async">
+        </div>
+        <div class="rg-qr-cap">Escanea el código para ver la mesa</div>
+      </article>
+
+      <!-- C) Transferencia -->
+      <article class="rg-card" id="rgTransfer">
+        <svg class="rg-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M6 18L24 7l18 11"/><path d="M8 18h32"/><path d="M11 22v13M19 22v13M29 22v13M37 22v13"/><path d="M6 39h36M4 43h40"/>
+        </svg>
+        <div class="rg-h3">Transferencia</div>
+        <div class="rg-sep"></div>
+        <div class="rg-k">CLABE interbancaria</div>
+        <div class="rg-v rg-big" id="rgClabe" data-clabe="722969020794084236" aria-label="CLABE 7 2 2 9 6 9 0 2 0 7 9 4 0 8 4 2 3 6">7229 6902 0794 0842 36</div>
+        <div class="rg-k">Banco</div>
+        <div class="rg-v">Mercado Pago</div>
+        <div class="rg-k">Titular</div>
+        <!-- PENDIENTE: confirmar titular -->
+        <div class="rg-v">Ana Cristina Valencia Guevara</div>
+        <button class="rg-btn" id="rgCopy" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 011-1h10"/></svg>
+          Copiar CLABE
+        </button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var sec=document.getElementById('regalos');
+  if(!sec)return;
+  var rain=document.getElementById('rgRain'),btn=document.getElementById('rgEnv'),body=document.getElementById('rgBody'),
+      open=document.getElementById('rgOpen'),hint=document.getElementById('rgHint');
+  var hasG=typeof window.gsap!=='undefined';
+  var hasST=hasG&&typeof window.ScrollTrigger!=='undefined';
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var anim=hasG&&!reduce;
+  if(hasST)gsap.registerPlugin(ScrollTrigger);
+  function say(m){try{if(typeof window.toast==='function')window.toast(m);}catch(e){}}
+  function refresh(){if(hasST)ScrollTrigger.refresh();}
+
+  /* ---------- Sobre: aterrizaje + abrir/cerrar ---------- */
+  var landed=!anim,landing=null,pendingOpen=false,isOpen=false;
+  if(anim)gsap.set(btn,{autoAlpha:0,y:-150,rotation:-12,scale:.82});
+  else body.classList.add('rg-breath');
+
+  function afterLand(){
+    landed=true;landing=null;
+    if(!isOpen)body.classList.add('rg-breath');
+    if(pendingOpen){pendingOpen=false;setOpen(true);}
+  }
+  function land(fast){
+    if(landed)return;
+    if(landing){if(fast)landing.timeScale(2.2);return;}
+    landing=gsap.to(btn,{autoAlpha:1,y:0,rotation:0,scale:1,duration:fast?.55:1.15,ease:'back.out(1.5)',onComplete:afterLand});
+  }
+  function setOpen(v){
+    isOpen=v;
+    btn.classList.toggle('open',v);
+    btn.setAttribute('aria-expanded',v?'true':'false');
+    btn.setAttribute('aria-label',v?'Sobre abierto: toca para cerrar':'Sobre: toca para abrir');
+    hint.textContent=v?'Toca para cerrar':'Toca para abrir';
+    if(v){
+      body.classList.remove('rg-breath');
+      open.hidden=false;
+      if(anim)gsap.fromTo(open,{autoAlpha:0,y:14},{autoAlpha:1,y:0,duration:.5,delay:.28,ease:'power2.out',overwrite:true});
+      refresh();
+    }else{
+      var done=function(){if(!isOpen){open.hidden=true;body.classList.add('rg-breath');refresh();}};
+      if(anim)gsap.to(open,{autoAlpha:0,y:8,duration:.25,ease:'power1.in',overwrite:true,onComplete:done});
+      else done();
+    }
+  }
+  function onTap(e){
+    if(e)e.preventDefault();
+    if(!landed){pendingOpen=true;land(true);return;}
+    setOpen(!isOpen);
+  }
+  btn.addEventListener('click',onTap);
+  hint.addEventListener('click',onTap);
+
+  if(anim){
+    if(hasST)ScrollTrigger.create({trigger:btn,start:'center 62%',once:true,onEnter:function(){land(false);}});
+    else land(false);
+  }
+
+  /* ---------- Lluvia continua (3 profundidades) ---------- */
+  if(anim&&rain){
+    var MAX=22,alive=0,active=false,spawner=null;
+    var DEPTH=[ /* lejos, medio, cerca */
+      {min:14,max:20,op:.32,speed:70},
+      {min:20,max:28,op:.52,speed:105},
+      {min:29,max:38,op:.78,speed:150}
+    ];
+    var SVG='<rect x="1" y="1" width="32" height="22" rx="2.5" fill="#F7E7CE" stroke="#E3C08F" stroke-width="1.3"/>'+
+            '<path d="M1.6 1.8 L17 13.2 L32.4 1.8 Z" fill="#efd6b1" stroke="#C99A5B" stroke-width="1.1" stroke-linejoin="round"/>'+
+            '<circle cx="17" cy="13" r="3.3" fill="#99244f" stroke="#E3C08F" stroke-width=".6"/>';
+    function drop(){
+      if(!active||alive>=MAX||document.hidden)return;
+      var r=Math.random(),d=DEPTH[r<.42?0:(r<.78?1:2)];
+      var w=d.min+Math.random()*(d.max-d.min);
+      var el=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      el.setAttribute('viewBox','0 0 34 24');
+      el.setAttribute('class','rg-drop');
+      el.setAttribute('width',w.toFixed(1));el.setAttribute('height',(w*24/34).toFixed(1));
+      el.innerHTML=SVG;
+      rain.appendChild(el);alive++;
+      var W=rain.clientWidth||sec.offsetWidth,H=sec.offsetHeight+60;
+      var x0=Math.random()*(W-w),dur=H/d.speed*(.9+Math.random()*.2);
+      var tl=gsap.timeline({onComplete:function(){el.remove();alive--;}});
+      tl.fromTo(el,{x:x0,y:-50,rotation:(Math.random()-.5)*50},
+                   {x:x0+(Math.random()-.5)*80,y:H,rotation:(Math.random()-.5)*170,duration:dur,ease:'none'},0)
+        .fromTo(el,{opacity:0},{opacity:d.op,duration:Math.min(1.2,dur*.15),ease:'power1.out'},0)
+        .to(el,{opacity:0,duration:Math.min(1.6,dur*.15),ease:'power1.in'},dur-Math.min(1.6,dur*.15));
+    }
+    function loop(){spawner=gsap.delayedCall(.42+Math.random()*.18,function(){drop();if(active)loop();});}
+    function setActive(v){
+      if(v===active)return;active=v;
+      if(spawner){spawner.kill();spawner=null;}
+      if(v){for(var i=0;i<6;i++)gsap.delayedCall(i*.2,drop);loop();}
+      else{ /* fuera de pantalla: liberar capas (iPhone) */
+        [].forEach.call(rain.querySelectorAll('.rg-drop'),function(el){gsap.killTweensOf(el);el.remove();});
+        alive=0;
+      }
+    }
+    if(hasST)ScrollTrigger.create({trigger:sec,start:'top bottom',end:'bottom top',onToggle:function(s){setActive(s.isActive);}});
+    else setActive(true);
+  }
+
+  /* ---------- Destello sheen en tarjetas ---------- */
+  if(!reduce){
+    [].forEach.call(sec.querySelectorAll('.rg-card'),function(c){
+      if(hasST)ScrollTrigger.create({trigger:c,start:'top 82%',once:true,onEnter:function(){c.classList.add('rg-shine');}});
+      else c.classList.add('rg-shine');
+    });
+  }
+
+  /* ---------- Copiar CLABE ---------- */
+  var copyBtn=document.getElementById('rgCopy'),clabe=document.getElementById('rgClabe').getAttribute('data-clabe');
+  function fallback(t){
+    var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');
+    ta.style.cssText='position:fixed;top:0;left:0;opacity:0;font-size:16px';
+    document.body.appendChild(ta);ta.focus();ta.select();ta.setSelectionRange(0,t.length);
+    var ok=false;try{ok=document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);return ok;
+  }
+  copyBtn.addEventListener('click',function(){
+    function ok(){say('CLABE copiada');}
+    if(navigator.clipboard&&window.isSecureContext){
+      navigator.clipboard.writeText(clabe).then(ok,function(){if(fallback(clabe))ok();else say('CLABE: '+clabe);});
+    }else{if(fallback(clabe))ok();else say('CLABE: '+clabe);}
+  });
+})();
+</script>
+<!-- ================= /MESA DE REGALOS ================= -->

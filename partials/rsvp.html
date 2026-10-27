@@ -1,0 +1,377 @@
+<!-- ═════════ RSVP · Panel de Invitados (X pases) · Ana & Miguel ═════════ -->
+<style>
+#rsvp{position:relative;background:var(--bg);text-align:center;padding:84px 16px 90px;overflow:hidden}
+#rsvp::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(60% 40% at 50% 18%,rgba(153,36,79,.22),transparent 70%),
+             radial-gradient(50% 35% at 15% 85%,rgba(184,115,51,.12),transparent 70%),
+             radial-gradient(45% 30% at 88% 70%,rgba(183,110,121,.12),transparent 70%)}
+#rsvp [hidden]{display:none!important}
+.rv-wrap{position:relative;z-index:1;max-width:440px;margin:0 auto}
+.rv-hi{font-family:var(--serif);font-weight:500;font-size:clamp(30px,8.6vw,38px);line-height:1.2;color:var(--champ);margin:22px 0 4px;text-wrap:balance}
+.rv-hi em{font-style:italic;font-weight:400;display:block;font-size:.62em;letter-spacing:.04em;color:var(--gold-lt)}
+.rv-note{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.5;color:var(--text-soft);margin:6px 0 0}
+.rv-pases{display:inline-flex;flex-direction:column;align-items:center;margin:18px auto 8px;padding:14px 34px 12px;border-radius:18px;
+  border:1px solid rgba(227,192,143,.45);background:linear-gradient(180deg,rgba(74,16,40,.55),rgba(28,10,18,.75));box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(247,231,206,.08)}
+.rv-pases-lbl{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--gold-lt)}
+.rv-pases-num{font-family:var(--serif);font-weight:600;font-size:58px;line-height:1.05;background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rv-adultos{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--gold-lt);margin:6px 0 0;letter-spacing:.02em}
+.rv-adultos::before,.rv-adultos::after{content:"";display:inline-block;width:22px;height:1px;background:rgba(227,192,143,.55);vertical-align:middle;margin:0 10px}
+.rv-dl{font-family:var(--sans);font-weight:400;font-size:17px;line-height:1.5;text-wrap:balance;color:var(--champ);margin:14px 0 0}
+.rv-dl b{font-weight:700;color:var(--gold-lt)}
+.rv-bandeja{margin:24px auto 0;text-align:left}
+.rv-toggle{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rv-tbtn{min-height:54px;padding:10px 8px;border-radius:14px;border:1.5px solid rgba(227,192,143,.42);background:rgba(247,231,206,.04);
+  font-family:var(--sans);font-weight:700;font-size:16px;line-height:1.25;color:var(--champ);cursor:pointer;transition:background .25s,border-color .25s,color .25s,box-shadow .25s;-webkit-tap-highlight-color:transparent}
+.rv-tbtn:hover{border-color:var(--gold-lt)}
+.rv-tbtn.on{background:linear-gradient(135deg,var(--wine),var(--wine-deep));border-color:var(--rose);color:#fff;box-shadow:0 6px 20px rgba(153,36,79,.35)}
+.rv-tbtn:disabled{opacity:.45;cursor:not-allowed}
+.rv-fields{margin-top:18px;display:grid;gap:14px}
+.rv-card{padding:16px 14px 14px;border-radius:16px;border:1px solid rgba(227,192,143,.28);background:rgba(28,10,18,.78)}
+.rv-card-h{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-lt);margin:0 0 10px}
+.rv-sub{display:block;font-family:var(--sans);font-weight:700;font-size:14px;letter-spacing:.06em;color:var(--text-soft);margin:12px 0 7px}
+.rv-input{display:block;width:100%;box-sizing:border-box;min-height:52px;padding:12px 15px;border-radius:12px;border:1.5px solid rgba(227,192,143,.4);
+  background:rgba(247,231,206,.06);font-family:var(--sans);font-weight:400;font-size:17px;color:var(--champ);outline:none;-webkit-appearance:none;appearance:none;transition:border-color .2s,box-shadow .2s,background .2s}
+.rv-input::placeholder{color:rgba(247,231,206,.62);opacity:1}
+.rv-input:focus{border-color:var(--gold-lt);background:rgba(247,231,206,.09);box-shadow:0 0 0 3px rgba(227,192,143,.18)}
+.rv-input.rv-empty{border-style:dashed;border-color:rgba(183,110,121,.75)}
+.rv-input.rv-bad{border-color:#E8798E;box-shadow:0 0 0 3px rgba(232,121,142,.2)}
+.rv-hint{font-family:var(--sans);font-size:16px;color:#F0A9B6;margin:6px 2px 0}
+.rv-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rv-chips.rv-bad .rv-chip{border-color:#E8798E}
+.rv-chip{position:relative;min-height:50px;padding:8px 6px;white-space:nowrap;border-radius:999px;border:1.5px solid rgba(227,192,143,.4);background:transparent;
+  font-family:var(--sans);font-weight:700;font-size:16px;line-height:1.2;color:var(--champ);cursor:pointer;transition:background .22s,border-color .22s,color .22s;-webkit-tap-highlight-color:transparent}
+.rv-chip:hover{border-color:var(--gold-lt)}
+.rv-chip[aria-pressed="true"]{background:var(--champ);border-color:var(--champ);color:var(--wine-deep)}
+.rv-chip[aria-pressed="true"]::after{content:"✓";position:absolute;top:-7px;right:-3px;width:22px;height:22px;border-radius:50%;background:var(--wine);color:#fff;border:1.5px solid var(--champ);font-size:12px;line-height:19px;text-align:center}
+.rv-chip:disabled{opacity:.45;cursor:not-allowed}
+.rv-count{font-family:var(--sans);font-size:16px;color:var(--text-soft);text-align:center;margin:2px 0 0}
+.rv-count b{color:var(--gold-lt);font-weight:700}
+.rv-trans{margin-top:14px;padding:16px 14px;border-radius:16px;border:1px solid rgba(184,115,51,.45);background:linear-gradient(180deg,rgba(74,16,40,.45),rgba(28,10,18,.8))}
+.rv-trans.rv-bad{border-color:#E8798E}
+.rv-trans-q{font-family:var(--serif);font-weight:600;font-size:20px;line-height:1.35;color:var(--champ);margin:0 0 12px;text-align:center;text-wrap:balance}
+.rv-trans-n{font-family:var(--sans);font-size:16px;line-height:1.5;color:var(--text-soft);margin:10px 0 0;text-align:center}
+.rv-btn{display:block;width:100%;margin-top:20px;min-height:58px;border-radius:999px;border:1px solid rgba(247,231,206,.35);cursor:pointer;
+  background:linear-gradient(135deg,var(--wine) 0%,#7a1a3f 55%,var(--wine-deep) 100%);color:#fff;
+  font-family:var(--sans);font-weight:700;font-size:16px;letter-spacing:2.5px;text-transform:uppercase;
+  box-shadow:0 8px 26px rgba(153,36,79,.38);animation:rvBreathe 3.4s ease-in-out infinite}
+@keyframes rvBreathe{0%,100%{transform:scale(1);box-shadow:0 8px 26px rgba(153,36,79,.34)}50%{transform:scale(1.025);box-shadow:0 10px 36px rgba(183,110,121,.55)}}
+.rv-btn:disabled{opacity:.5;cursor:not-allowed;animation:none}
+.rv-gracias{max-width:420px;margin:26px auto 0;padding:30px 22px 26px;border-radius:20px;border:1px solid rgba(227,192,143,.45);
+  background:linear-gradient(180deg,rgba(74,16,40,.6),rgba(28,10,18,.85));box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.rv-gracias-ic{color:var(--gold-lt);margin:0 auto 12px;display:block}
+.rv-gracias-t{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.25;color:var(--champ);margin:0 0 10px}
+.rv-gracias-s{font-family:var(--sans);font-size:17px;line-height:1.55;color:var(--text-soft);margin:0 0 6px}
+.rv-gracias-names{list-style:none;padding:0;margin:8px 0 20px}
+.rv-gracias-names li{font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.45;color:var(--gold-lt)}
+.rv-editar{min-height:48px;padding:10px 24px;border-radius:999px;border:1.5px solid rgba(227,192,143,.5);background:transparent;cursor:pointer;
+  font-family:var(--sans);font-weight:700;font-size:16px;color:var(--champ);transition:background .25s}
+.rv-editar:hover{background:rgba(247,231,206,.08)}
+.rv-editar:disabled{opacity:.45;cursor:not-allowed}
+.rv-fb{font-family:var(--sans);font-weight:700;font-size:16px;line-height:1.5;min-height:24px;margin:16px 0 0}
+.rv-fb.err{color:#F0A9B6}.rv-fb.ok{color:var(--gold-lt)}
+.rv-badge{display:inline-block;margin:26px auto 0;padding:9px 18px;border-radius:999px;border:1px solid rgba(184,115,51,.55);
+  font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-lt);background:rgba(28,10,18,.6)}
+.rv-confetti{position:fixed;top:-14px;width:9px;height:14px;border-radius:2px;z-index:9999;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.rv-btn{animation:none}}
+</style>
+
+<section id="rsvp" data-top="#120509" data-bot="#120509" data-nav="Confirmar">
+  <div class="rv-wrap">
+    <span class="lbl">Sábado 29 de mayo de 2027</span>
+    <h2 class="ttl">Confirma tu asistencia</h2>
+    <div class="gline"></div>
+
+    <p class="rv-hi" id="rv-hi" hidden></p>
+    <p class="rv-note" id="rv-note"></p>
+    <div class="rv-pases" id="rv-pases" hidden>
+      <span class="rv-pases-lbl">Pases</span>
+      <span class="rv-pases-num" id="rv-pases-num">1</span>
+    </div>
+    <p class="rv-adultos">Celebración solo para adultos</p>
+    <p class="rv-dl" id="rv-dl">Por favor confirma antes del <b>lunes 1 de febrero de 2027</b></p>
+
+    <!-- BANDEJA (se colapsa al confirmar) -->
+    <div class="rv-bandeja" id="rv-bandeja">
+      <div class="rv-toggle">
+        <button class="rv-tbtn" id="rv-yes" type="button" aria-pressed="false">Asistiré</button>
+        <button class="rv-tbtn" id="rv-no" type="button" aria-pressed="false">No podré asistir</button>
+      </div>
+      <div class="rv-fields" id="rv-fields" hidden></div>
+      <div class="rv-trans" id="rv-trans" hidden>
+        <p class="rv-trans-q">¿Requieren transporte del hotel <span style="white-space:nowrap">(Ex-Hacienda</span> El Lobo) al viñedo?</p>
+        <div class="rv-chips" id="rv-trans-chips">
+          <button class="rv-chip" type="button" data-t="Sí" aria-pressed="false">Sí</button>
+          <button class="rv-chip" type="button" data-t="No" aria-pressed="false">No</button>
+        </div>
+        <p class="rv-trans-n">No hay Uber en la zona; la hacienda avisará a los taxis locales.</p>
+      </div>
+      <button class="rv-btn" id="rv-btn" type="button"><span id="rv-btn-text">Confirmar asistencia</span></button>
+    </div>
+
+    <!-- PANEL DE GRACIAS -->
+    <div class="rv-gracias" id="rv-gracias" hidden>
+      <svg class="rv-gracias-ic" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="8.5 12.5 11 15 16 9.5"/></svg>
+      <p class="rv-gracias-t" id="rv-gracias-t"></p>
+      <p class="rv-gracias-s" id="rv-gracias-s"></p>
+      <ul class="rv-gracias-names" id="rv-gracias-names"></ul>
+      <button class="rv-editar" id="rv-editar" type="button">Modificar mi respuesta</button>
+    </div>
+
+    <p class="rv-fb" id="rv-fb" role="status" aria-live="polite"></p>
+    <span class="rv-badge" id="rv-badge">Fecha límite · 1 feb 2027</span>
+  </div>
+</section>
+
+<script>
+(function(){
+  var API = 'https://panel-invitados.vercel.app/api/confirmar';
+  var URL_BODA = 'https://boda-ana-y-miguel.vercel.app';
+  var DEADLINE = new Date(2027, 1, 1, 23, 59, 59, 999); // lunes 1 de febrero de 2027
+  var MENUS = [{ v: 'Atún', t: 'Medallón de atún' }, { v: 'Res', t: 'Medallón de res' }];
+  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var qs = new URLSearchParams(location.search);
+  var para = (qs.get('para') || '').trim();
+  var pases = Math.max(1, Math.min(20, parseInt(qs.get('pases'), 10) || 1));
+  var frozen = new Date() > DEADLINE;
+  var estado = null, transporte = null, saved = []; // saved: [{nombre, menu, alergia}]
+
+  function $(id){ return document.getElementById(id); }
+  var hi = $('rv-hi'), note = $('rv-note'), pasesBox = $('rv-pases'), num = $('rv-pases-num');
+  var bandeja = $('rv-bandeja'), fields = $('rv-fields'), trans = $('rv-trans'), transChips = $('rv-trans-chips');
+  var yes = $('rv-yes'), no = $('rv-no'), btn = $('rv-btn'), btnText = $('rv-btn-text'), fb = $('rv-fb');
+  var gracias = $('rv-gracias'), gT = $('rv-gracias-t'), gS = $('rv-gracias-s'), gN = $('rv-gracias-names'), editar = $('rv-editar');
+
+  /* Texto de fecha límite y badge salen de la MISMA constante */
+  (function(){
+    var dias = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+    var meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    var d = DEADLINE;
+    $('rv-dl').innerHTML = 'Por favor confirma antes del <b>' + dias[d.getDay()] + ' ' + d.getDate() + ' de ' + meses[d.getMonth()] + ' de ' + d.getFullYear() + '</b>';
+    $('rv-badge').textContent = 'Fecha límite · ' + d.getDate() + ' ' + meses[d.getMonth()].slice(0, 3) + ' ' + d.getFullYear();
+  })();
+
+  function trato(){
+    try { if (typeof window.tratoInvitado === 'function'){ var t = window.tratoInvitado(para, pases); if (t) return t; } } catch (e) {}
+    return (pases > 1 || /\s(y|e)\s|familia|&/i.test(para)) ? 'Queridos' : 'Querido(a)';
+  }
+  function pintarSaludo(){
+    if (!para){ hi.hidden = true; return; }
+    hi.textContent = trato() + ' ' + para; hi.hidden = false;
+  }
+  function pintarPases(){
+    num.textContent = pases; pasesBox.hidden = false;
+    note.textContent = pases === 1 ? 'Hemos reservado un lugar en tu honor.' : 'Hemos reservado ' + pases + ' lugares en su honor.';
+  }
+  pintarSaludo(); pintarPases();
+  window.addEventListener('load', pintarSaludo); // por si tratoInvitado se define después
+
+  function setFb(t, c){ fb.textContent = t; fb.className = 'rv-fb' + (c ? ' ' + c : ''); }
+  function limpio(s){ return String(s || '').replace(/[—·]/g, '-').replace(/\s+/g, ' ').trim(); }
+
+  /* ── Codificación en nombres_confirmados ── */
+  function codificar(e, i){
+    var s = e.nombre + ' — Menú: ' + e.menu + ' · Alergias: ' + (e.alergia || 'ninguna');
+    if (i === 0) s += ' · Transporte: ' + transporte;
+    return s;
+  }
+  function decodificar(str){
+    var out = { nombre: '', menu: '', alergia: '', transporte: null };
+    str = String(str || '');
+    var k = str.indexOf(' — ');
+    out.nombre = (k >= 0 ? str.slice(0, k) : str).trim();
+    if (k < 0) return out;
+    str.slice(k + 3).split(' · ').forEach(function(p){
+      var m = p.match(/^\s*([^:]+):\s*(.*)$/); if (!m) return;
+      var key = m[1].toLowerCase(), val = m[2].trim();
+      if (key.indexOf('men') === 0) out.menu = /at[uú]n/i.test(val) ? 'Atún' : (/res/i.test(val) ? 'Res' : '');
+      else if (key.indexOf('alerg') === 0) out.alergia = /^ninguna$/i.test(val) ? '' : val;
+      else if (key.indexOf('transp') === 0) out.transporte = /^s[ií]/i.test(val) ? 'Sí' : 'No';
+    });
+    return out;
+  }
+
+  /* ── Tarjetas por pase ── */
+  function setPressed(group, el){
+    group.querySelectorAll('.rv-chip').forEach(function(c){ c.setAttribute('aria-pressed', c === el ? 'true' : 'false'); });
+  }
+  function buildFields(){
+    fields.innerHTML = '';
+    for (var i = 0; i < pases; i++){
+      var e = saved[i] || {};
+      var card = document.createElement('div'); card.className = 'rv-card';
+      var h = document.createElement('p'); h.className = 'rv-card-h'; h.textContent = 'Invitado ' + (i + 1); card.appendChild(h);
+      var inp = document.createElement('input'); inp.type = 'text'; inp.className = 'rv-input rv-name';
+      inp.placeholder = 'Nombre completo del invitado ' + (i + 1); inp.autocomplete = 'name'; inp.value = e.nombre || '';
+      inp.setAttribute('aria-label', 'Nombre completo del invitado ' + (i + 1));
+      card.appendChild(inp);
+      var sub = document.createElement('span'); sub.className = 'rv-sub'; sub.textContent = 'Menú'; card.appendChild(sub);
+      var chips = document.createElement('div'); chips.className = 'rv-chips rv-menu'; chips.setAttribute('role', 'group'); chips.setAttribute('aria-label', 'Menú del invitado ' + (i + 1));
+      MENUS.forEach(function(m){
+        var c = document.createElement('button'); c.type = 'button'; c.className = 'rv-chip'; c.dataset.m = m.v; c.textContent = m.t;
+        c.setAttribute('aria-pressed', e.menu === m.v ? 'true' : 'false'); c.disabled = frozen;
+        chips.appendChild(c);
+      });
+      card.appendChild(chips);
+      var al = document.createElement('input'); al.type = 'text'; al.className = 'rv-input rv-alergia';
+      al.placeholder = 'Alergias o restricciones (opcional)'; al.value = e.alergia || ''; al.style.marginTop = '10px';
+      al.setAttribute('aria-label', 'Alergias o restricciones del invitado ' + (i + 1) + ' (opcional)');
+      card.appendChild(al);
+      if (frozen){ inp.disabled = al.disabled = true; }
+      fields.appendChild(card);
+    }
+    var cnt = document.createElement('p'); cnt.className = 'rv-count'; cnt.id = 'rv-count'; fields.appendChild(cnt);
+    contar();
+  }
+  function contar(){
+    var c = $('rv-count'); if (!c) return;
+    var n = 0; fields.querySelectorAll('.rv-name').forEach(function(i){ if (i.value.trim()) n++; });
+    c.innerHTML = 'Confirmando <b>' + n + '</b> de <b>' + pases + '</b> ' + (pases === 1 ? 'lugar' : 'lugares');
+  }
+  fields.addEventListener('click', function(ev){
+    var c = ev.target.closest('.rv-chip'); if (!c || frozen) return;
+    var g = c.parentNode; setPressed(g, c); g.classList.remove('rv-bad'); setFb('', '');
+  });
+  fields.addEventListener('input', function(ev){
+    if (ev.target.classList.contains('rv-name')){
+      ev.target.classList.remove('rv-bad');
+      if (ev.target.value.trim()) ev.target.classList.remove('rv-empty');
+      var hint = ev.target.parentNode.querySelector('.rv-hint'); if (hint && ev.target.value.trim()) hint.remove();
+      contar();
+    }
+  });
+  transChips.addEventListener('click', function(ev){
+    var c = ev.target.closest('.rv-chip'); if (!c || frozen) return;
+    setPressed(transChips, c); transporte = c.dataset.t; trans.classList.remove('rv-bad'); setFb('', '');
+  });
+  function pintarTransporte(){
+    transChips.querySelectorAll('.rv-chip').forEach(function(c){ c.setAttribute('aria-pressed', c.dataset.t === transporte ? 'true' : 'false'); c.disabled = frozen; });
+  }
+
+  function selectRsvp(v){
+    estado = v;
+    yes.classList.toggle('on', v === 'confirmado'); yes.setAttribute('aria-pressed', v === 'confirmado');
+    no.classList.toggle('on', v === 'declino'); no.setAttribute('aria-pressed', v === 'declino');
+    if (v === 'confirmado'){
+      if (!fields.querySelector('.rv-card')) buildFields();
+      fields.hidden = false; trans.hidden = false; pintarTransporte();
+    } else {
+      fields.innerHTML = ''; fields.hidden = true; trans.hidden = true;
+    }
+    setFb('', '');
+  }
+  yes.addEventListener('click', function(){ if (!frozen) selectRsvp('confirmado'); });
+  no.addEventListener('click', function(){ if (!frozen) selectRsvp('declino'); });
+
+  /* ── Bandeja ⇄ Gracias ── */
+  function aparecer(el){
+    el.hidden = false;
+    if (window.gsap && !RM){ gsap.fromTo(el, { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: .6, ease: 'power2.out', clearProps: 'all' }); }
+  }
+  function mostrarGracias(est, entradas){
+    gN.innerHTML = '';
+    if (est === 'confirmado'){
+      gT.textContent = '¡Gracias por confirmar!';
+      gS.textContent = entradas.length === 1 ? 'Te esperamos con mucho cariño:' : 'Confirmamos ' + entradas.length + ' lugares para:';
+      entradas.forEach(function(e){ var li = document.createElement('li'); li.textContent = e.nombre; gN.appendChild(li); });
+    } else {
+      gT.textContent = 'Gracias por avisarnos';
+      gS.textContent = 'Lamentamos que no puedan acompañarnos. Los vamos a extrañar.';
+    }
+    bandeja.hidden = true; aparecer(gracias);
+  }
+  function abrirBandeja(){
+    gracias.hidden = true; setFb('', '');
+    if (estado === 'confirmado'){ fields.innerHTML = ''; selectRsvp('confirmado'); }
+    aparecer(bandeja);
+  }
+  editar.addEventListener('click', function(){ if (!frozen) abrirBandeja(); });
+
+  function confeti(){
+    if (RM) return;
+    var cols = ['#99244f', '#B76E79', '#B87333', '#F7E7CE', '#E3C08F', '#4a1028'];
+    for (var i = 0; i < 80; i++){
+      var c = document.createElement('i'); c.className = 'rv-confetti';
+      c.style.left = Math.random() * 100 + 'vw'; c.style.background = cols[i % cols.length];
+      if (i % 3 === 0){ c.style.borderRadius = '50%'; c.style.height = '9px'; }
+      document.body.appendChild(c);
+      c.animate([{ transform: 'translateY(0) rotate(0)', opacity: 1 },
+                 { transform: 'translateY(' + (innerHeight + 40) + 'px) translateX(' + (Math.random() * 140 - 70) + 'px) rotate(' + (Math.random() * 720) + 'deg)', opacity: .85 }],
+        { duration: 2300 + Math.random() * 1700, delay: Math.random() * 450, easing: 'cubic-bezier(.2,.6,.4,1)' })
+        .onfinish = (function(el){ return function(){ el.remove(); }; })(c);
+    }
+  }
+
+  if (frozen){
+    yes.disabled = no.disabled = btn.disabled = true; editar.disabled = true; pintarTransporte();
+    btnText.textContent = 'Confirmaciones cerradas';
+    setFb('La fecha límite para confirmar ya pasó.', 'err');
+  }
+
+  /* ── Precarga ── */
+  if (para){
+    fetch(API + '?nombre=' + encodeURIComponent(para) + '&url_boda=' + encodeURIComponent(URL_BODA))
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        var inv = d && d.invitado; if (!inv) return;
+        if (inv.pases){ pases = Math.max(1, Math.min(20, parseInt(inv.pases, 10) || pases)); pintarPases(); pintarSaludo(); }
+        if (inv.estado === 'confirmado' || inv.estado === 'declino'){
+          saved = (inv.nombres_confirmados || []).map(decodificar).filter(function(e){ return e.nombre; });
+          if (saved[0] && saved[0].transporte) transporte = saved[0].transporte;
+          fields.innerHTML = ''; selectRsvp(inv.estado);
+          btnText.textContent = frozen ? 'Confirmaciones cerradas' : 'Actualizar respuesta';
+          mostrarGracias(inv.estado, saved);
+        }
+      }).catch(function(){});
+  }
+
+  /* ── Enviar ── */
+  btn.addEventListener('click', function(){
+    if (frozen) return;
+    if (!para){ setFb('Abre tu enlace personal de invitación para confirmar.', 'err'); return; }
+    if (!estado){ setFb('Elige si asistirán o no.', 'err'); return; }
+    var entradas = [], faltaMenu = false;
+    if (estado === 'confirmado'){
+      fields.querySelectorAll('.rv-card').forEach(function(card){
+        var inp = card.querySelector('.rv-name'), g = card.querySelector('.rv-menu');
+        var sel = g.querySelector('[aria-pressed="true"]'), old = card.querySelector('.rv-hint');
+        if (old) old.remove();
+        var nombre = limpio(inp.value);
+        if (!nombre){
+          inp.classList.add('rv-empty'); g.classList.remove('rv-bad');
+          var h = document.createElement('p'); h.className = 'rv-hint'; h.textContent = 'Lugar sin nombre: no se contará.';
+          inp.insertAdjacentElement('afterend', h);
+          return;
+        }
+        inp.classList.remove('rv-empty');
+        if (!sel){ g.classList.add('rv-bad'); faltaMenu = true; return; }
+        entradas.push({ nombre: nombre, menu: sel.dataset.m, alergia: limpio(card.querySelector('.rv-alergia').value) });
+      });
+      if (faltaMenu){ setFb('Elige el menú de cada invitado.', 'err'); return; }
+      if (!entradas.length){ var f = fields.querySelector('.rv-name'); if (f){ f.classList.add('rv-bad'); f.focus(); } setFb('Escribe al menos un nombre.', 'err'); return; }
+      if (!transporte){ trans.classList.add('rv-bad'); setFb('Indícanos si requieren transporte al viñedo.', 'err'); return; }
+    }
+    var nombres = entradas.map(codificar);
+    btn.disabled = true; setFb('Enviando…', '');
+    fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: para, url_boda: URL_BODA, estado: estado,
+        pases_confirmados: estado === 'confirmado' ? nombres.length : 0, nombres_confirmados: nombres }) })
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(d){ return { ok: r.ok, status: r.status, d: d }; }); })
+      .then(function(res){
+        btn.disabled = false;
+        if (!res.ok || (res.d && res.d.ok === false)){
+          var code = res.d && (res.d.error || res.d.code);
+          if (res.status === 404 || res.status === 410 || code === 'no_match' || code === 'invitacion_borrada')
+            setFb('No encontramos tu invitación. Escríbenos y con gusto registramos tu respuesta.', 'err');
+          else setFb('No pudimos registrar tu respuesta. Intenta de nuevo en un momento.', 'err');
+          return;
+        }
+        saved = entradas; btnText.textContent = 'Actualizar respuesta'; setFb('', '');
+        mostrarGracias(estado, entradas);
+        if (estado === 'confirmado') confeti();
+        gracias.scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'center' });
+      })
+      .catch(function(){ btn.disabled = false; setFb('Sin conexión. Intenta de nuevo.', 'err'); });
+  });
+})();
+</script>
