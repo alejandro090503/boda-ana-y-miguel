@@ -496,6 +496,51 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
 .orbs .sw-ttl{margin:0!important;text-align:right;font-size:12px!important;line-height:1.3}
 .orb{width:56px!important;height:56px!important;animation:none!important}
 .orb-n{margin:0!important;text-align:left;font-size:16px!important}
+
+/* ECLIPSE premium (estilo foto del cliente: aro de luz + destello que orbita) */
+#eclipse .ec-sticky{background:radial-gradient(ellipse at 50% 48%,rgba(74,16,40,.0) 0%,rgba(18,5,9,.55) 60%,rgba(18,5,9,.95) 100%),url(fotos/wall-tex.jpg) center/cover}
+#eclipse .ec-sticky::after{content:'';position:absolute;inset:0;background:linear-gradient(var(--bg),transparent 18%,transparent 82%,var(--bg));pointer-events:none}
+.ec-stage{width:min(76vw,320px)!important}
+.ec-stage>*{position:absolute;border-radius:50%}
+.ec-glow{inset:-55%!important;background:radial-gradient(circle,rgba(255,190,140,.16) 0%,rgba(183,110,121,.10) 35%,transparent 65%)!important}
+.ec-sun{inset:0;overflow:visible!important;background:radial-gradient(circle at 46% 42%,#fff8ec 0%,#fbe3c4 38%,#eab08a 70%,#c97b52 100%)!important;box-shadow:0 0 30px 6px rgba(255,214,170,.55),0 0 90px 24px rgba(227,140,110,.25)!important}
+.ec-sun::after{display:none!important}
+.ec-moon{inset:-.6%!important;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(40,8,18,.15) 0%,rgba(20,4,10,.55) 70%,rgba(8,1,4,.85) 100%),url(fotos/moon-tex.jpg) center/cover!important;box-shadow:inset 0 0 40px rgba(0,0,0,.65)!important;display:flex;align-items:center;justify-content:center}
+.ec-mono{width:74%;opacity:0;filter:drop-shadow(0 2px 10px rgba(0,0,0,.6))}
+.ec-edge{inset:-.6%;opacity:0;pointer-events:none;
+  box-shadow:0 0 0 1.4px rgba(255,226,190,.95),0 0 6px 1px rgba(255,205,160,.85),0 0 22px 4px rgba(240,160,110,.45),0 0 60px 14px rgba(183,110,121,.22),inset 0 0 14px 1px rgba(255,190,140,.35)}
+.ec-edge-arc{position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(from 0deg,rgba(255,240,215,.0) 0deg,rgba(255,240,215,.95) 40deg,rgba(255,220,180,.25) 120deg,transparent 200deg,rgba(255,220,180,.2) 300deg,rgba(255,240,215,0) 360deg);
+  -webkit-mask:radial-gradient(circle closest-side,transparent calc(100% - 3px),#000 calc(100% - 1.6px),#000 calc(100% - .4px),transparent 100%);mask:radial-gradient(circle closest-side,transparent calc(100% - 3px),#000 calc(100% - 1.6px),#000 calc(100% - .4px),transparent 100%);
+  filter:blur(.6px) drop-shadow(0 0 6px rgba(255,210,170,.9));animation:spin 9s linear infinite}
+.ec-orbit{inset:-.6%;animation:spin 9s linear infinite;pointer-events:none}
+.ec-flare{position:absolute;left:50%;top:0;width:0;height:0;opacity:0;transform:rotate(-1deg)}
+.ec-txt{bottom:19svh!important}
+.ec-flare b,.ec-flare::before,.ec-flare::after{position:absolute;left:0;top:0;transform:translate(-50%,-50%);border-radius:50%;mix-blend-mode:screen;pointer-events:none}
+.ec-flare b{width:18px;height:18px;background:radial-gradient(circle,#fff 0%,#fff6e8 30%,rgba(255,214,170,.6) 55%,transparent 72%);box-shadow:0 0 14px 6px rgba(255,230,200,.9),0 0 40px 16px rgba(255,180,120,.45);animation:flarePulse 2.6s ease-in-out infinite}
+.ec-flare::before{content:'';width:150px;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,rgba(255,236,210,.85) 45%,#fff 50%,rgba(255,236,210,.85) 55%,transparent);filter:blur(.4px)}
+.ec-flare::after{content:'';width:3px;height:70px;border-radius:3px;background:linear-gradient(transparent,rgba(255,236,210,.75) 45%,#fff 50%,rgba(255,236,210,.75) 55%,transparent);filter:blur(.4px)}
+@keyframes flarePulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.25)}}
+.ec-orbit::after{content:'';position:absolute;left:50%;top:0;width:60px;height:60px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,200,150,.35),transparent 70%);opacity:var(--fl,0)}
+
+/* familia: subtítulo de la Panqué */
+.pol{padding-bottom:62px!important}
+.pol p small{display:block;font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:13px;color:#7a1d40;margin-top:4px}
+.pol p:has(small){bottom:8px}
+
+/* ARCOS: secciones de foto entre secciones */
+.wrap>section.arco{padding:0!important;height:88svh;min-height:520px;overflow:hidden}
+.arco-frame{position:absolute;inset:0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(transparent 0,#000 120px,#000 calc(100% - 120px),transparent);mask-image:linear-gradient(transparent 0,#000 120px,#000 calc(100% - 120px),transparent)}
+.arco-img{position:absolute;inset:-14% 0;background-size:cover;will-change:transform}
+.arco-frame::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,transparent 45%,rgba(18,5,9,.65) 100%),linear-gradient(180deg,rgba(18,5,9,.0) 40%,rgba(18,5,9,.75) 100%);mix-blend-mode:normal}
+.arco-frame::before{content:'';position:absolute;inset:0;z-index:1;mix-blend-mode:soft-light;background:linear-gradient(115deg,transparent 30%,rgba(255,236,210,.45) 48%,transparent 66%);background-size:250% 100%;animation:shine 10s ease-in-out infinite}
+.arco-txt{position:absolute;left:0;right:0;bottom:9%;z-index:2;text-align:center;padding:0 24px}
+.arco-k{display:block;font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:13px;letter-spacing:.24em;text-transform:uppercase;background:linear-gradient(100deg,#C9A06A,#E3C08F 35%,#FFF4DE 48%,#E3C08F 62%,#B87333);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:satin 6s ease-in-out infinite;filter:drop-shadow(0 2px 6px rgba(0,0,0,.9))}
+.arco-l{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:clamp(28px,8vw,36px);line-height:1.25;color:#fff;margin-top:8px;text-shadow:0 2px 18px rgba(0,0,0,.85)}
+.arco-txt>*{opacity:0;transform:translateY(24px);transition:opacity 1.1s var(--cine),transform 1.1s var(--cine)}
+.arco.in .arco-txt>*{opacity:1;transform:none}
+.arco.in .arco-l{transition-delay:.2s}
+html:not(.anim) .arco-txt>*{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.2s!important}}
 </style>
 </head>
@@ -579,6 +624,12 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
     </g>
   </svg>
   <p class="p fx" data-fx="up" id="greetBody">Un hilo rojo invisible une a quienes están destinados a encontrarse. El nuestro nos trajo hasta aquí, y con la bendición de Dios y de nuestros padres queremos que <b id="greetYou">nos acompañes</b> el día en que el sol y la luna se encuentran para unir nuestras vidas.</p>
+</section>
+
+
+<section class="arco" id="arco1" data-top="#120509" data-bot="#120509" aria-label="Los Arcos de Querétaro">
+  <div class="arco-frame"><div class="arco-img" style="background-image:url(fotos/f16.jpg);background-position:center 40%"></div></div>
+  <div class="arco-txt"><span class="arco-k">Los Arcos · Querétaro</span><p class="arco-l">Donde nuestra historia<br>encontró su camino</p></div>
 </section>
 
 <!-- PADRES -->
@@ -671,11 +722,24 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
   </div>
 </section>
 
+
+<section class="arco" id="arco2" data-top="#120509" data-bot="#120509" aria-label="Los Arcos de Querétaro">
+  <div class="arco-frame"><div class="arco-img" style="background-image:url(fotos/f19.jpg);background-position:center 30%"></div></div>
+  <div class="arco-txt"><span class="arco-k">Querétaro</span><p class="arco-l">Cada arco, un paso<br>más cerca de ti</p></div>
+</section>
+
 <!-- ECLIPSE (efecto al bajar) -->
 <section id="eclipse" data-top="#120509" data-bot="#120509" aria-label="Reserva de un eclipse">
   <div class="ec-sticky">
     <div class="ec-top"><span class="lbl">29 · 05 · 2027</span><p class="script mtx" style="font-size:clamp(46px,13vw,64px)">Reserva de un Eclipse</p></div>
-    <div class="ec-stage"><i class="ec-glow"></i><i class="ec-corona" id="ecCorona"><i class="ec-rays"></i><i class="ec-rays r2"></i></i><i class="ec-sun"></i><i class="ec-chromo" id="ecChromo"></i><i class="ec-moon" id="ecMoon"></i><i class="ec-ring" id="ecRing"><i></i></i><i class="ec-beads" id="ecBeads"></i></div><div class="ec-dust" aria-hidden="true"></div>
+    <div class="ec-stage">
+      <i class="ec-glow"></i>
+      <i class="ec-sun"></i>
+      <i class="ec-moon" id="ecMoon"><img class="ec-mono" id="ecMono" src="monograma.png" alt=""></i>
+      <i class="ec-edge" id="ecEdge"><i class="ec-edge-arc"></i></i>
+      <i class="ec-orbit" id="ecOrbit"><i class="ec-flare" id="ecFlare"><b></b></i></i>
+      <i id="ecCorona" hidden></i><i id="ecRing" hidden></i><i id="ecBeads" hidden></i><i id="ecChromo" hidden></i>
+    </div><div class="ec-dust" aria-hidden="true"></div>
     <div class="ec-txt"><p class="ec-line"><span>El sol</span><span>y la luna…</span></p><p class="ec-line"><span>se buscan</span><span>en el cielo,</span></p><p class="ec-line"><span>y por un instante,</span><span>todo se alinea.</span></p></div>
   </div>
 </section>
@@ -744,7 +808,6 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
     <span class="lbl">Nuestra historia</span>
     <h2 class="ttl">Galería</h2>
     <div class="gline"></div>
-    <p class="gl-sub">Pequeños instantes que nos trajeron hasta aquí.</p>
   </div>
 
   <div class="gl-scene" id="gl-scene" role="region" aria-label="Carrusel de fotos, desliza para girar y toca para ampliar">
@@ -752,16 +815,6 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
   </div>
   <p class="gl-hint"><span>‹</span>Desliza · toca para ampliar<span>›</span></p>
 
-  <div class="gl-fx">
-    <p class="gl-fx-ttl">Un amor <em>a la luz</em> de cada día</p>
-    <div class="gl-grid">
-      <figure class="gl-tile gl-t1" data-gl-i="2" data-speed="-6"><img src="fotos/f03.jpg" alt="Ana y Miguel" decoding="async"></figure>
-      <figure class="gl-tile gl-t2" data-gl-i="8" data-speed="9" data-lift="1"><img src="fotos/f09.jpg" alt="Ana y Miguel" decoding="async"></figure>
-      <figure class="gl-tile gl-t3" data-gl-i="14" data-speed="-9" data-lift="-1"><img src="fotos/f24.jpg" alt="Ana y Miguel" decoding="async"></figure>
-      <p class="gl-quote">“Y de pronto, todos los caminos llevaban a ti.”</p>
-      <figure class="gl-tile gl-t4" data-gl-i="20" data-speed="7"><img src="fotos/f29.jpg" alt="Ana y Miguel" decoding="async"></figure>
-    </div>
-  </div>
 </section>
 
 <script>
@@ -781,7 +834,7 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
   for(var a=1;a<=13;a++)ALL.push('fotos/f'+(a<10?'0':'')+a+'.jpg');
   for(var b=22;b<=32;b++)ALL.push('fotos/f'+b+'.jpg');
   /* anillo: 14 variadas (verticales + horizontales, color y B/N) */
-  var RING=['f01','f06','f02','f22','f04','f25','f07','f26','f08','f28','f10','f31','f12','f32'];
+  var RING=['f01','f06','f02','f22','f03','f04','f25','f07','f09','f26','f08','f28','f24','f10','f31','f12','f29','f32'];
 
   /* ── construir anillo ── */
   var scene=document.getElementById('gl-scene'),ring=document.getElementById('gl-ring');
@@ -984,12 +1037,18 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
   <h2 class="ttl">Familia y Peludos</h2>
   <div class="gline"></div>
   <div class="stack" id="stack" aria-label="Fotos de familia y mascotas, toca para ver la siguiente">
-    <figure class="pol"><img src="fotos/f37.jpg" alt="Nuestro gatito"><p>Nuestro consentido</p></figure>
-    <figure class="pol"><img src="fotos/f36.jpg" alt="Nuestra perrita"><p>Nuestra pequeña</p></figure>
-    <figure class="pol"><img src="fotos/f38.jpg" alt="Familia"><p>Nuestra familia</p></figure>
-    <figure class="pol"><img src="fotos/f39.jpg" alt="Familia"><p>Nuestra familia</p></figure>
+    <figure class="pol"><img src="fotos/f37.jpg" alt="La Lili"><p>La Lili</p></figure>
+    <figure class="pol"><img src="fotos/f36.jpg" alt="La Panqué"><p>La Panqué<small>“la dueña de las quincenas”</small></p></figure>
+    <figure class="pol"><img src="fotos/f38.jpg" alt="Familia de Miguel"><p>Familia de Miguel</p></figure>
+    <figure class="pol"><img src="fotos/f39.jpg" alt="Familia de Any"><p>Familia de Any</p></figure>
   </div>
   <p class="stack-hint">Toca para ver la siguiente</p>
+</section>
+
+
+<section class="arco" id="arco3" data-top="#120509" data-bot="#120509" aria-label="Los Arcos de Querétaro">
+  <div class="arco-frame"><div class="arco-img" style="background-image:url(fotos/f17.jpg);background-position:center 45%"></div></div>
+  <div class="arco-txt"><span class="arco-k">Los Arcos</span><p class="arco-l">Caminamos juntos<br>bajo el mismo cielo</p></div>
 </section>
 
 <!-- DRESS CODE -->
@@ -1492,6 +1551,12 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
 </script>
 
 
+
+<section class="arco" id="arco4" data-top="#120509" data-bot="#120509" aria-label="Los Arcos de Querétaro">
+  <div class="arco-frame"><div class="arco-img" style="background-image:url(fotos/f14.jpg);background-position:center 55%"></div></div>
+  <div class="arco-txt"><span class="arco-k">29 · 05 · 2027</span><p class="arco-l">Y todos los caminos<br>nos llevaron aquí</p></div>
+</section>
+
 <!-- AVISOS -->
 <section id="avisos" data-top="#2a0c18" data-bot="#2a0c18" style="background:#2a0c18">
   <span class="lbl">Para que todo salga perfecto</span>
@@ -1813,6 +1878,12 @@ footer .ft-mono{width:min(64vw,260px);margin:0 auto 12px}
 </script>
 <!-- ================= /MESA DE REGALOS ================= -->
 
+
+
+<section class="arco" id="arco5" data-top="#120509" data-bot="#120509" aria-label="Los Arcos de Querétaro">
+  <div class="arco-frame"><div class="arco-img" style="background-image:url(fotos/f21.jpg);background-position:center 50%"></div></div>
+  <div class="arco-txt"><span class="arco-k">Ana & Miguel</span><p class="arco-l">Lo mejor<br>está por venir</p></div>
+</section>
 
 <!-- ÁLBUM -->
 <section id="album" data-nav="Álbum">
@@ -2261,7 +2332,7 @@ fab.addEventListener('click',function(){ if(mEl.paused) mEl.play().catch(functio
 
 function initAll(){
   splitTitles(); reveals(); initSectionFades(); hero(); hilo(); countdown(); setInterval(countdown,1000);
-  tilt(); itinerario(); eclipse(); stack(); swatches(); menu(); clima(); avisos(); satinBorders();
+  tilt(); itinerario(); eclipse(); stack(); swatches(); menu(); clima(); avisos(); satinBorders(); arcos();
   setTimeout(function(){ ScrollTrigger.refresh(); },400);
 }
 
@@ -2349,17 +2420,19 @@ function itinerario(){
   }});
 }
 function eclipse(){
-  var moon=document.getElementById('ecMoon'),cor=document.getElementById('ecCorona'),ring=document.getElementById('ecRing'),lines=document.querySelectorAll('.ec-line');
-  if(R){ gsap.set(moon,{xPercent:0}); gsap.set(lines[2],{opacity:1}); return; }
+  var moon=document.getElementById('ecMoon'),lines=document.querySelectorAll('.ec-line');
+  if(R){ gsap.set(['#ecEdge','#ecFlare','#ecMono'],{opacity:1}); gsap.set('.ec-sun',{opacity:0}); gsap.set(lines[2],{opacity:1}); return; }
   var tl=gsap.timeline({scrollTrigger:{trigger:'#eclipse',start:'top top',end:'bottom bottom',scrub:.6}});
-  tl.fromTo(moon,{xPercent:-120,yPercent:18},{xPercent:0,yPercent:0,ease:'none',duration:6},0)
-    .to(cor,{opacity:1,scale:1.15,duration:1.6},4.6)
-    .to('#ecBeads',{opacity:1,duration:.4},4.9).to('#ecBeads',{opacity:0,duration:.4},5.6)
-    .to('#ecChromo',{opacity:1,boxShadow:'0 0 0 2px rgba(255,90,110,.75),0 0 16px 4px rgba(220,40,80,.55)',duration:.6},5.7)
-    .fromTo(ring,{opacity:0,scale:.4,rotate:-20},{opacity:1,scale:1,rotate:0,duration:.5},5.4).to(ring,{opacity:0,scale:.6,duration:.6},6.2)
+  tl.fromTo(moon,{xPercent:-118,yPercent:16},{xPercent:0,yPercent:0,ease:'none',duration:6},0)
+    .to('.ec-sun',{opacity:0,scale:1.02,duration:.8},5.4)
+    .to('.ec-glow',{opacity:.55,duration:.8},5.4)
+    .fromTo('#ecEdge',{opacity:0,scale:.985},{opacity:1,scale:1,duration:.8},5.2)
+    .fromTo('#ecFlare',{opacity:0},{opacity:1,duration:.6},5.6)
+    .fromTo('#ecOrbit',{'--fl':0},{'--fl':1,duration:.6},5.6)
+    .fromTo('#ecMono',{opacity:0,scale:.92},{opacity:1,scale:1,duration:1},6)
     .fromTo(lines[0],{opacity:0,y:20},{opacity:1,y:0,duration:1},0.3).to(lines[0],{opacity:0,y:-20,duration:.8},2)
     .fromTo(lines[1],{opacity:0,y:20},{opacity:1,y:0,duration:1},2.6).to(lines[1],{opacity:0,y:-20,duration:.8},4.2)
-    .fromTo(lines[2],{opacity:0,y:20},{opacity:1,y:0,duration:1},5)
+    .fromTo(lines[2],{opacity:0,y:20},{opacity:1,y:0,duration:1},5.6)
     .to({}, {duration:1.5});
 }
 function clima(){
@@ -2391,6 +2464,14 @@ function satinBorders(){
     if(el.querySelector(':scope > .satin-b')) return;
     if(getComputedStyle(el).position==='static') el.style.position='relative';
     var b=document.createElement('i'); b.className='satin-b'; b.style.animationDelay=(-(k%7)*.9)+'s'; el.appendChild(b);
+  });
+}
+function arcos(){
+  document.querySelectorAll('.arco').forEach(function(sec){
+    var img=sec.querySelector('.arco-img');
+    new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting) sec.classList.add('in'); }); },{threshold:.35}).observe(sec);
+    if(R) return;
+    gsap.fromTo(img,{yPercent:-9,scale:1.12},{yPercent:9,scale:1,ease:'none',scrollTrigger:{trigger:sec,start:'top bottom',end:'bottom top',scrub:true}});
   });
 }
 function stack(){
