@@ -581,6 +581,11 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
 .loc-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity 1.8s ease,transform 6s ease-out}
 .loc-slides img.on{opacity:1;transform:scale(1)}
 .loc-slides::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(18,5,9,.55));pointer-events:none}
+.tl-ico{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;margin-bottom:6px;color:var(--gold-lt);background:radial-gradient(circle at 35% 30%,#4a1028,#1c0a12);border:1px solid rgba(227,192,143,.6);box-shadow:0 0 14px rgba(196,58,106,.35),inset 0 1px 0 rgba(255,255,255,.12)}
+.tl-ico svg{width:22px;height:22px;filter:drop-shadow(0 0 4px rgba(255,226,190,.5))}
+.tl-row[data-side="right"] .tl-ico{margin-left:auto}
+.tl-row.on .tl-ico{animation:icoPop .7s cubic-bezier(.34,1.8,.64,1)}
+@keyframes icoPop{0%{transform:scale(.3)}100%{transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.2s!important}}
 </style>
 </head>
@@ -740,11 +745,11 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
       <path class="tl-svg-bg" id="tlPathBg"/><path class="tl-svg-halo" id="tlPathHalo"/><path class="tl-svg-beam" id="tlPathBeam"/><path class="tl-svg-path" id="tlPath"/><path class="tl-svg-core" id="tlPathCore"/>
     </svg>
     <div class="tl-pearl" id="tlPearl" aria-hidden="true"></div>
-    <div class="tl-row" data-side="left"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><p class="tl-t">4:00 PM</p><p class="tl-ev">Ceremonia de vino</p><p class="tl-de">Viñedos Puerta del Lobo</p></div></div>
-    <div class="tl-row" data-side="right"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><p class="tl-t">4:30 PM</p><p class="tl-ev">Ceremonia religiosa</p></div></div>
-    <div class="tl-row" data-side="left"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><p class="tl-t">5:00 PM</p><p class="tl-ev">Cóctel de bienvenida</p></div></div>
-    <div class="tl-row" data-side="right"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><p class="tl-t">6:30 PM</p><p class="tl-ev">Cena</p></div></div>
-    <div class="tl-row" data-side="left"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><p class="tl-t">8:00 PM</p><p class="tl-ev">¡A bailar!</p><p class="tl-de">Que comience la fiesta</p></div></div>
+    <div class="tl-row" data-side="left"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><span class="tl-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8l-.5 6a3.5 3.5 0 01-7 0z"/><path d="M12 12.5V20M8.5 20h7"/><circle cx="17.5" cy="15" r="1.3"/><circle cx="19.3" cy="17" r="1.3"/><circle cx="16.8" cy="17.6" r="1.3"/></svg></span><p class="tl-t">4:00 PM</p><p class="tl-ev">Ceremonia de vino</p><p class="tl-de">Viñedos Puerta del Lobo</p></div></div>
+    <div class="tl-row" data-side="right"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><span class="tl-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v5M9.5 4.5h5M5 21V11l7-4 7 4v10"/><path d="M10 21v-4a2 2 0 014 0v4"/></svg></span><p class="tl-t">4:30 PM</p><p class="tl-ev">Ceremonia religiosa</p></div></div>
+    <div class="tl-row" data-side="left"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><span class="tl-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-8 9z"/><path d="M12 13v7M8 20h8M15 4l3-2"/></svg></span><p class="tl-t">5:00 PM</p><p class="tl-ev">Cóctel de bienvenida</p></div></div>
+    <div class="tl-row" data-side="right"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><span class="tl-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="6"/><circle cx="12" cy="13" r="3"/><path d="M3 4v6M5 4v6M4 10v10M20 4c-1.5 1-2 3-2 6h2v10"/></svg></span><p class="tl-t">6:30 PM</p><p class="tl-ev">Cena</p></div></div>
+    <div class="tl-row" data-side="left"><div class="tl-orn"></div><div class="tl-pulse"></div><div class="tl-dot"></div><div class="tl-row-inner"><span class="tl-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg></span><p class="tl-t">8:00 PM</p><p class="tl-ev">¡A bailar!</p><p class="tl-de">Que comience la fiesta</p></div></div>
   </div>
 </section>
 
