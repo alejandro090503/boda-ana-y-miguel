@@ -586,6 +586,25 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
 .tl-row[data-side="right"] .tl-ico{margin-left:auto}
 .tl-row.on .tl-ico{animation:icoPop .7s cubic-bezier(.34,1.8,.64,1)}
 @keyframes icoPop{0%{transform:scale(.3)}100%{transform:scale(1)}}
+
+/* FONDOS de la clienta (seda / nácar) */
+.bgx{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;pointer-events:none}
+section[data-bg] .ink-bg{display:none}
+/* secciones con fondo claro: textos en ciruela */
+#padres .lbl,#cuenta .lbl{background-image:linear-gradient(100deg,#4b1838 0%,#7a3460 30%,#B87333 46%,#7a3460 60%,#4b1838 100%)!important;filter:drop-shadow(0 1px 6px rgba(255,255,255,.7))}
+#padres .ttl .w,#cuenta .ttl .w{filter:drop-shadow(0 1px 8px rgba(255,255,255,.6));background:linear-gradient(135deg,#3a1029,#4b1838 40%,#7a3460 70%,#996515)!important;-webkit-background-clip:text!important;background-clip:text!important}
+#padres .gline,#cuenta .gline{background:linear-gradient(90deg,transparent,#996515,#4b1838,#996515,transparent)!important}
+#padres .fam-card{background:linear-gradient(170deg,rgba(75,24,56,.88),rgba(42,11,31,.92))!important}
+#cuenta .cd-box{background:rgba(42,11,31,.55)}
+#cuenta .cd-rsvp{background:rgba(42,11,31,.72)}
+#bienvenida{padding-top:165px!important;padding-bottom:150px!important}
+#bienvenida{overflow:hidden}
+#bienvenida .bgx{background-size:165% 100%;background-position:center;top:-30%;bottom:-30%}
+#cuenta .cd-rsvp .lbl{background-image:linear-gradient(100deg,#C9A06A,#E3C08F 35%,#FFF4DE 48%,#E3C08F 62%,#B87333)!important;filter:none;top:0}
+#bienvenida .greet,#bienvenida .p{max-width:300px;margin-left:auto;margin-right:auto}
+#cuenta{padding-top:150px!important;padding-bottom:150px!important}
+#cuenta .bgx{background-size:142% 100%;background-position:center;top:4%;bottom:-2%}
+#cuenta .lbl,#cuenta .ttl,#cuenta .gline{position:relative;top:-46px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.2s!important}}
 </style>
 </head>
@@ -641,8 +660,8 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
 </section>
 
 <!-- BIENVENIDA -->
-<section id="bienvenida">
-  <div class="ink-bg"><i style="background-image:url(ink/ink-top.webp)"></i></div>
+<section id="bienvenida" data-top="#3c152d" data-bot="#2d0e23" data-bg="1">
+  <div class="bgx" style="background-image:url(bg/f4.jpg)"></div>
   <p class="greet fx" data-fx="up" id="greet"><small>Con todo nuestro amor</small><span id="greetTxt">Queridos invitados</span></p>
   <svg class="liston" id="liston" viewBox="0 0 400 150" aria-hidden="true">
     <defs>
@@ -662,8 +681,8 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
 </section>
 
 <!-- PADRES -->
-<section id="padres">
-  <div class="ink-bg oval"><i style="background-image:url(ink/ink-oval.webp)"></i></div>
+<section id="padres" data-top="#ded1d5" data-bot="#c1a8af" data-bg="1">
+  <div class="bgx" style="background-image:url(bg/f3.jpg)"></div>
   <span class="lbl">Con la bendición de</span>
   <h2 class="ttl">Nuestros Padres</h2>
   <div class="gline"></div>
@@ -683,7 +702,8 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
 </section>
 
 <!-- CUENTA REGRESIVA -->
-<section id="cuenta">
+<section id="cuenta" data-top="#dcc8ca" data-bot="#b89ca0" data-bg="1">
+  <div class="bgx" style="background-image:url(bg/f1.jpg)"></div>
   <span class="lbl">Sábado 29 de mayo de 2027</span>
   <h2 class="ttl">Faltan</h2>
   <div class="gline"></div>
@@ -728,8 +748,8 @@ html:not(.anim) .arco-txt>*{opacity:1;transform:none}
 </section>
 
 <!-- ITINERARIO -->
-<section id="itinerario" data-nav="Itinerario">
-  <div class="ink-bg"><i style="background-image:url(ink/ink-footer.webp)"></i></div>
+<section id="itinerario" data-nav="Itinerario" data-top="#2c0d1b" data-bot="#230916" data-bg="1">
+  <div class="bgx" style="background-image:url(bg/f2.jpg)"></div>
   <span class="lbl">El gran día</span>
   <h2 class="ttl">Itinerario</h2>
   <div class="gline"></div>
@@ -2260,16 +2280,18 @@ function reveals(){
 
 /* fundido uniforme entre secciones */
 function initSectionFades(){
-  var page='rgb(18,5,9)';
+  var page=[18,5,9];
   var secs=[].slice.call(document.querySelectorAll('.wrap > section, .wrap > footer'));
   function parse(c){ var m=(c||'').match(/[\d.]+/g); if(!m) return null; if(m.length>3&&+m[3]===0) return null; return [+m[0],+m[1],+m[2]]; }
   function hex(h){ h=h.replace('#',''); return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)]; }
-  function edge(s,which){ var d=s.getAttribute(which==='top'?'data-top':'data-bot'); if(d) return hex(d); return parse(getComputedStyle(s).backgroundColor)||parse(page); }
-  function grad(c,dir){ var st=[]; for(var i=0;i<=8;i++){ var t=i/8,a=1-t*t*(3-2*t); st.push('rgba('+c.map(Math.round).join(',')+','+a.toFixed(3)+') '+(t*100).toFixed(1)+'%'); } return 'linear-gradient('+dir+','+st.join(',')+')'; }
+  function edge(s,w){ var d=s.getAttribute(w==='top'?'data-top':'data-bot'); if(d) return hex(d); return parse(getComputedStyle(s).backgroundColor)||page; }
+  function grad(c,dir){ var st=[]; for(var i=0;i<=16;i++){ var t=i/16,a=1-t*t*t*(t*(t*6-15)+10); st.push('rgba('+c.map(Math.round).join(',')+','+a.toFixed(3)+') '+(t*100).toFixed(1)+'%'); } return 'linear-gradient('+dir+','+st.join(',')+')'; }
+  function lum(c){ return .299*c[0]+.587*c[1]+.114*c[2]; }
   for(var i=0;i<secs.length-1;i++){
     var A=secs[i],B=secs[i+1],a=edge(A,'bot'),b=edge(B,'top');
     var mid=[(a[0]+b[0])/2,(a[1]+b[1])/2,(a[2]+b[2])/2];
-    var h=A.id==='hero'?90:170;
+    var contrast=Math.abs(lum(a)-lum(b))>60;
+    var h=A.id==='hero'?90:(contrast?260:190);
     if(A.id!=='eclipse'){ var x=document.createElement('i'); x.className='sf bot'; x.style.height=h+'px'; x.style.background=grad(mid,'to top'); A.appendChild(x); }
     if(B.id!=='eclipse'){ var y=document.createElement('i'); y.className='sf top'; y.style.height=h+'px'; y.style.background=grad(mid,'to bottom'); B.appendChild(y); }
   }
