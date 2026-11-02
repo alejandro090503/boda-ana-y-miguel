@@ -594,6 +594,10 @@ section[data-bg]{overflow:hidden}
 #padres .fam-card{background:rgba(42,11,31,.35)!important}
 #cuenta .cd-box{background:rgba(42,11,31,.45)}
 #cuenta .cd-rsvp{background:rgba(42,11,31,.45);border-color:rgba(227,192,143,.4)}
+#ubicacion .loc-card{background:rgba(42,11,31,.4)!important}
+#ubicacion .note{background:rgba(42,11,31,.4)}
+#clima .wx2{padding-top:120px}
+#familia .stack{width:min(64vw,260px);height:min(84vw,340px)}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.2s!important}}
 </style>
 </head>
@@ -711,7 +715,8 @@ section[data-bg]{overflow:hidden}
 </section>
 
 <!-- UBICACIÓN -->
-<section id="ubicacion" data-nav="Celebración">
+<section id="ubicacion" data-nav="Celebración" data-top="#3c152d" data-bot="#2d0e23" data-bg="1" data-card=".198,.291,.802,.707">
+  <div class="bgx" style="background-image:url(bg/f4.jpg)"></div>
   <div class="ink-bg flip"><i style="background-image:url(ink/ink-hero.webp)"></i></div>
   <span class="lbl">Dónde y cuándo</span>
   <h2 class="ttl">La Celebración</h2>
@@ -1069,7 +1074,8 @@ section[data-bg]{overflow:hidden}
 
 
 <!-- FAMILIA Y MASCOTAS -->
-<section id="familia">
+<section id="familia" data-top="#ddcbbe" data-bot="#c1a99a" data-bg="1" data-card=".150,.170,.850,.815" data-arch="1">
+  <div class="bgx" style="background-image:url(bg/f6.jpg)"></div>
   <div class="ink-bg oval flip"><i style="background-image:url(ink/ink-oval.webp)"></i></div>
   <span class="lbl">Los que siempre están</span>
   <h2 class="ttl">Familia y Peludos</h2>
@@ -1103,7 +1109,8 @@ section[data-bg]{overflow:hidden}
 </section>
 
 <!-- CLIMA -->
-<section id="clima">
+<section id="clima" data-top="#3a132b" data-bot="#240a1a" data-bg="1" data-card=".212,.226,.787,.734" data-arch="1">
+  <div class="bgx" style="background-image:url(bg/f5.jpg)"></div>
   <span class="lbl">Finales de mayo en El Lobo</span>
   <h2 class="ttl">El Clima</h2>
   <div class="gline"></div>
@@ -2424,7 +2431,7 @@ function fitCards(){
     var c=sec.getAttribute('data-card').split(',').map(Number),bg=sec.querySelector('.bgx'); if(!bg) return;
     var full=(c[1]===0&&c[3]===1), m=6, mt=full?0:96, mb=full?0:96, pin=26, pv=full?90:52;
     sec.style.paddingLeft=sec.style.paddingRight=(m+pin)+'px';
-    sec.style.paddingTop=(mt+pv)+'px'; sec.style.paddingBottom=(mb+pv)+'px';
+    sec.style.paddingTop=(mt+pv+(sec.hasAttribute('data-arch')?Math.round(sec.clientWidth*.16):0))+'px'; sec.style.paddingBottom=(mb+pv)+'px';
     var W=sec.clientWidth,H=sec.clientHeight;
     var bw=(W-2*m)/(c[2]-c[0]), bh=(H-mt-mb)/(c[3]-c[1]);
     bg.style.backgroundSize=bw+'px '+bh+'px';
