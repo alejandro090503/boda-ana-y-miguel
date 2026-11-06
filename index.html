@@ -21,6 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Great+Vibes&family=Playfair+Display:ital,wght@1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="sobre.jpg">
+<link rel="preload" as="video" href="sobre-apertura.mp4" type="video/mp4">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
@@ -113,12 +114,12 @@ html.anim .fx:not(.in)[data-fx="clip"]{clip-path:inset(0 0 100% 0)}
 @keyframes flick{0%,100%{opacity:.55;transform:scale(1)}30%{opacity:.85;transform:scale(1.06)}55%{opacity:.6;transform:scale(.97)}75%{opacity:.95;transform:scale(1.04)}}
 
 /* sobre */
-#envelope-screen{position:fixed;inset:0;z-index:10000;background:#e9dcc8;cursor:pointer;overflow:hidden;touch-action:manipulation}
+#envelope-screen{position:fixed;inset:0;z-index:10000;background:#1a0d08;cursor:pointer;overflow:hidden;touch-action:manipulation}
 #env-image,#env-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 #env-video{opacity:0}
 .envelope-hint{position:absolute;left:50%;bottom:max(46px,env(safe-area-inset-bottom));transform:translateX(-50%);font-family:var(--sans);font-weight:700;font-size:14px;letter-spacing:.32em;text-transform:uppercase;color:#4a1028;background:rgba(247,231,206,.86);padding:12px 24px;border-radius:40px;white-space:nowrap;animation:hintP 2.2s ease-in-out infinite;box-shadow:0 6px 20px rgba(74,16,40,.18)}
 @keyframes hintP{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.05)}}
-#env-flash{position:fixed;inset:0;background:#F7E7CE;z-index:9999;opacity:0;pointer-events:none}
+#env-flash{position:fixed;inset:0;background:#FBF3E4;z-index:9999;opacity:0;pointer-events:none}
 
 /* música */
 .vinyl-btn{position:fixed;right:16px;bottom:max(90px,calc(env(safe-area-inset-bottom) + 78px));z-index:900;width:58px;height:58px;border-radius:50%;border:none;padding:0;cursor:pointer;background:radial-gradient(circle,#1a1a1a 14%,#B76E79 15%,#B87333 26%,#111 27%,#1b1b1b 100%);box-shadow:0 6px 18px rgba(0,0,0,.5),0 0 0 1px rgba(227,192,143,.35);opacity:0;pointer-events:none;transition:opacity .5s}
@@ -648,7 +649,7 @@ section[data-silk]:nth-of-type(2n) .bgx{animation-duration:17s;animation-delay:-
 
 <!-- SOBRE (imagen y video del cliente) -->
 <div id="envelope-screen" role="button" aria-label="Toca para abrir tu invitación">
-  <img id="env-image" src="sobre.jpg" alt="Sobre con sello A&amp;M">
+  <img id="env-image" src="sobre.jpg" alt="Sobre de la invitación sobre la mesa">
   <video id="env-video" playsinline webkit-playsinline muted preload="auto"><source src="sobre-apertura.mp4" type="video/mp4"></video>
   <p class="envelope-hint" id="env-hint">Toca para abrir</p>
 </div>
@@ -2284,7 +2285,7 @@ function reveal(){
   try{ initAll(); }catch(e){ console.error(e); document.querySelectorAll('.fx,.ttl').forEach(function(x){x.classList.add('in')}); }
 }
 function flash(d){ if(flashed) return; flashed=true; gsap.to(envFlash,{opacity:1,duration:d,ease:'none',onComplete:reveal}); }
-envVideo.addEventListener('timeupdate',function(){ if(envVideo.duration&&envVideo.currentTime>=envVideo.duration*.8) flash(1.4); });
+envVideo.addEventListener('timeupdate',function(){ if(envVideo.duration&&envVideo.currentTime>=envVideo.duration*.86) flash(1.1); });
 envVideo.addEventListener('ended',function(){ flash(.8); });
 function open(){
   if(opened) return; opened=true; gsap.killTweensOf(envImage); hint.style.opacity='0';
