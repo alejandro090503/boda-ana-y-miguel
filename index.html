@@ -642,6 +642,15 @@ section[data-silk]:not(#galeria){overflow:hidden}
 section[data-silk]:nth-of-type(2n) .bgx{animation-duration:17s;animation-delay:-5s}
 @keyframes silkFloat{0%{transform:translate3d(0,-8px,0) scale(1.02)}50%{transform:translate3d(0,6px,0) scale(1.04)}100%{transform:translate3d(0,-4px,0) scale(1.025)}}
 @media(prefers-reduced-motion:reduce){.bgx{animation:none}}
+
+/* ===== color único de tarjetas = "Una noche para ti" ===== */
+:root{--card:linear-gradient(160deg,#4a1028 0%,#2a0c18 55%,#1c0a12 100%)}
+.fam-card,#padres .fam-card,.loc-card,#ubicacion .loc-card,.note,#ubicacion .note,.cd-box,#cuenta .cd-box,.cd-rsvp,#cuenta .cd-rsvp,
+.wx2-row>div,.wx2-chips span,.av-card,.hs-code-in,.hs-hotel,.hs-note,#hospedaje .hs-note,.hs-toggle,#hospedaje .hs-toggle,.hs-sheet,
+.it-ico,.tl-ico,.gr-acc,.gift-close,.rv-card{background:var(--card)!important}
+.wx2-sky{background:var(--card)!important}.wx2-sky::after{background:linear-gradient(180deg,#1c0a12,#2a0c18 50%,#4a1028)!important}
+.wx2-row>div,.wx2-chips span{border-color:rgba(227,192,143,.28)!important}
+section[data-silk="dark"]::before{display:none}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.2s!important}}
 </style>
 </head>
@@ -697,7 +706,7 @@ section[data-silk]:nth-of-type(2n) .bgx{animation-duration:17s;animation-delay:-
 </section>
 
 <!-- BIENVENIDA -->
-<section id="bienvenida" data-top="#381523" data-bot="#381523" data-silk="dark">
+<section id="bienvenida" data-top="#381220" data-bot="#381220" data-silk="dark">
   <div class="bgx" style="background-image:url(bg/t01.jpg)"></div>
   <p class="greet fx" data-fx="up" id="greet"><small>Con todo nuestro amor</small><span id="greetTxt">Queridos invitados</span></p>
   <svg class="liston" id="liston" viewBox="0 0 400 150" aria-hidden="true">
@@ -739,7 +748,7 @@ section[data-silk]:nth-of-type(2n) .bgx{animation-duration:17s;animation-delay:-
 </section>
 
 <!-- CUENTA REGRESIVA -->
-<section id="cuenta" data-top="#361622" data-bot="#361622" data-silk="dark">
+<section id="cuenta" data-top="#391220" data-bot="#391220" data-silk="dark">
   <div class="bgx" style="background-image:url(bg/t03.jpg)"></div>
   <span class="lbl">Sábado 29 de mayo de 2027</span>
   <h2 class="ttl">Faltan</h2>
@@ -785,7 +794,7 @@ section[data-silk]:nth-of-type(2n) .bgx{animation-duration:17s;animation-delay:-
 </section>
 
 <!-- ITINERARIO -->
-<section id="itinerario" data-nav="Itinerario" data-top="#351422" data-bot="#351422" data-silk="dark">
+<section id="itinerario" data-nav="Itinerario" data-top="#381220" data-bot="#381220" data-silk="dark">
   <div class="bgx" style="background-image:url(bg/t05.jpg)"></div>
   <span class="lbl">El gran día</span>
   <h2 class="ttl">Itinerario</h2>
@@ -1118,7 +1127,7 @@ section[data-silk]:nth-of-type(2n) .bgx{animation-duration:17s;animation-delay:-
 
 
 <!-- FAMILIA Y MASCOTAS -->
-<section id="familia" data-top="#5e313e" data-bot="#5e313e" data-silk="dark">
+<section id="familia" data-top="#381220" data-bot="#381220" data-silk="dark">
   <div class="bgx" style="background-image:url(bg/t07.jpg)"></div>
   <span class="lbl">Los que siempre están</span>
   <h2 class="ttl">Familia y Peludos</h2>
@@ -1153,7 +1162,7 @@ section[data-silk]:nth-of-type(2n) .bgx{animation-duration:17s;animation-delay:-
 </section>
 
 <!-- CLIMA -->
-<section id="clima" data-top="#59323b" data-bot="#59323b" data-silk="dark">
+<section id="clima" data-top="#391220" data-bot="#391220" data-silk="dark">
   <div class="bgx" style="background-image:url(bg/t09.jpg)"></div>
   <span class="lbl">Finales de mayo en El Lobo</span>
   <h2 class="ttl">El Clima</h2>
@@ -1652,7 +1661,7 @@ section[data-silk]:nth-of-type(2n) .bgx{animation-duration:17s;animation-delay:-
 </section>
 
 <!-- AVISOS -->
-<section id="avisos" data-top="#351420" data-bot="#351420" data-silk="dark">
+<section id="avisos" data-top="#391220" data-bot="#391220" data-silk="dark">
   <div class="bgx" style="background-image:url(bg/t11.jpg)"></div>
   <span class="lbl">Para que todo salga perfecto</span>
   <h2 class="ttl">Avisos Importantes</h2>
@@ -1857,7 +1866,7 @@ section[data-silk]:nth-of-type(2n) .bgx{animation-duration:17s;animation-delay:-
 </section>
 
 <!-- ÁLBUM -->
-<section id="album" data-nav="Álbum" data-top="#502933" data-bot="#502933" data-silk="dark">
+<section id="album" data-nav="Álbum" data-top="#391220" data-bot="#391220" data-silk="dark">
   <div class="bgx" style="background-image:url(bg/t13.jpg)"></div>
   <span class="lbl">Comparte tus fotos</span>
   <h2 class="ttl">Álbum de la Boda</h2>
