@@ -598,6 +598,30 @@ section[data-bg]{overflow:hidden}
 #ubicacion .note{background:rgba(42,11,31,.4)}
 #clima .wx2{padding-top:120px}
 #familia .stack{width:min(64vw,260px);height:min(84vw,340px)}
+
+/* ===== FONDOS DE SEDA (todas las secciones) ===== */
+.bgx{position:absolute;inset:0;z-index:-2;pointer-events:none;background-size:100% auto;background-repeat:repeat-y;background-position:center top}
+section[data-silk] .ink-bg{display:none}
+section[data-silk="dark"]::before{content:'';position:absolute;right:9%;bottom:70px;width:26px;height:26px;z-index:-1;pointer-events:none;
+  background:radial-gradient(circle,#fff 0 6%,rgba(255,236,200,.8) 12%,transparent 40%),linear-gradient(90deg,transparent 45%,rgba(255,232,190,.9) 50%,transparent 55%),linear-gradient(0deg,transparent 45%,rgba(255,232,190,.9) 50%,transparent 55%);
+  filter:drop-shadow(0 0 6px rgba(255,220,170,.8));animation:flareBreath 4s ease-in-out infinite}
+#dresscode,#rsvp,#avisos{background:transparent!important}
+/* secciones claras: texto ciruela */
+section[data-silk="light"] .lbl{background-image:linear-gradient(100deg,#4b1838 0%,#7a3460 30%,#B87333 46%,#7a3460 60%,#4b1838 100%)!important}
+section[data-silk="light"] .ttl .w{filter:none!important;background:linear-gradient(135deg,#3a1029,#4b1838 40%,#7a3460 70%,#996515)!important;-webkit-background-clip:text!important;background-clip:text!important}
+section[data-silk="light"] .gline{background:linear-gradient(90deg,transparent,#996515,#4b1838,#996515,transparent)!important;background-size:250% 100%!important}
+section[data-silk="light"] .p,section[data-silk="light"] .gf-sub,section[data-silk="light"] .hs-why,section[data-silk="light"] .stack-hint,section[data-silk="light"] .gl-hint{color:#3a1029!important;text-shadow:0 1px 8px rgba(255,248,240,.7)!important}
+section[data-silk="light"] .giftbox-cta{color:#4b1838}
+#padres .fam-card,#ubicacion .loc-card,#ubicacion .note{background:linear-gradient(170deg,rgba(75,24,56,.94),rgba(42,11,31,.96))!important}
+#hospedaje .hs-note,#hospedaje .hs-toggle{background:linear-gradient(170deg,rgba(75,24,56,.94),rgba(42,11,31,.96))}
+
+.wrap>section[data-silk]{padding-left:48px!important;padding-right:48px!important}
+.wrap>section#galeria{padding-left:0!important;padding-right:0!important}
+#cuenta .cd-grid{gap:6px}
+section[data-silk] .orbs,section[data-silk] .wx2,section[data-silk] .loc-card,section[data-silk] .fam-grid{max-width:100%}
+#dresscode .dc-kind,#dresscode .dc-fig span{color:#3a1029!important;text-shadow:0 0 10px rgba(255,248,240,.95),0 0 3px rgba(255,248,240,.9)}
+section[data-silk="light"] .p,section[data-silk="light"] .gf-sub,section[data-silk="light"] .hs-why{text-shadow:0 0 10px rgba(255,248,240,.95),0 0 3px rgba(255,248,240,.9)!important}
+#hospedaje .hs-why b,#hospedaje .hs-why strong,#hospedaje .hs-why em,#hospedaje .hs-why span{color:#4b1838!important;-webkit-text-fill-color:#4b1838!important;background:none!important}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.2s!important}}
 </style>
 </head>
@@ -653,8 +677,8 @@ section[data-bg]{overflow:hidden}
 </section>
 
 <!-- BIENVENIDA -->
-<section id="bienvenida" data-top="#3c152d" data-bot="#2d0e23" data-bg="1" data-card=".198,.291,.802,.707">
-  <div class="bgx" style="background-image:url(bg/f4.jpg)"></div>
+<section id="bienvenida" data-top="#3e1528" data-bot="#3e1528" data-silk="dark">
+  <div class="bgx" style="background-image:url(bg/s01.jpg)"></div>
   <p class="greet fx" data-fx="up" id="greet"><small>Con todo nuestro amor</small><span id="greetTxt">Queridos invitados</span></p>
   <svg class="liston" id="liston" viewBox="0 0 400 150" aria-hidden="true">
     <defs>
@@ -674,8 +698,8 @@ section[data-bg]{overflow:hidden}
 </section>
 
 <!-- PADRES -->
-<section id="padres" data-top="#ded1d5" data-bot="#c1a8af" data-bg="1" data-card=".264,.295,.734,.693">
-  <div class="bgx" style="background-image:url(bg/f3.jpg)"></div>
+<section id="padres" data-top="#ceb7a3" data-bot="#ceb7a3" data-silk="light">
+  <div class="bgx" style="background-image:url(bg/s02.jpg)"></div>
   <span class="lbl">Con la bendición de</span>
   <h2 class="ttl">Nuestros Padres</h2>
   <div class="gline"></div>
@@ -695,8 +719,8 @@ section[data-bg]{overflow:hidden}
 </section>
 
 <!-- CUENTA REGRESIVA -->
-<section id="cuenta" data-top="#dcc8ca" data-bot="#b89ca0" data-bg="1" data-card=".154,.225,.867,.785">
-  <div class="bgx" style="background-image:url(bg/f1.jpg)"></div>
+<section id="cuenta" data-top="#381525" data-bot="#381525" data-silk="dark">
+  <div class="bgx" style="background-image:url(bg/s03.jpg)"></div>
   <span class="lbl">Sábado 29 de mayo de 2027</span>
   <h2 class="ttl">Faltan</h2>
   <div class="gline"></div>
@@ -715,9 +739,8 @@ section[data-bg]{overflow:hidden}
 </section>
 
 <!-- UBICACIÓN -->
-<section id="ubicacion" data-nav="Celebración" data-top="#3c152d" data-bot="#2d0e23" data-bg="1" data-card=".198,.291,.802,.707">
-  <div class="bgx" style="background-image:url(bg/f4.jpg)"></div>
-  <div class="ink-bg flip"><i style="background-image:url(ink/ink-hero.webp)"></i></div>
+<section id="ubicacion" data-nav="Celebración" data-top="#e3d1be" data-bot="#e3d1be" data-silk="light">
+  <div class="bgx" style="background-image:url(bg/s04.jpg)"></div>
   <span class="lbl">Dónde y cuándo</span>
   <h2 class="ttl">La Celebración</h2>
   <div class="gline"></div>
@@ -742,8 +765,8 @@ section[data-bg]{overflow:hidden}
 </section>
 
 <!-- ITINERARIO -->
-<section id="itinerario" data-nav="Itinerario" data-top="#2c0d1b" data-bot="#230916" data-bg="1" data-card=".05,0,.955,1">
-  <div class="bgx" style="background-image:url(bg/f2.jpg)"></div>
+<section id="itinerario" data-nav="Itinerario" data-top="#3a1427" data-bot="#3a1427" data-silk="dark">
+  <div class="bgx" style="background-image:url(bg/s05.jpg)"></div>
   <span class="lbl">El gran día</span>
   <h2 class="ttl">Itinerario</h2>
   <div class="gline"></div>
@@ -846,7 +869,8 @@ section[data-bg]{overflow:hidden}
 }
 </style>
 
-<section id="galeria" data-nav="Galería" data-top="#120509" data-bot="#120509" aria-label="Galería de fotos">
+<section id="galeria" data-nav="Galería" aria-label="Galería de fotos" data-top="#ccb6a8" data-bot="#ccb6a8" data-silk="light">
+  <div class="bgx" style="background-image:url(bg/s06.jpg)"></div>
   <div class="gl-head">
     <span class="lbl">Nuestra historia</span>
     <h2 class="ttl">Galería</h2>
@@ -1074,9 +1098,8 @@ section[data-bg]{overflow:hidden}
 
 
 <!-- FAMILIA Y MASCOTAS -->
-<section id="familia" data-top="#ddcbbe" data-bot="#c1a99a" data-bg="1" data-card=".150,.170,.850,.815" data-arch="1">
-  <div class="bgx" style="background-image:url(bg/f6.jpg)"></div>
-  <div class="ink-bg oval flip"><i style="background-image:url(ink/ink-oval.webp)"></i></div>
+<section id="familia" data-top="#351525" data-bot="#351525" data-silk="dark">
+  <div class="bgx" style="background-image:url(bg/s07.jpg)"></div>
   <span class="lbl">Los que siempre están</span>
   <h2 class="ttl">Familia y Peludos</h2>
   <div class="gline"></div>
@@ -1095,7 +1118,8 @@ section[data-bg]{overflow:hidden}
 </section>
 
 <!-- DRESS CODE -->
-<section id="dresscode" data-nav="Vestimenta" data-top="#F3E7D9" data-bot="#F3E7D9">
+<section id="dresscode" data-nav="Vestimenta" data-top="#b79981" data-bot="#b79981" data-silk="light">
+  <div class="bgx" style="background-image:url(bg/s08.jpg)"></div>
   <span class="lbl">Código de vestimenta</span>
   <h2 class="ttl">Formal</h2>
   <div class="gline"></div>
@@ -1109,8 +1133,8 @@ section[data-bg]{overflow:hidden}
 </section>
 
 <!-- CLIMA -->
-<section id="clima" data-top="#3a132b" data-bot="#240a1a" data-bg="1" data-card=".212,.226,.787,.734" data-arch="1">
-  <div class="bgx" style="background-image:url(bg/f5.jpg)"></div>
+<section id="clima" data-top="#471e31" data-bot="#471e31" data-silk="dark">
+  <div class="bgx" style="background-image:url(bg/s09.jpg)"></div>
   <span class="lbl">Finales de mayo en El Lobo</span>
   <h2 class="ttl">El Clima</h2>
   <div class="gline"></div>
@@ -1284,7 +1308,8 @@ section[data-bg]{overflow:hidden}
 }
 </style>
 
-<section id="hospedaje" data-nav="Hospedaje" data-top="#120509" data-bot="#120509">
+<section id="hospedaje" data-nav="Hospedaje" data-top="#dacab9" data-bot="#dacab9" data-silk="light">
+  <div class="bgx" style="background-image:url(bg/s10.jpg)"></div>
   <span class="lbl">Hospédate cerca</span>
   <h2 class="ttl">Hospedaje</h2>
   <div class="gline"></div>
@@ -1607,7 +1632,8 @@ section[data-bg]{overflow:hidden}
 </section>
 
 <!-- AVISOS -->
-<section id="avisos" data-top="#2a0c18" data-bot="#2a0c18" style="background:#2a0c18">
+<section id="avisos" data-top="#2a0d1c" data-bot="#2a0d1c" data-silk="dark">
+  <div class="bgx" style="background-image:url(bg/s11.jpg)"></div>
   <span class="lbl">Para que todo salga perfecto</span>
   <h2 class="ttl">Avisos Importantes</h2>
   <div class="gline"></div>
@@ -1681,7 +1707,8 @@ section[data-bg]{overflow:hidden}
 .gr-hint{text-align:center;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:#6b4250;margin-top:12px}
 @media(prefers-reduced-motion:reduce){.giftbox,.giftbox-cta,.gb-glow{animation:none}}
 </style>
-<section id="regalos" data-top="#120509" data-bot="#120509">
+<section id="regalos" data-top="#d1bdac" data-bot="#d1bdac" data-silk="light">
+  <div class="bgx" style="background-image:url(bg/s12.jpg)"></div>
   <span class="lbl">Con cariño</span>
   <h2 class="ttl">Mesa de Regalos</h2>
   <div class="gline"></div>
@@ -1810,8 +1837,8 @@ section[data-bg]{overflow:hidden}
 </section>
 
 <!-- ÁLBUM -->
-<section id="album" data-nav="Álbum">
-  <div class="ink-bg oval"><i style="background-image:url(ink/ink-oval.webp)"></i></div>
+<section id="album" data-nav="Álbum" data-top="#522739" data-bot="#522739" data-silk="dark">
+  <div class="bgx" style="background-image:url(bg/s13.jpg)"></div>
   <span class="lbl">Comparte tus fotos</span>
   <h2 class="ttl">Álbum de la Boda</h2>
   <div class="gline"></div>
@@ -1898,7 +1925,8 @@ section[data-bg]{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.rv-btn{animation:none}}
 </style>
 
-<section id="rsvp" data-top="#F3E7D9" data-bot="#120509" data-nav="Confirmar">
+<section id="rsvp" data-nav="Confirmar" data-top="#b49c88" data-bot="#b49c88" data-silk="light">
+  <div class="bgx" style="background-image:url(bg/s14.jpg)"></div>
   <div class="rv-wrap">
     <span class="lbl">Sábado 29 de mayo de 2027</span>
     <h2 class="ttl">Confirma tu asistencia</h2>
