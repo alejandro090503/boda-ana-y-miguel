@@ -622,6 +622,25 @@ section[data-silk] .orbs,section[data-silk] .wx2,section[data-silk] .loc-card,se
 #dresscode .dc-kind,#dresscode .dc-fig span{color:#3a1029!important;text-shadow:0 0 10px rgba(255,248,240,.95),0 0 3px rgba(255,248,240,.9)}
 section[data-silk="light"] .p,section[data-silk="light"] .gf-sub,section[data-silk="light"] .hs-why{text-shadow:0 0 10px rgba(255,248,240,.95),0 0 3px rgba(255,248,240,.9)!important}
 #hospedaje .hs-why b,#hospedaje .hs-why strong,#hospedaje .hs-why em,#hospedaje .hs-why span{color:#4b1838!important;-webkit-text-fill-color:#4b1838!important;background:none!important}
+#rsvp .rv-paper{position:relative;max-width:420px;margin:0 auto;padding:44px 22px 38px;border-radius:22px;background:radial-gradient(ellipse at 20% 0%,rgba(183,110,121,.12),transparent 55%),linear-gradient(180deg,#FBF6EF,#F3E7D9);box-shadow:0 30px 60px rgba(42,11,31,.35),0 2px 0 rgba(255,255,255,.8) inset;border:1px solid rgba(153,36,79,.18)}
+#rsvp .rv-paper::before{content:'';position:absolute;inset:10px;border:1px solid rgba(153,36,79,.12);border-radius:16px;pointer-events:none}
+.wrap>section#rsvp{padding-left:22px!important;padding-right:22px!important}
+
+/* RSVP: botón dentro de la tarjeta */
+#rsvp .rv-paper .rv-btn{max-width:100%!important;width:100%;letter-spacing:.12em!important;font-size:15px!important;padding-left:12px!important;padding-right:12px!important}
+/* Transporte compacto */
+#hospedaje .hs-note{flex-direction:column;align-items:center;text-align:center;gap:8px;padding:20px 16px!important;max-width:100%;box-sizing:border-box}
+#hospedaje .hs-note>div{min-width:0;width:100%}
+#hospedaje .hs-note>.hs-note-ic{width:44px;height:44px;flex:0 0 44px}
+section[data-silk]:not(#galeria){overflow:hidden}
+#hospedaje .hs-note p{font-size:16px;line-height:1.5;overflow-wrap:break-word}
+#hospedaje .hs-trans-btn{white-space:normal!important;width:100%;max-width:260px;justify-content:center;font-size:13px!important;padding:12px 14px!important}
+#hospedaje .hs-trans-tel{text-align:center}
+/* fondos de seda: levitación suave */
+.bgx{inset:-18px 0!important;animation:silkFloat 14s ease-in-out infinite alternate;will-change:transform}
+section[data-silk]:nth-of-type(2n) .bgx{animation-duration:17s;animation-delay:-5s}
+@keyframes silkFloat{0%{transform:translate3d(0,-8px,0) scale(1.02)}50%{transform:translate3d(0,6px,0) scale(1.04)}100%{transform:translate3d(0,-4px,0) scale(1.025)}}
+@media(prefers-reduced-motion:reduce){.bgx{animation:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.2s!important}}
 </style>
 </head>
@@ -1927,6 +1946,7 @@ section[data-silk="light"] .p,section[data-silk="light"] .gf-sub,section[data-si
 
 <section id="rsvp" data-nav="Confirmar" data-top="#b49c88" data-bot="#b49c88" data-silk="light">
   <div class="bgx" style="background-image:url(bg/s14.jpg)"></div>
+<div class="rv-paper">
   <div class="rv-wrap">
     <span class="lbl">Sábado 29 de mayo de 2027</span>
     <h2 class="ttl">Confirma tu asistencia</h2>
@@ -1971,6 +1991,7 @@ section[data-silk="light"] .p,section[data-silk="light"] .gf-sub,section[data-si
     <p class="rv-fb" id="rv-fb" role="status" aria-live="polite"></p>
     <span class="rv-badge" id="rv-badge">Fecha límite · 1 feb 2027</span>
   </div>
+</div>
 </section>
 
 <script>
