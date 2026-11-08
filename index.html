@@ -8,7 +8,7 @@
 <meta name="description" content="Acompáñanos a celebrar la boda de Ana y Miguel · 29 de mayo de 2027 · Viñedos Puerta del Lobo, Querétaro">
 <meta property="og:title" content="Boda Ana & Miguel · 29 de mayo de 2027">
 <meta property="og:description" content="Reserva de un eclipse · Viñedos Puerta del Lobo, Querétaro">
-<meta property="og:image" content="https://boda-ana-y-miguel.vercel.app/og-image.jpg">
+<meta property="og:image" content="https://boda-ana-y-miguel.vercel.app/og-image.jpg?v=3">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -16,7 +16,7 @@
 <meta property="og:url" content="https://boda-ana-y-miguel.vercel.app/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://boda-ana-y-miguel.vercel.app/og-image.jpg">
+<meta name="twitter:image" content="https://boda-ana-y-miguel.vercel.app/og-image.jpg?v=3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Great+Vibes&family=Playfair+Display:ital,wght@1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
@@ -135,7 +135,7 @@ html.anim .fx:not(.in)[data-fx="clip"]{clip-path:inset(0 0 100% 0)}
 /* HERO */
 #hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:0 22px 110px!important;overflow:hidden}
 .hero-bg{position:absolute;inset:-6% 0 -6% 0;z-index:-3}
-.hero-drift{position:absolute;inset:0;background:url(fotos/hero.jpg) 40% 12%/cover;animation:heroDrift 26s ease-in-out infinite alternate}
+.hero-drift{position:absolute;inset:0;background:url(fotos/hero.jpg) 18% 18%/cover;animation:heroDrift 26s ease-in-out infinite alternate}
 @keyframes heroDrift{from{transform:translate(-1%,-1%) scale(1.02)}to{transform:translate(2%,1.5%) scale(1.10)}}
 .hero-shine{position:absolute;inset:0;z-index:-2;mix-blend-mode:soft-light;background:linear-gradient(115deg,transparent 30%,rgba(255,236,210,.55) 48%,transparent 66%);background-size:250% 100%;animation:shine 9s ease-in-out infinite}
 @keyframes shine{0%{background-position:120% 0}100%{background-position:-120% 0}}
@@ -662,6 +662,41 @@ section[data-silk="dark"]::before{display:none}
 .gl-ref{box-shadow:none!important}
 .gl-ref::before{content:"";position:absolute;left:6%;right:6%;bottom:0;height:2px;z-index:2;background:linear-gradient(90deg,transparent,rgba(255,244,228,.9),transparent);filter:blur(.6px)}
 #galeria .gl-ph{box-shadow:0 16px 26px -14px rgba(42,11,31,.55),0 0 0 1px rgba(255,244,228,.35) inset}
+.hero-res{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:10px;width:min(86vw,360px)}
+.hero-res::before,.hero-res::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(247,231,206,.85))}
+.hero-res::after{background:linear-gradient(90deg,rgba(247,231,206,.85),transparent)}
+.hero-res span{font-family:'Cormorant Garamond',serif;font-style:normal;font-weight:600;font-size:15px;letter-spacing:.32em;text-transform:uppercase;color:var(--champ);white-space:nowrap;text-shadow:0 2px 10px rgba(0,0,0,.85)}
+@keyframes heroDrift{from{transform:translate(0,-.5%) scale(1)}to{transform:translate(1%,.5%) scale(1.04)}}
+.manos{position:relative;margin:14px -30px 18px;aspect-ratio:1284/552;
+  -webkit-mask-image:radial-gradient(ellipse 72% 70% at 50% 50%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 72% 70% at 50% 50%,#000 55%,transparent 100%)}
+.manos img{width:100%;height:100%;object-fit:cover}
+.manos-glow{position:absolute;left:57.5%;top:41%;width:90px;height:90px;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,236,200,.9),rgba(255,170,90,.35) 35%,transparent 70%);mix-blend-mode:screen;animation:manosPulse 3.2s ease-in-out infinite}
+@keyframes manosPulse{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(.85)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}}
+#eclipse{height:auto!important;min-height:100svh}
+#eclipse .ec-sticky{position:relative!important;min-height:100svh;padding:110px 0 120px}
+.ec-txt{position:relative!important;bottom:auto!important;margin-top:46px}
+.ec-final{font-size:clamp(40px,11vw,54px)!important;line-height:1.15!important;text-align:center}
+.gcs{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 10px;max-width:340px;margin:0 auto 6px}
+.gc{width:58px;text-align:center}
+.gc i{display:block;width:44px;height:44px;margin:0 auto;border-radius:50%;padding:0;
+  box-shadow:0 0 0 2.5px #C9A06A,0 0 0 4px #F2D7A6,0 0 0 5px #8a6a30,0 4px 10px rgba(42,11,31,.3)}
+.gc small{display:block;margin-top:7px;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:12.5px;line-height:1.15;color:#3a1029}
+.dc-tip-img{flex:0 0 96px!important;width:96px!important;animation:none!important}
+.gr-acc{background:#fff!important;border:1px solid rgba(153,101,21,.45)!important}.gr-acc .gr-acc-c{color:#4a1028!important;-webkit-text-fill-color:#4a1028!important}.gr-acc .gr-acc-n{color:#996515!important}
+.sf{display:none!important}
+.wrap>section:not(#hero),.wrap>footer{margin-top:-90px}
+.wrap>section:not(#hero)>.bgx,.wrap>footer>.ft-photo{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 108px);mask-image:linear-gradient(to bottom,transparent 0,#000 108px)}
+.wrap>section[data-silk]:not(#hero){padding-top:calc(clamp(70px,11vh,110px) + 70px)!important}
+.wrap>section.arco{margin-top:-90px}
+.rv-alerg{display:block;margin:26px auto 0;padding:13px 22px;border-radius:999px;border:1px solid #996515;background:#FFFBF5;color:#4a1028;
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:15px;letter-spacing:.04em;cursor:pointer;touch-action:manipulation;box-shadow:0 6px 16px rgba(74,16,40,.12)}
+.rv-chip{white-space:normal!important;line-height:1.2!important}
+.wrap>section.arco{background:transparent!important}
+.arco-frame{-webkit-mask-image:linear-gradient(transparent 0,#000 130px)!important;mask-image:linear-gradient(transparent 0,#000 130px)!important}
+.ec-final{font-family:'Great Vibes',cursive!important;font-style:normal!important;font-weight:400!important}
+.wrap>section,.wrap>footer{isolation:isolate}
+.wrap>section[data-silk]:not(#hero){background:transparent!important}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.2s!important}}
 </style>
 </head>
@@ -711,7 +746,7 @@ section[data-silk="dark"]::before{display:none}
     <p class="hero-eyebrow">Nos casamos</p>
     <img class="hero-mono" src="monograma.png" alt="Ana &amp; Miguel">
     <p class="hero-date">29 · 05 · 2027</p>
-    <p class="hero-city">Viñedos Puerta del Lobo · Querétaro</p>
+    <p class="hero-res"><span>Reserva de un eclipse</span></p>
   </div>
   <div class="h-scroll"><i></i>Desliza</div>
 </section>
@@ -720,15 +755,7 @@ section[data-silk="dark"]::before{display:none}
 <section id="bienvenida" data-top="#381220" data-bot="#381220" data-silk="dark">
   <div class="bgx" style="background-image:url(bg/t01.jpg)"></div>
   <p class="greet fx" data-fx="up" id="greet"><small>Con todo nuestro amor</small><span id="greetTxt">Queridos invitados</span></p>
-  <svg class="liston" id="liston" viewBox="0 0 400 150" aria-hidden="true">
-    <defs>
-      <linearGradient id="lsFront" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8e0f26"/><stop offset=".35" stop-color="#d42a45"/><stop offset=".5" stop-color="#ff7d92"/><stop offset=".65" stop-color="#c61f3b"/><stop offset="1" stop-color="#7a0b20"/>
-        <animateTransform attributeName="gradientTransform" type="translate" values="-.25 -.25;.25 .25;-.25 -.25" dur="8s" repeatCount="indefinite"/></linearGradient>
-      <linearGradient id="lsBack" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f0714"/><stop offset=".5" stop-color="#8a1229"/><stop offset="1" stop-color="#3f0510"/></linearGradient>
-      <filter id="lsShadow" x="-10%" y="-30%" width="120%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#000" flood-opacity=".55"/></filter>
-    </defs>
-    <g id="lsRibbon" filter="url(#lsShadow)"></g>
-  </svg>
+  <div class="manos fx" data-fx="zoom"><img src="fotos/manos-hilo.jpg" alt="Dos manos unidas por un hilo rojo"><i class="manos-glow"></i></div>
   <p class="p fx" data-fx="up" id="greetBody">Un hilo rojo invisible une a quienes están destinados a encontrarse. El nuestro nos trajo hasta aquí, y con la bendición de Dios y de nuestros padres queremos que <b id="greetYou">nos acompañes</b> el día en que el sol y la luna se encuentran para unir nuestras vidas.</p>
 </section>
 
@@ -784,20 +811,12 @@ section[data-silk="dark"]::before{display:none}
   <span class="lbl">Dónde y cuándo</span>
   <h2 class="ttl">La Celebración</h2>
   <div class="gline"></div>
-  <div class="loc-card lev fx tilt" data-fx="up">
-    <svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>
-    <p class="loc-type">Ceremonia religiosa</p>
-    <h3 class="loc-name">Viñedos Puerta del Lobo</h3>
-    <p class="loc-time">4:00 <small>PM</small></p>
-    <p class="loc-sub">Ceremonia de vino 4:00 PM · Ceremonia religiosa 4:30 PM<br>Carr. Chichimequillas–La Griega, El Lobo, Querétaro</p>
-    <a class="btn" href="https://maps.app.goo.gl/M7nsg7WgK4aCAsNA9" target="_blank" rel="noopener">Cómo llegar</a>
-  </div>
   <div class="loc-card lev d2 fx tilt" data-fx="up">
     <div class="loc-slides" id="venueSlides"><img class="on" src="venue/v1.jpg" alt="Viñedos Puerta del Lobo"><img src="venue/v2.jpg" alt="Viñedos Puerta del Lobo" loading="eager"><img src="venue/v3.jpg" alt="Recepción en el viñedo" loading="eager"><img src="venue/v4.jpg" alt="Terraza del viñedo" loading="eager"></div>
     
-    <p class="loc-type">Recepción</p>
+    <p class="loc-type">Ceremonia y Recepción</p>
     <h3 class="loc-name">Viñedos Puerta del Lobo</h3>
-    <p class="loc-time">6:30 <small>PM</small></p>
+    <p class="loc-time">4:00 <small>PM</small></p>
     <p class="loc-sub">En el mismo viñedo, bajo la luz de las velas</p>
     <a class="btn" href="https://maps.app.goo.gl/M7nsg7WgK4aCAsNA9" target="_blank" rel="noopener">Cómo llegar</a>
   </div>
@@ -846,7 +865,7 @@ section[data-silk="dark"]::before{display:none}
       <i class="ec-orbit" id="ecOrbit"><i class="ec-flare" id="ecFlare"><b></b></i></i>
       <i id="ecCorona" hidden></i><i id="ecRing" hidden></i><i id="ecBeads" hidden></i><i id="ecChromo" hidden></i>
     </div><div class="ec-dust" aria-hidden="true"></div>
-    <div class="ec-txt"><p class="ec-line"><span>El sol</span><span>y la luna…</span></p><p class="ec-line"><span>se buscan</span><span>en el cielo,</span></p><p class="ec-line"><span>y por un instante,</span><span>todo se alinea.</span></p></div>
+    <div class="ec-txt"><p class="ec-final script mtx">y por un instante,<br>todo se alinea.</p></div>
   </div>
 </section>
 
@@ -1169,7 +1188,7 @@ section[data-silk="dark"]::before{display:none}
     <div class="dc-fig"><div class="sway"><img src="dama.png" alt="Dama en vestido formal"></div><span>Damas</span></div>
   </div>
   <div class="dc-tip fx" data-fx="up"><img class="dc-tip-img" src="tacon.png" alt="Tacón cuadrado"><p><b>Para ellas:</b> te sugerimos tacón cuadrado o zapato cómodo; el piso del viñedo es irregular (pasto y empedrado).</p></div>
-  <div class="orbs"><div><p class="sw-ttl">Colores sugeridos</p><div class="orb" id="orbOk"><i></i></div><p class="orb-n" id="orbOkN">&nbsp;</p></div><div><p class="sw-ttl">Por favor evita</p><div class="orb x" id="orbNo"><i></i></div><p class="orb-n" id="orbNoN">&nbsp;</p></div></div>
+  <p class="sw-ttl">Colores sugeridos</p><div class="gcs"><div class="gc"><i style="background:#ff6250"></i><small>Coral</small></div><div class="gc"><i style="background:#864ffe"></i><small>Violeta</small></div><div class="gc"><i style="background:#0061fe"></i><small>Azul rey</small></div><div class="gc"><i style="background:#01c7fc"></i><small>Turquesa</small></div><div class="gc"><i style="background:#feb43f"></i><small>Mostaza</small></div><div class="gc"><i style="background:#11053b"></i><small>Azul noche</small></div><div class="gc"><i style="background:#263e0f"></i><small>Verde bosque</small></div><div class="gc"><i style="background:#669d34"></i><small>Verde olivo</small></div><div class="gc"><i style="background:#450d59"></i><small>Morado</small></div><div class="gc"><i style="background:#ad3e00"></i><small>Terracota</small></div><div class="gc"><i style="background:#474747"></i><small>Gris Oxford</small></div><div class="gc"><i style="background:#999999"></i><small>Gris perla</small></div><div class="gc"><i style="background:#D4C5B2"></i><small>Arena</small></div><div class="gc"><i style="background:#fff76b"></i><small>Amarillo</small></div><div class="gc"><i style="background:#e292fe"></i><small>Lila</small></div><div class="gc"><i style="background:#b1dd8b"></i><small>Verde menta</small></div><div class="gc"><i style="background:#d357fe"></i><small>Orquídea</small></div><div class="gc"><i style="background:#583300"></i><small>Café</small></div></div><p class="sw-ttl">Por favor evita</p><div class="gcs"><div class="gc"><i style="background:#000000"></i><small>Negro</small></div><div class="gc"><i style="background:#FFFFFF"></i><small>Blanco</small></div><div class="gc"><i style="background:#791a3d"></i><small>Vino</small></div><div class="gc"><i style="background:#ee719e"></i><small>Rosa</small></div><div class="gc"><i style="background:#ffecd4"></i><small>Crema</small></div></div>
 </section>
 
 <!-- CLIMA -->
@@ -1469,8 +1488,8 @@ section[data-silk="dark"]::before{display:none}
         <span class="hs-note-t">Transporte</span>
         <p><strong>En la zona no hay Uber.</strong> En tu confirmación podrás indicar si necesitas transporte del hotel al viñedo; la hacienda avisará a los taxis locales.</p>
         <p style="margin-top:10px">¿Ocuparán transporte <strong>del viñedo al hotel</strong> al terminar la fiesta? Avísanos aquí:</p>
-        <a class="btn solid hs-trans-btn" href="https://wa.me/524423826325?text=Hola%2C%20somos%20invitados%20de%20la%20boda%20de%20Ana%20y%20Miguel%20%2829%20de%20mayo%20de%202027%29.%20Vamos%20a%20ocupar%20transporte%20del%20vi%C3%B1edo%20Puerta%20del%20Lobo%20al%20hotel." target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Necesito transporte</a>
-        <span class="hs-trans-tel">442 382 6325</span>
+        <a class="btn solid hs-trans-btn" href="https://wa.me/525541429651?text=Hola%2C%20somos%20invitados%20de%20la%20boda%20de%20Ana%20y%20Miguel%20%2829%20de%20mayo%20de%202027%29.%20Vamos%20a%20ocupar%20transporte%20del%20vi%C3%B1edo%20Puerta%20del%20Lobo%20al%20hotel." target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Necesito transporte</a>
+        <span class="hs-trans-tel">+52 55 4142 9651</span>
       </div>
     </div>
 
@@ -1883,8 +1902,8 @@ section[data-silk="dark"]::before{display:none}
   <h2 class="ttl">Álbum de la Boda</h2>
   <div class="gline"></div>
   <p class="p" style="margin-bottom:18px">Escanea el código o toca el botón para subir las fotos que tomes durante la celebración.</p>
-  <div class="qr-frame lev fx" data-fx="zoom"><img src="https://api.qrserver.com/v1/create-qr-code/?size=460x460&margin=6&color=4a1028&bgcolor=F7E7CE&data=https%3A%2F%2Fanaymiguel.posdataid.com%2F" alt="QR del álbum de fotos"></div><br>
-  <a class="btn solid" href="https://anaymiguel.posdataid.com/" target="_blank" rel="noopener">Abrir álbum</a>
+  <div class="qr-frame lev fx" data-fx="zoom"><img src="https://api.qrserver.com/v1/create-qr-code/?size=460x460&margin=6&color=4a1028&bgcolor=F7E7CE&data=https%3A%2F%2Fboda-ana-y-miguel.vercel.app%2Falbum" alt="QR del álbum de fotos"></div><br>
+  <a class="btn solid" href="/album" target="_blank" rel="noopener">Abrir álbum</a>
 </section>
 
 <!-- ===== rsvp ===== -->
@@ -2010,7 +2029,7 @@ section[data-silk="dark"]::before{display:none}
     </div>
 
     <p class="rv-fb" id="rv-fb" role="status" aria-live="polite"></p>
-    <span class="rv-badge" id="rv-badge">Fecha límite · 1 feb 2027</span>
+    <button type="button" class="rv-alerg" id="rv-alerg">Alergias y elección de platillo</button><span id="rv-badge" hidden></span>
   </div>
 </div>
 </section>
@@ -2020,7 +2039,7 @@ section[data-silk="dark"]::before{display:none}
   var API = 'https://panel-invitados.vercel.app/api/confirmar';
   var URL_BODA = 'https://boda-ana-y-miguel.vercel.app';
   var DEADLINE = new Date(2027, 1, 1, 23, 59, 59, 999); // lunes 1 de febrero de 2027
-  var MENUS = [{ v: 'Atún', t: 'Medallón de atún' }, { v: 'Res', t: 'Medallón de res' }];
+  var MENUS = [{ v: 'Res', t: 'Medallón de res al merlot' }, { v: 'Atún', t: 'Medallón de atún en salsa de mango' }];
   var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var qs = new URLSearchParams(location.search);
@@ -2436,20 +2455,9 @@ function itinerario(){
   }});
 }
 function eclipse(){
-  var moon=document.getElementById('ecMoon'),lines=document.querySelectorAll('.ec-line');
-  if(R){ gsap.set(['#ecEdge','#ecFlare','#ecMono'],{opacity:1}); gsap.set('.ec-sun',{opacity:0}); gsap.set(lines[2],{opacity:1}); return; }
-  var tl=gsap.timeline({scrollTrigger:{trigger:'#eclipse',start:'top top',end:'bottom bottom',scrub:.6}});
-  tl.fromTo(moon,{xPercent:-118,yPercent:16},{xPercent:0,yPercent:0,ease:'none',duration:6},0)
-    .to('.ec-sun',{opacity:0,scale:1.02,duration:.8},5.4)
-    .to('.ec-glow',{opacity:.55,duration:.8},5.4)
-    .fromTo('#ecEdge',{opacity:0,scale:.985},{opacity:1,scale:1,duration:.8},5.2)
-    .fromTo('#ecFlare',{opacity:0},{opacity:1,duration:.6},5.6)
-    .fromTo('#ecOrbit',{'--fl':0},{'--fl':1,duration:.6},5.6)
-    .fromTo('#ecMono',{opacity:0,scale:.92},{opacity:1,scale:1,duration:1},6)
-    .fromTo(lines[0],{opacity:0,y:20},{opacity:1,y:0,duration:1},0.3).to(lines[0],{opacity:0,y:-20,duration:.8},2)
-    .fromTo(lines[1],{opacity:0,y:20},{opacity:1,y:0,duration:1},2.6).to(lines[1],{opacity:0,y:-20,duration:.8},4.2)
-    .fromTo(lines[2],{opacity:0,y:20},{opacity:1,y:0,duration:1},5.6)
-    .to({}, {duration:1.5});
+  gsap.set('#ecMoon',{xPercent:0,yPercent:0}); gsap.set('.ec-sun',{opacity:0});
+  gsap.set(['#ecEdge','#ecFlare','#ecMono'],{opacity:1}); gsap.set('.ec-glow',{opacity:.55});
+  document.getElementById('ecOrbit').style.setProperty('--fl',1);
 }
 function clima(){
   var box=document.getElementById('wx2'),orb=document.getElementById('wxOrb'),path=document.getElementById('wxPath'),svg=box.querySelector('.wx2-arc'),L=path.getTotalLength(),last=0;
@@ -2490,6 +2498,10 @@ function arcos(){
     gsap.fromTo(img,{yPercent:-9,scale:1.12},{yPercent:9,scale:1,ease:'none',scrollTrigger:{trigger:sec,start:'top bottom',end:'bottom top',scrub:true}});
   });
 }
+document.addEventListener('click',function(e){ if(!e.target.closest('#rv-alerg')) return;
+  var y=document.getElementById('rv-yes'); if(y && y.getAttribute('aria-pressed')!=='true') y.click();
+  setTimeout(function(){ var f=document.getElementById('rv-fields'); if(f) f.scrollIntoView({behavior:'smooth',block:'start'}); },250); });
+document.addEventListener('DOMContentLoaded',function(){ document.querySelectorAll('.dc-viewer').forEach(function(v){ document.body.appendChild(v); }); });
 function venueSlides(){
   var w=document.getElementById('venueSlides'); if(!w) return;
   var im=w.querySelectorAll('img'),i=0;
